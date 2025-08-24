@@ -1,6 +1,9 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
+//import LangSwitcher from "../../components/LangSwitcher";
+
 import {
   Dialog,
   DialogPanel,
@@ -26,6 +29,9 @@ import {
   PhoneIcon,
   PlayCircleIcon,
 } from "@heroicons/react/20/solid";
+
+import LangSwitcher from "./LangSwitcher";
+//import Header from "../../../Sergio-site-1/src/components/Header";
 
 const products = [
   {
@@ -64,8 +70,10 @@ const callsToAction = [
   { name: "Contact sales", href: "#", icon: PhoneIcon },
 ];
 
-export default function Example() {
+export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const t = useTranslations("Header");
+  console.log("t: ", t);
 
   return (
     <header className="bg-gray-900">
@@ -75,7 +83,11 @@ export default function Example() {
       >
         <div className="flex lg:flex-1">
           <a href="/" className="-m-1.5 p-1.5">
-            <span className="sr-only">Your Company</span>
+            {/* <span className="sr-only">{t("Your Company")}</span> */}
+            <span className="sr-only">
+              {/* {t("title")} */}
+              Your Company
+            </span>
             <img
               alt="logo"
               src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=500"
@@ -96,7 +108,8 @@ export default function Example() {
         <PopoverGroup className="hidden lg:flex lg:gap-x-12">
           <Popover className="relative">
             <PopoverButton className="flex items-center gap-x-1 text-sm/6 font-semibold text-white">
-              Product
+              {/* Product */}
+              {t("product")}
               <ChevronDownIcon
                 aria-hidden="true"
                 className="size-5 flex-none text-gray-500"
@@ -150,21 +163,26 @@ export default function Example() {
             </PopoverPanel>
           </Popover>
 
-          <a href="/features" className="text-sm/6 font-semibold text-white">
-            Features
+          <a href="features" className="text-sm/6 font-semibold text-white">
+            {/* Features */}
+            {t("features")}
           </a>
           <a href="marketplace" className="text-sm/6 font-semibold text-white">
-            Marketplace
+            {/* Marketplace */}
+            {t("marketplace")}
           </a>
           <a href="company" className="text-sm/6 font-semibold text-white">
-            Company
+            {/* Company */}
+            {t("company")}
           </a>
         </PopoverGroup>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
           <a href="login" className="text-sm/6 font-semibold text-white">
-            Log in <span aria-hidden="true">&rarr;</span>
+            {/* Log in */} {t("logIn")}
+            <span aria-hidden="true">&rarr;</span>
           </a>
         </div>
+        <LangSwitcher />
       </nav>
       <Dialog
         open={mobileMenuOpen}
@@ -196,7 +214,8 @@ export default function Example() {
               <div className="space-y-2 py-6">
                 <Disclosure as="div" className="-mx-3">
                   <DisclosureButton className="group flex w-full items-center justify-between rounded-lg py-2 pr-3.5 pl-3 text-base/7 font-semibold text-white hover:bg-white/5">
-                    Product
+                    {/* Product */}
+                    {t("product")}
                     <ChevronDownIcon
                       aria-hidden="true"
                       className="size-5 flex-none group-data-open:rotate-180"
@@ -219,19 +238,22 @@ export default function Example() {
                   href="features"
                   className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-white hover:bg-white/5"
                 >
-                  Features
+                  {/* Features */}
+                  {t("features")}
                 </a>
                 <a
                   href="marketplace"
                   className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-white hover:bg-white/5"
                 >
-                  Marketplace
+                  {/* Marketplace */}
+                  {t("marketplace")}
                 </a>
                 <a
                   href="company"
                   className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-white hover:bg-white/5"
                 >
-                  Company
+                  {/* Company */}
+                  {t("company")}
                 </a>
               </div>
               <div className="py-6">
@@ -239,7 +261,8 @@ export default function Example() {
                   href="login"
                   className="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-white hover:bg-white/5"
                 >
-                  Log in
+                  {/* Log in */}
+                  {t("logIn")}
                 </a>
               </div>
             </div>

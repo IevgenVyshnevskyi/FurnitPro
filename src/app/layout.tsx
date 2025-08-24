@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+//import Head from "next/head";
 
 //import Header from "@/components/Header";
 //import Footer from "@/components/Footer";
@@ -27,11 +28,44 @@ export default function RootLayout({
 }>) {
   return (
     <html /* lang="ua" */>
+      {/* <Head>
+        <link rel="icon" href="/favicon.ico" />
+      </Head> */}
+      {/* <head>
+        <link rel="icon" href="/favicon.ico" />
+      </head> */}
+      <head>
+        {/* Стандартний favicon */}
+        <link rel="icon" href="/favicon.png" />
+        {/* PNG favicon для кращої сумісності */}
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="32x32"
+          href="/favicon-32x32.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="16x16"
+          href="/favicon-16x16.png"
+        />
+        {/* Apple Touch Icon для iOS */}
+        <link
+          rel="apple-touch-icon"
+          sizes="180x180"
+          href="/apple-touch-icon.png"
+        />
+        {/* Можна додати manifest для PWA */}
+        {/* <link rel="manifest" href="/site.webmanifest" /> */}
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {/* <Header /> */}
-        {/* <main className="flex-grow"> */}{children}{/* </main> */}
+        {/* <main className="flex-grow"> */}
+        {children}
+        {/* </main> */}
         {/* <Footer /> */}
       </body>
     </html>

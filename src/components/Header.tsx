@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
-import logo from "../../public/logo/logo_1.jpg";
+import logo from "../../public/logo/logo.jpg";
 //import LangSwitcher from "../../components/LangSwitcher";
 
 import {

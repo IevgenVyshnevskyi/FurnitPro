@@ -5,7 +5,7 @@ import { NextIntlClientProvider } from "next-intl";
 
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -30,6 +30,10 @@ export default async function RootLayout({
   params: Promise<{ locale: string }>; // 👈 тут Promise
 }>) {
   const { locale } = await params; // 👈 обов’язково await
+  // Якщо URL не містить мови, перенаправляємо на українську
+  if (!locale) {
+    redirect("/ua");
+  }
   let messages;
   try {
     //messages = (await import(`../../messages/${locale}.json`)).default;
@@ -39,15 +43,15 @@ export default async function RootLayout({
   }
   return (
     //<html /* lang="ua" */>
-     /*  <body
+    /*  <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       > */
-        <NextIntlClientProvider locale={locale} messages={messages}>
-          <Header />
-          <main className="flex-grow">{children}</main>
-          <Footer />
-        </NextIntlClientProvider>
-      /* </body> */
+    <NextIntlClientProvider locale={locale} messages={messages}>
+      <Header />
+      <main className="flex-grow">{children}</main>
+      <Footer />
+    </NextIntlClientProvider>
+    /* </body> */
     //</html>
   );
 }

@@ -4,43 +4,41 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 type LangSwitcherProps = {
-  mobile?: boolean; // для мобільного меню
+  mobile?: boolean;
 };
 
 export default function LangSwitcher({ mobile = false }: LangSwitcherProps) {
   const pathname = usePathname();
 
-  // Клас для відображення на мобільному або десктопі
-  const containerClass = mobile
-    ? "flex gap-4 justify-center text-white"
-    : "hidden lg:flex lg:flex-1 lg:justify-end gap-2 items-center text-white";
-  //console.log("pathname: ", pathname);
+  // Визначаємо поточну мову з шляху
+  const currentLang = pathname.startsWith("/en") ? "en" : "ua";
 
-  const flagSizeClass = mobile ? "h-6 w-4" : "text-xl";
+  // Клас для контейнера
+  const containerClass = mobile
+    ? "flex gap-4 justify-center items-center"
+    : "hidden lg:flex lg:flex-1 lg:justify-end gap-2 items-center";
+
+  const flagSizeClass = mobile ? "h-4 w-6" : "h-5 w-8";
+
+  const getFlagClass = (lang: string) =>
+    currentLang === lang ? "opacity-100 border-2 border-white rounded" : "opacity-50";
 
   return (
     <div className={containerClass}>
-      {/* <div className="hidden lg:flex lg:flex-1 lg:justify-end"> */}
       <Link
         href={`/ua${pathname.replace(/^\/(ua|en)/, "")}`}
-        //href={pathname}
         locale="ua"
-        className={flagSizeClass}
-        /* className="text-sm/6 font-semibold text-white" */
+        className={`${flagSizeClass} ${getFlagClass("ua")}`}
       >
-        🇺🇦 {/* Українська */}
+        <img src="/flags/ua-flag.svg" alt="UA" className="h-full w-full" />
       </Link>
-      {/* {" "}
-      |{" "} */}
       <span className="text-white">|</span>
       <Link
         href={`/en${pathname.replace(/^\/(ua|en)/, "")}`}
-        //href={pathname}
         locale="en"
-        /* className="text-sm/6 font-semibold text-white" */
-        className={flagSizeClass}
+        className={`${flagSizeClass} ${getFlagClass("en")}`}
       >
-        🇬🇧 {/* English */}
+        <img src="/flags/uk-flag.svg" alt="GB" className="h-full w-full" />
       </Link>
     </div>
   );

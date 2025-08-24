@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import { useTranslations } from "next-intl";
+import Image from "next/image";
+import logo from "../../public/logo/logo_1.jpg";
 //import LangSwitcher from "../../components/LangSwitcher";
 
 import {
@@ -88,10 +90,11 @@ export default function Header() {
               {/* {t("title")} */}
               Your Company
             </span>
-            <img
+            <Image
+              src={logo}
               alt="logo"
-              src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=500"
-              className="h-8 w-auto"
+              width={50} // бажана ширина
+              height={50} // бажана висота
             />
           </a>
         </div>
@@ -194,10 +197,11 @@ export default function Header() {
           <div className="flex items-center justify-between">
             <a href="/" className="-m-1.5 p-1.5">
               <span className="sr-only">Your Company</span>
-              <img
+              <Image
+                src={logo}
                 alt="logo"
-                src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=500"
-                className="h-8 w-auto"
+                width={50} // бажана ширина
+                height={50} // бажана висота
               />
             </a>
             <LangSwitcher mobile />

@@ -200,6 +200,7 @@ export default function Header() {
                 className="h-8 w-auto"
               />
             </a>
+            <LangSwitcher mobile />
             <button
               type="button"
               onClick={() => setMobileMenuOpen(false)}
@@ -209,6 +210,7 @@ export default function Header() {
               <XMarkIcon aria-hidden="true" className="size-6" />
             </button>
           </div>
+
           <div className="mt-6 flow-root">
             <div className="-my-6 divide-y divide-white/10">
               <div className="space-y-2 py-6">

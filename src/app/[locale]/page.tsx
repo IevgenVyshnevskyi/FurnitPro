@@ -15,83 +15,228 @@ import { Link } from "@/i18n/navigation";
 const products = [
   {
     id: 1,
-    name: "Earthen Bottle",
-    href: "#",
-    price: "$48",
-    imageSrc:
-      "https://tailwindcss.com/plus-assets/img/ecommerce-images/category-page-04-image-card-01.jpg",
-    imageAlt:
-      "Tall slender porcelain bottle with natural clay textured body and cork stopper.",
+    name: "Механізм юніор посилений",
+    href: "/mechanism-junior-strong",
+    price: "40.00 грн./шт.",
+    imageSrc: "/images/products/1.mechanism-junior-strong/item1.jpg",
+    imageAlt: "Механізм меблевий підйомний без ребра жорсткості.",
   },
+  /*   {
+    id: 1,
+    name: "Junior mechanism reinforced",
+    href: "/mechanism-junior-strong",
+    price: "$48",
+    imageSrc: "/images/products/1.mechanism-junior-strong/item1.jpg",
+    imageAlt: "Furniture lifting mechanism without stiffener.",
+  }, */
   {
     id: 2,
-    name: "Nomad Tumbler",
+    name: "Зачіп середній",
     href: "#",
-    price: "$35",
-    imageSrc:
-      "https://tailwindcss.com/plus-assets/img/ecommerce-images/category-page-04-image-card-02.jpg",
+    price: "4.50 грн./шт.",
+    imageSrc: "/images/products/2.latch-medium/item1.jpg",
+    imageAlt: "Механізм меблевий підйомний без ребра жорсткості.",
+  },
+  /*     {
+    id: 2,
+    name: "Medium hook",
+    href: "#",
+    price: "4.50 грн./шт.",
+    imageSrc: "/images/products/2.latch-medium/item1.jpg",
     imageAlt:
       "Olive drab green insulated bottle with flared screw lid and flat top.",
-  },
+  }, */
   {
     id: 3,
-    name: "Focus Paper Refill",
+    name: "Зачіп великий",
     href: "#",
-    price: "$89",
-    imageSrc:
-      "https://tailwindcss.com/plus-assets/img/ecommerce-images/category-page-04-image-card-03.jpg",
-    imageAlt:
-      "Person using a pen to cross a task off a productivity paper card.",
+    price: "4.90 грн./шт.",
+    imageSrc: "/images/products/3.latch-large/item1.jpg",
+    imageAlt: "Зачіп посилений  для великих меблевих елементів.",
   },
+  /*    {
+    id: 3,
+    name: "Big hook",
+    href: "#",
+    price: "4.90 грн./шт.",
+    imageSrc:
+      "/images/products/3.latch-large/item1.jpg",
+    imageAlt:
+      "The hook is reinforced for large furniture elements.",
+  }, */
   {
     id: 4,
-    name: "Machined Mechanical Pencil",
+    name: "Зачіп слайдер Н-16",
     href: "#",
-    price: "$35",
-    imageSrc:
-      "https://tailwindcss.com/plus-assets/img/ecommerce-images/category-page-04-image-card-04.jpg",
-    imageAlt:
-      "Hand holding black machined steel mechanical pencil with brass tip and top.",
+    price: "9.20 грн./шт.",
+    imageSrc: "/images/products/4.latch-slider-h16/item1.jpg",
+    imageAlt: "Зачіп типу слайдер для меблевих направляючих.",
   },
+  /*     {
+    id: 4,
+    name: "Hook slider Н-16",
+    href: "#",
+    price: "9.20 грн./шт.",
+    imageSrc:
+      "/images/products/4.latch-slider-h16/item1.jpg",
+    imageAlt:
+      "Slider type hook for furniture guides.",
+  }, */
   {
     id: 5,
-    name: "Focus Card Tray",
+    name: "Зачіп слайдер Н-10",
     href: "#",
-    price: "$64",
-    imageSrc:
-      "https://tailwindcss.com/plus-assets/img/ecommerce-images/category-page-04-image-card-05.jpg",
-    imageAlt: "Paper card sitting upright in walnut card holder on desk.",
+    price: "8.80 грн./шт.",
+    imageSrc: "/images/products/5.latch-slider-h10/item1.jpg",
+    imageAlt: "Компактний зачіп для направляючих.",
   },
+  /*     {
+    id: 5,
+    name: "Hook slider Н-10",
+    href: "#",
+    price: "8.80 грн./шт.",
+    imageSrc:
+      "/images/products/5.latch-slider-h10/item1.jpg",
+    imageAlt:
+      "Compact hook for guides.",
+  }, */
   {
     id: 6,
-    name: "Focus Multi-Pack",
+    name: "Mеханізм Юніор",
     href: "#",
-    price: "$39",
-    imageSrc:
-      "https://tailwindcss.com/plus-assets/img/ecommerce-images/category-page-04-image-card-06.jpg",
-    imageAlt:
-      "Stack of 3 small drab green cardboard paper card refill boxes with white text.",
+    price: "38.00 грн./шт.",
+    imageSrc: "/images/products/6.mechanism-junior/item1.jpg",
+    imageAlt: "Механізм меблевий підйомний без ребра жорсткості.",
   },
+  /*     {
+    id: 6,
+    name: "Mechanism Junior",
+    href: "#",
+    price: "38.00 грн./шт.",
+    imageSrc:
+      "/images/products/6.mechanism-junior/item1.jpg",
+    imageAlt:
+      "Furniture lifting mechanism without stiffener.",
+  }, */
   {
     id: 7,
-    name: "Brass Scissors",
+    name: "Завіса велика 190",
     href: "#",
-    price: "$50",
-    imageSrc:
-      "https://tailwindcss.com/plus-assets/img/ecommerce-images/category-page-04-image-card-07.jpg",
-    imageAlt:
-      "Brass scissors with geometric design, black steel finger holes, and included upright brass stand.",
+    price: "24.00 грн./шт.",
+    imageSrc: "/images/products/7.hinge-large-190/item1.jpg",
+    imageAlt: "Завіса меблева металева велика для складних конструкцій.",
   },
+  /*     {
+    id: 7,
+    name: "Large curtain 190",
+    href: "#",
+    price: "24.00 грн./шт.",
+    imageSrc:
+      "/images/products/7.hinge-large-190/item1.jpg",
+    imageAlt:
+      "Large metal furniture hinge for complex structures.",
+  }, */
   {
     id: 8,
-    name: "Focus Carry Pouch",
+    name: "Завіса мала",
     href: "#",
-    price: "$32",
-    imageSrc:
-      "https://tailwindcss.com/plus-assets/img/ecommerce-images/category-page-04-image-card-08.jpg",
-    imageAlt:
-      "Textured gray felt pouch for paper cards with snap button flap and elastic pen holder loop.",
+    price: "8.50 грн./шт.",
+    imageSrc: "/images/products/8.hinge-small/item1.jpg",
+    imageAlt: "Завіса меблева металева мала для складних конструкцій.",
   },
+  /*     {
+    id: 8,
+    name: "Large curtain 190",
+    href: "#",
+    price: "24.00 грн./шт.",
+    imageSrc:
+      "/images/products/8.hinge-small/item1.jpg",
+    imageAlt:
+      "Small metal furniture hinge for complex structures.",
+  }, */
+  {
+    id: 9,
+    name: "Куток 106 оцинкований",
+    href: "#",
+    price: "2.50 грн./шт.",
+    imageSrc: "/images/products/9.angle-106/item1.jpg",
+    imageAlt: "Куток меблевий з’єднувальний  106.",
+  },
+  /*     {
+    id: 9,
+    name: "Corner 106 galvanized",
+    href: "#",
+    price: "2.50 грн./шт.",
+    imageSrc:
+      "/images/products/9.angle-106/item1.jpg",
+    imageAlt:
+      "Furniture corner connecting 106.",
+  }, */
+  {
+    id: 10,
+    name: "Механізм Блюз",
+    href: "#",
+    price: "??? грн./шт.",
+    imageSrc: "/images/products/10.mechanism-blues/item1.jpg",
+    imageAlt: "Механізм пружинний для м’яких меблів.",
+  },
+  /*       {
+    id: 10,
+    name: "Mechanism Blues",
+    href: "#",
+    price: "??? грн./шт.",
+    imageSrc: "/images/products/10.mechanism-blues/item1.jpg",
+    imageAlt: "Spring mechanism for upholstered furniture.",
+  }, */
+  {
+    id: 11,
+    name: "Механізм ліжковий гідравлічний",
+    href: "#",
+    price: "??? грн./шт.",
+    imageSrc: "/images/products/11.mechanism-bed/item1.jpg",
+    imageAlt: "Механізм підйомний гідравлічний для ліжок.",
+  },
+  /*     {
+    id: 11,
+    name: "Hydraulic bed mechanism",
+    href: "#",
+    price: "??? грн./шт.",
+    imageSrc: "/images/products/11.mechanism-bed/item1.jpg",
+    imageAlt: "Hydraulic lifting mechanism for beds.",
+  }, */
+  {
+    id: 12,
+    name: "Механізм Алігатор",
+    href: "#",
+    price: "??? грн./шт.",
+    imageSrc: "/images/products/12.mechanism-alligator/item1.jpg",
+    imageAlt: "Механізм трансформації меблів білого кольору.",
+  },
+  /*   {
+    id: 12,
+    name: " Mechanism Alligator",
+    href: "#",
+    price: "??? грн./шт.",
+    imageSrc: "/images/products/12.mechanism-alligator/item1.jpg",
+    imageAlt: "White furniture transformation mechanism.",
+  }, */
+  {
+    id: 13,
+    name: "Механізм Євро-Книжка",
+    href: "#",
+    price: "??? грн./шт.",
+    imageSrc: "/images/products/13.mechanism-eurobook/item1.jpg",
+    imageAlt: "Механізм для трансформації диванів у положення 'ліжко'.",
+  },
+  /*     {
+    id: 13,
+    name: "Mechanism Euro-Book",
+    href: "#",
+    price: "??? грн./шт.",
+    imageSrc: "/images/products/13.mechanism-eurobook/item1.jpg",
+    imageAlt: "
+Mechanism for transforming sofas into a 'bed' position.",
+  }, */
 ];
 
 export default function Example() {

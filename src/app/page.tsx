@@ -1,11 +1,13 @@
 const products = [
+  
   {
     id: 1,
-    name: "Earthen Bottle",
-    href: "#",
+    name: "Mechanism Junior Strong",
+    href: "/mechanism-junior-strong",
     price: "$48",
     imageSrc:
       "https://tailwindcss.com/plus-assets/img/ecommerce-images/category-page-04-image-card-01.jpg",
+
     imageAlt:
       "Tall slender porcelain bottle with natural clay textured body and cork stopper.",
   },
@@ -108,7 +110,8 @@ export default function Example() {
 
 //import Image from "next/image";
 
-{/* export default function Home() {
+{
+  /* export default function Home() {
   return (
     <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
       <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
@@ -119,8 +122,10 @@ export default function Example() {
           width={180}
           height={38}
           priority
-        /> */}
-        {/* <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
+        /> */
+}
+{
+  /* <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
           <li className="mb-2 tracking-[-.01em]">
             Get started by editing{" "}
             <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
@@ -131,9 +136,11 @@ export default function Example() {
           <li className="tracking-[-.01em]">
             Save and see your changes instantly.
           </li>
-        </ol> */}
+        </ol> */
+}
 
-        {/*  <div className="flex gap-4 items-center flex-col sm:flex-row">
+{
+  /*  <div className="flex gap-4 items-center flex-col sm:flex-row">
           <a
             className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
             href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
@@ -158,8 +165,10 @@ export default function Example() {
             Read our docs
           </a>
         </div> 
-      </main>*/}
-      {/* <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
+      </main>*/
+}
+{
+  /* <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
         <a
           className="flex items-center gap-2 hover:underline hover:underline-offset-4"
           href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
@@ -208,4 +217,5 @@ export default function Example() {
       </footer> 
     </div>
   );
-}*/}
+}*/
+}

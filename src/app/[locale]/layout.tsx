@@ -5,6 +5,7 @@ import { NextIntlClientProvider } from "next-intl";
 
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+//import BackgroundLayout from "@/components/BackgroundLayout";
 import { notFound, redirect } from "next/navigation";
 
 const geistSans = Geist({
@@ -48,7 +49,10 @@ export default async function RootLayout({
       > */
     <NextIntlClientProvider locale={locale} messages={messages}>
       <Header />
-      <main className="flex-grow">{children}</main>
+        <main className="flex-grow">
+          {/* <BackgroundLayout>{children}</BackgroundLayout> */}
+          {children}
+        </main>
       <Footer />
     </NextIntlClientProvider>
     /* </body> */

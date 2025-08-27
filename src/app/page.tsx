@@ -1,4 +1,4 @@
-const products = [
+/* const products = [
   
   {
     id: 1,
@@ -106,7 +106,7 @@ export default function Example() {
       </div>
     </div>
   );
-}
+} */
 
 //import Image from "next/image";
 

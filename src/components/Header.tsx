@@ -95,6 +95,7 @@ export default function Header() {
               alt="logo"
               width={50} // бажана ширина
               height={50} // бажана висота
+              className="transition hover:opacity-60"
             />
           </a>
         </div>
@@ -110,7 +111,7 @@ export default function Header() {
         </div>
         <PopoverGroup className="hidden lg:flex lg:gap-x-12">
           <Popover className="relative">
-            <PopoverButton className="flex items-center gap-x-1 text-sm/6 font-semibold text-white">
+            <PopoverButton className="flex items-center gap-x-1 text-sm/6 font-semibold text-white transition-colors hover:text-gray-400">
               {/* Product */}
               {t("product")}
               <ChevronDownIcon
@@ -166,15 +167,15 @@ export default function Header() {
             </PopoverPanel>
           </Popover>
 
-          <a href="features" className="text-sm/6 font-semibold text-white">
+          <a href="features" className="text-sm/6 font-semibold text-white transition-colors hover:text-gray-400">
             {/* Features */}
             {t("features")}
           </a>
-          <a href="marketplace" className="text-sm/6 font-semibold text-white">
+          <a href="marketplace" className="text-sm/6 font-semibold text-white transition-colors hover:text-gray-400">
             {/* Marketplace */}
             {t("marketplace")}
           </a>
-          <a href="company" className="text-sm/6 font-semibold text-white">
+          <a href="company" className="text-sm/6 font-semibold text-white transition-colors hover:text-gray-400">
             {/* Company */}
             {t("company")}
           </a>

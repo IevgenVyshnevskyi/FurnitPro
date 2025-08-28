@@ -15,7 +15,7 @@ export default function ProductPage() {
 
   if (!product) {
     return (
-      <div className="px-4 py-16 mx-auto max-w-7xl">
+      <div className="flex flex-col items-center justify-center min-h-screen px-4">
         <h1 className="text-3xl font-bold mb-4">Продукт не знайдено</h1>
         <Link href="/" className="text-blue-600 hover:underline">
           Повернутися на головну
@@ -25,15 +25,17 @@ export default function ProductPage() {
   }
 
   return (
-    <div className="px-4 py-16 mx-auto max-w-7xl">
-      <h1 className="text-3xl font-bold mb-4">{product.name}</h1>
-      <img
-        src={product.imageSrc}
-        alt={product.imageAlt}
-        className="w-full max-w-md rounded-xl mb-4"
-      />
-      <p className="text-gray-600 mb-2">{product.imageAlt}</p>
-      <p className="text-lg font-medium text-gray-900">{product.price}</p>
+    <div className="flex flex-col items-center justify-center min-h-screen px-4">
+      <div className="max-w-md text-center">
+        <h1 className="text-3xl font-bold mb-6">{product.name}</h1>
+        <img
+          src={product.imageSrc}
+          alt={product.imageAlt}
+          className="w-full rounded-xl mb-6 shadow-md"
+        />
+        <p className="text-gray-600 mb-3">{product.imageAlt}</p>
+        <p className="text-lg font-medium text-gray-900">{product.price}</p>
+      </div>
     </div>
   );
 }

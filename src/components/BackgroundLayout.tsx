@@ -1,5 +1,7 @@
 "use client";
 
+import Image from "next/image";
+
 export default function BackgroundLayout({
   children,
 }: {
@@ -13,15 +15,26 @@ export default function BackgroundLayout({
           srcSet="/images/background/bg-1920.jpg"
           media="(min-width: 1280px)"
         />
-        {/* <source srcSet="/images/background/bg-1920.webp" media="(min-width: 1280px)" />
-        <source srcSet="/images/background//bg-1280.webp" media="(min-width: 768px)" /> */}
-        <img
-          src="/images/bg-768.webp"
+        {/* <source srcSet="/images/background/bg-1920.webp" media="(min-width: 1280px)" /> */}
+        <source
+          srcSet="/images/background/bg-1280.png"
+          media="(min-width: 768px)"
+        />
+
+        {/*  <img
+          src="/images/background/bg-768.png"
           alt="Background"
           className="absolute inset-0 -z-10 h-full w-full object-cover"
+        /> */}
+       </picture>
+        <Image
+          src="/images/background/bg-768.png"
+          alt="Background"
+          fill
+          priority
+          className="absolute inset-0 -z-10 object-cover"
+          sizes="(min-width: 1280px) 1920px, (min-width: 768px) 1280px, 768px"
         />
-      </picture>
-
       {/* Контент сайту */}
       <main className="relative z-10">{children}</main>
     </div>

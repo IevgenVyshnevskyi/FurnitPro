@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
+import Link from "next/link";
 import logo from "../../public/logo/logo.jpg";
 //import LangSwitcher from "../../components/LangSwitcher";
 
@@ -84,7 +85,7 @@ export default function Header() {
         className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8"
       >
         <div className="flex lg:flex-1">
-          <a href="/" className="-m-1.5 p-1.5">
+          <Link href="/" className="-m-1.5 p-1.5">
             {/* <span className="sr-only">{t("Your Company")}</span> */}
             <span className="sr-only">
               {/* {t("title")} */}
@@ -97,7 +98,7 @@ export default function Header() {
               height={50} // бажана висота
               className="transition hover:opacity-60"
             />
-          </a>
+          </Link>
         </div>
         <div className="flex lg:hidden">
           <button
@@ -167,15 +168,24 @@ export default function Header() {
             </PopoverPanel>
           </Popover>
 
-          <a href="features" className="text-sm/6 font-semibold text-white transition-colors hover:text-gray-400">
+          <a
+            href="features"
+            className="text-sm/6 font-semibold text-white transition-colors hover:text-gray-400"
+          >
             {/* Features */}
             {t("features")}
           </a>
-          <a href="marketplace" className="text-sm/6 font-semibold text-white transition-colors hover:text-gray-400">
+          <a
+            href="marketplace"
+            className="text-sm/6 font-semibold text-white transition-colors hover:text-gray-400"
+          >
             {/* Marketplace */}
             {t("marketplace")}
           </a>
-          <a href="company" className="text-sm/6 font-semibold text-white transition-colors hover:text-gray-400">
+          <a
+            href="company"
+            className="text-sm/6 font-semibold text-white transition-colors hover:text-gray-400"
+          >
             {/* Company */}
             {t("company")}
           </a>
@@ -196,7 +206,7 @@ export default function Header() {
         <div className="fixed inset-0 z-50" />
         <DialogPanel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-gray-900 p-6 sm:max-w-sm sm:ring-1 sm:ring-gray-100/10">
           <div className="flex items-center justify-between">
-            <a href="/" className="-m-1.5 p-1.5">
+            <Link href="/" className="-m-1.5 p-1.5">
               <span className="sr-only">Your Company</span>
               <Image
                 src={logo}
@@ -204,7 +214,7 @@ export default function Header() {
                 width={50} // бажана ширина
                 height={50} // бажана висота
               />
-            </a>
+            </Link>
             <LangSwitcher mobile />
             <button
               type="button"

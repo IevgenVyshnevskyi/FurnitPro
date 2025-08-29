@@ -18,14 +18,14 @@ export default function FloatingMessenger() {
   return (
     <div
       className="fixed bottom-32 left-12 flex items-center gap-4"
-      onMouseEnter={() => setOpen(true)}
-      onMouseLeave={() => setOpen(false)}
     >
       {/* Початкова кнопка */}
       <div
         className={`w-14 h-14 rounded-full bg-purple-900 flex items-center justify-center text-white text-2xl cursor-pointer transition-opacity duration-300 ${
           open ? "opacity-100 transition-opacity duration-300" : "opacity-60"
         }`}
+        onMouseEnter={() => setOpen(true)}
+        onMouseLeave={() => setOpen(false)}
       >
         <FaCommentDots />
       </div>

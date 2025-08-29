@@ -1,5 +1,6 @@
 "use client";
 
+import FloatingContactButton from "@/components/FloatingContactButton";
 import FloatingMessenger from "@/components/FloatingMessenger";
 import ScrollToTop from "@/components/ScrollToTop";
 import Link from "next/link";
@@ -92,6 +93,7 @@ export default function HomePage() {
       </Link> */}
       <FloatingMessenger />
       <ScrollToTop/>
+      <FloatingContactButton/>
     </div>
   );
 }

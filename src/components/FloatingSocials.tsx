@@ -1,35 +1,48 @@
 "use client";
 
 import { useState } from "react";
-import { FaCommentDots, FaFacebookMessenger, FaTelegramPlane, FaViber } from "react-icons/fa";
+import { FaShareAlt, FaInstagram, FaFacebook, FaTiktok } from "react-icons/fa";
 
-export default function FloatingMessenger() {
+export default function FloatingSocials() {
   const [open, setOpen] = useState(false);
 
-  const buttons = [
-    { icon: <FaFacebookMessenger />, bg: "bg-blue-500", url: "#" },
-    { icon: <FaTelegramPlane />, bg: "bg-cyan-500", url: "#" },
-    { icon: <FaViber />, bg: "bg-purple-600", url: "#" },
+  const socials = [
+    {
+      icon: <FaInstagram />,
+      bg: "bg-pink-500",
+      url: "https://www.instagram.com/FurnitPro",
+    },
+    {
+      icon: <FaFacebook />,
+      bg: "bg-blue-600",
+      url: "https://www.facebook.com/profile.php?id=61578154867004",
+    },
+    {
+      icon: <FaTiktok />,
+      bg: "bg-black",
+      url: "https://www.tiktok.com/@FurnitPro7",
+    },
   ];
 
   return (
     <div
-      className="fixed bottom-32 left-12 flex items-center gap-4 z-50"
-      onMouseLeave={() => setOpen(false)} // ховаємо кнопки, коли курсор покидає всю площину
+      className="fixed bottom-50 left-12 flex items-center gap-4 z-50"
+      onMouseLeave={() => setOpen(false)}
     >
       {/* Головна кнопка */}
       <div
         className={`w-14 h-14 rounded-full bg-purple-900 flex items-center justify-center text-white text-2xl cursor-pointer transition-opacity duration-300 ${
           open ? "opacity-100" : "opacity-60"
         }`}
-        onMouseEnter={() => setOpen(true)} // відкриваємо кнопки тільки при наведенні на головну кнопку
+        onMouseEnter={() => setOpen(true)}
       >
-        <FaCommentDots />
+        {/* Змінена іконка */}
+        <FaShareAlt />
       </div>
 
-      {/* Контейнер кнопок */}
+      {/* Кнопки соцмереж */}
       <div className="flex items-center gap-4">
-        {buttons.map((btn, idx) => (
+        {socials.map((btn, idx) => (
           <a
             key={idx}
             href={btn.url}
@@ -39,7 +52,7 @@ export default function FloatingMessenger() {
             style={{
               transitionDelay: open
                 ? `${idx * 100}ms`
-                : `${(buttons.length - idx) * 100}ms`,
+                : `${(socials.length - idx) * 100}ms`,
               opacity: open ? 1 : 0,
               transform: open ? "translateX(0)" : "translateX(-2rem)",
             }}

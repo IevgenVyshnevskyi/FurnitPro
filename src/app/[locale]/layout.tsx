@@ -49,10 +49,10 @@ export default async function RootLayout({
       > */
     <NextIntlClientProvider locale={locale} messages={messages}>
       <Header />
-        <main className="flex-grow">
-          {/* <BackgroundLayout>{children}</BackgroundLayout> */}
-          {children}
-        </main>
+      <main className="flex-grow">
+        {/* <BackgroundLayout>{children}</BackgroundLayout> */}
+        {children}
+      </main>
       <Footer />
     </NextIntlClientProvider>
     /* </body> */

@@ -1,8 +1,8 @@
 "use client";
 
-import FloatingContactButton from "@/components/FloatingContactButton";
-import FloatingMessenger from "@/components/FloatingMessenger";
-import ScrollToTop from "@/components/ScrollToTop";
+// import FloatingContactButton from "@/components/FloatingContactButton";
+// import FloatingMessenger from "@/components/FloatingMessenger";
+// import ScrollToTop from "@/components/ScrollToTop";
 import Link from "next/link";
 
 const categories = [
@@ -91,9 +91,9 @@ export default function HomePage() {
       >
         Зв’язатись
       </Link> */}
-      <FloatingMessenger />
+{/*       <FloatingMessenger />
       <ScrollToTop/>
-      <FloatingContactButton/>
+      <FloatingContactButton/> */}
     </div>
   );
 }

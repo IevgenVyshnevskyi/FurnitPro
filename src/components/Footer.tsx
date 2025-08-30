@@ -1,4 +1,10 @@
-import Link from 'next/link';
+"use client";
+
+import Link from "next/link";
+import FloatingMessenger from "./FloatingMessenger";
+import ScrollToTop from "./ScrollToTop";
+import FloatingContactButton from "./FloatingContactButton";
+import FloatingSocials from "./FloatingSocials";
 
 export default function Footer() {
   return (
@@ -58,6 +64,10 @@ export default function Footer() {
       <div className="border-t border-gray-700 text-center py-4 text-sm">
         © {new Date().getFullYear()} MySite. All rights reserved.
       </div>
+      <FloatingContactButton />
+      <FloatingSocials />
+      <FloatingMessenger />
+      <ScrollToTop />
     </footer>
   );
 }

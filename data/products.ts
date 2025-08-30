@@ -3,7 +3,10 @@ export interface Product {
   name: string;
   href: string;
   price: string;
-  imageSrc: string;
+  imageSrc: {
+    image: string;
+    drawing?: string;
+  };
   imageAlt: string;
   category: string;
   thickness: string;
@@ -18,7 +21,10 @@ const products: Product[] = [
     name: "Механізм Юніор з ребром",
     href: "/mechanism-junior-strong",
     price: "40.00 грн./шт.",
-    imageSrc: "/images/products/1.mechanism-junior-strong/item1.jpg",
+    imageSrc: {
+      image: "/images/products/1.mechanism-junior-strong/item1.jpg",
+      drawing: "/images/products/1.mechanism-junior-strong/item2.jpg",
+    },
     imageAlt: "Junior mechanism with rib",
     category: "mechanisms",
     thickness: "2,0мм",
@@ -46,7 +52,10 @@ const products: Product[] = [
     name: "Mеханізм Юніор",
     href: "#",
     price: "38.00 грн./шт.",
-    imageSrc: "/images/products/2.mechanism-junior/item1.jpg",
+    imageSrc: {
+      image: "/images/products/2.mechanism-junior/item1.jpg",
+      drawing: "/images/products/2.mechanism-junior/item2.jpg",
+    },
     imageAlt: "Механізм меблевий підйомний без ребра жорсткості.",
     category: "mechanisms",
     thickness: "2,0 мм",
@@ -75,7 +84,10 @@ const products: Product[] = [
     name: "Зачіп великий",
     href: "#",
     price: "4.90 грн./шт.",
-    imageSrc: "/images/products/3.latch-large/item1.jpg",
+    imageSrc: {
+      image: "/images/products/3.latch-large/item1.jpg",
+      drawing: "/images/products/3.latch-large/item2.jpg",
+    },
     imageAlt: "Зачіп посилений для великих меблевих елементів.",
     category: "hooks",
     thickness: "1,5 мм",
@@ -105,7 +117,10 @@ const products: Product[] = [
     name: "Зачіп середній",
     href: "#",
     price: "4.50 грн./шт.",
-    imageSrc: "/images/products/4.latch-medium/item1.jpg",
+    imageSrc: {
+      image: "/images/products/4.latch-medium/item1.jpg",
+      drawing: "/images/products/4.latch-medium/item2.jpg",
+    },
     imageAlt: "Призначений для фіксації меблевих елементів.",
     category: "hooks",
     thickness: "1,5 мм",
@@ -135,7 +150,10 @@ const products: Product[] = [
     name: "Зачіп слайдер Н-16",
     href: "#",
     price: "9.20 грн./шт.",
-    imageSrc: "/images/products/5.latch-slider-h16/item1.jpg",
+    imageSrc: {
+      image: "/images/products/5.latch-slider-h16/item1.jpg",
+      /* drawing: "/images/products/5.latch-slider-h16/item2.jpg", */
+    },
     imageAlt: "Зачіп типу слайдер для меблевих направляючих.",
     category: "hooks",
     thickness: "1,5 мм",
@@ -164,7 +182,10 @@ const products: Product[] = [
     name: "Зачіп слайдер Н-10",
     href: "#",
     price: "8.80 грн./шт.",
-    imageSrc: "/images/products/6.latch-slider-h10/item1.jpg",
+    imageSrc: {
+      image: "/images/products/6.latch-slider-h10/item1.jpg",
+      /* drawing: "/images/products/6.latch-slider-h10/item2.jpg", */
+    },
     imageAlt: "Компактний зачіп для направляючих.",
     category: "hooks",
     thickness: "1,5 мм",
@@ -193,7 +214,10 @@ const products: Product[] = [
     name: "Завіса велика 190",
     href: "#",
     price: "24.00 грн./шт.",
-    imageSrc: "/images/products/7.hinge-large-190/item1.jpg",
+    imageSrc: {
+      image: "/images/products/7.hinge-large-190/item1.jpg",
+      drawing: "/images/products/7.hinge-large-190/item2.jpg",
+    },
     imageAlt: "Металева меблева петля для складних конструкцій.",
     category: "curtains",
     thickness: "2,5 мм",
@@ -223,7 +247,10 @@ const products: Product[] = [
     name: "Завіса мала",
     href: "#",
     price: "8.50 грн./шт.",
-    imageSrc: "/images/products/8.hinge-small/item1.jpg",
+    imageSrc: {
+      image: "/images/products/8.hinge-small/item1.jpg",
+      drawing: "/images/products/8.hinge-small/item2.jpg",
+    },
     imageAlt: "Компактна меблева петля для точного відкривання.",
     category: "curtains",
     thickness: "1,8 мм",
@@ -253,7 +280,10 @@ const products: Product[] = [
     name: "Куток 106 оцинкований",
     href: "#",
     price: "2.50 грн./шт.",
-    imageSrc: "/images/products/9.angle-106/item1.jpg",
+    imageSrc: {
+      image: "/images/products/9.angle-106/item1.jpg",
+      drawing: "/images/products/9.angle-106/item2.jpg",
+    },
     imageAlt: "Меблевий з’єднувальний куток 106. ",
     category: "corners",
     thickness: "1,5 мм",
@@ -283,7 +313,10 @@ const products: Product[] = [
     name: "Механізм Блюз",
     href: "#",
     price: "??? грн./шт.",
-    imageSrc: "/images/products/10.mechanism-blues/item1.jpg",
+    imageSrc: {
+      image: "/images/products/10.mechanism-blues/item1.jpg",
+      /* drawing: "/images/products/10.mechanism-blues/item2.jpg", */
+    },
     imageAlt: "Механізм пружинний для м’яких меблів.",
     category: "mechanisms",
     thickness: "1,5 мм",
@@ -311,7 +344,10 @@ const products: Product[] = [
     name: "Механізм ліжковий гідравлічний",
     href: "#",
     price: "??? грн./шт.",
-    imageSrc: "/images/products/12.mechanism-bed/item1.jpg",
+    imageSrc: {
+      image: "/images/products/12.mechanism-bed/item1.jpg",
+      /* drawing: "/images/products/12.mechanism-bed/item2.jpg", */
+    },
     imageAlt: "Підйомний гідравлічний механізм для ліжок. ",
     category: "mechanisms",
     thickness: "",
@@ -339,7 +375,10 @@ const products: Product[] = [
     name: "Механізм Алігатор",
     href: "#",
     price: "??? грн./шт.",
-    imageSrc: "/images/products/11.mechanism-alligator/item1.jpg",
+    imageSrc: {
+      image: "/images/products/11.mechanism-alligator/item1.jpg",
+      /* drawing: "/images/products/11.mechanism-alligator/item2.jpg", */
+    },
     imageAlt: "Механізм трансформації меблів білого кольору.",
     category: "mechanisms",
     thickness: "",
@@ -367,7 +406,10 @@ const products: Product[] = [
     name: "Механізм Євро-Книжка",
     href: "#",
     price: "??? грн./шт.",
-    imageSrc: "/images/products/13.mechanism-eurobook/item1.jpg",
+    imageSrc: {
+      image: "/images/products/13.mechanism-eurobook/item1.jpg",
+      /* drawing: "/images/products/13.mechanism-eurobook/item2.jpg", */
+    },
     imageAlt: "Механізм для трансформації диванів у положення 'ліжко'.",
     category: "mechanisms",
     thickness: "",

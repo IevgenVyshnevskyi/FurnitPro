@@ -1,15 +1,34 @@
 "use client";
 
 import { useState } from "react";
-import { FaCommentDots, FaFacebookMessenger, FaTelegramPlane, FaViber } from "react-icons/fa";
+import {
+  FaCommentDots,
+  /* FaFacebookMessenger, */
+  FaTelegramPlane,
+  FaViber,
+} from "react-icons/fa";
+import { SiGmail } from "react-icons/si";
 
 export default function FloatingMessenger() {
   const [open, setOpen] = useState(false);
 
   const buttons = [
-    { icon: <FaFacebookMessenger />, bg: "bg-blue-500", url: "#" },
-    { icon: <FaTelegramPlane />, bg: "bg-cyan-500", url: "#" },
-    { icon: <FaViber />, bg: "bg-purple-600", url: "#" },
+    /* { icon: <FaFacebookMessenger />, bg: "bg-blue-500", url: "#" }, */
+    {
+      icon: <SiGmail />,
+      bg: "bg-red-600",
+      url: "mailto:furnitpro7@gmail.com", // відкриває Gmail або будь-який поштовий клієнт
+    },
+    {
+      icon: <FaTelegramPlane />,
+      bg: "bg-cyan-500",
+      url: "tg://resolve?phone=380987781679",
+    },
+    {
+      icon: <FaViber />,
+      bg: "bg-purple-600",
+      url: "viber://chat?number=%2B380963760986",
+    },
   ];
 
   return (

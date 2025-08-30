@@ -2,7 +2,8 @@
 
 import { useState, useEffect } from "react";
 import { FaPhoneAlt } from "react-icons/fa";
-import { SiVodafone } from "react-icons/si";
+import { SiVodafone } from "react-icons/si"; // додаємо іконку Київстар
+import kyivstarLogo from "./../../public/images/phones/kyivstar.jpeg";
 
 export default function FloatingContactButton() {
   const [open, setOpen] = useState(false);
@@ -30,24 +31,36 @@ export default function FloatingContactButton() {
     {
       icon: <SiVodafone />,
       bg: "bg-red-600",
-      href: "tel:111",
+      href: "tel:+380957989094",
       label: "Vodafone",
+    },
+    {
+      /* icon: <KyivstarIcon />, */
+      icon: (
+        <img
+          src={kyivstarLogo.src}
+          alt="Kyivstar"
+          className="w-7 h-7 rounded-full"
+        />
+      ), // JPEG замість SVG
+      bg: "bg-blue-600",
+      href: "tel:+380963760986",
+      label: "Kyivstar",
     },
   ];
 
   return (
     <div
       className="fixed bottom-68 left-12 flex items-center gap-4 z-50"
-      onMouseLeave={() => setOpen(false)} // ховаємо кнопки при виході курсора з усієї площини
+      onMouseLeave={() => setOpen(false)}
     >
       {/* Головна кнопка */}
       <div
         className={`w-14 h-14 rounded-full bg-purple-900 flex items-center justify-center text-white text-lg cursor-pointer transition-all duration-500 relative overflow-hidden ${
           open ? "opacity-100" : "opacity-60"
         }`}
-        onMouseEnter={() => setOpen(true)} // відкриваємо кнопки тільки при наведенні на головну кнопку
+        onMouseEnter={() => setOpen(true)}
       >
-        {/* Текст */}
         <span
           className={`absolute inset-0 flex items-center justify-center text-xs px-2 text-center transition-opacity duration-700 ${
             showText ? "opacity-100" : "opacity-0"
@@ -56,7 +69,6 @@ export default function FloatingContactButton() {
           Кнопка зв'язку
         </span>
 
-        {/* Іконка */}
         {!showText && (
           <div className={animate ? "vibrate-once" : ""}>
             <FaPhoneAlt className="text-2xl" />
@@ -85,7 +97,6 @@ export default function FloatingContactButton() {
         ))}
       </div>
 
-      {/* Стилі для вібрації */}
       <style jsx>{`
         @keyframes vibrateOnce {
           0% {

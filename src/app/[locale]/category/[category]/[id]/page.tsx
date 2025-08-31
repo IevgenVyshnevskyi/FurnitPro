@@ -34,7 +34,7 @@ export default function ProductPage() {
           alt={product.imageAlt}
           className="w-full rounded-xl mb-6 shadow-md"
         />
-        {product.imageSrc.drawing && (
+        {(product.imageSrc.drawing || product.imageSrc.drawing != "") && (
           <img
             src={product.imageSrc.drawing}
             alt={product.imageAlt}

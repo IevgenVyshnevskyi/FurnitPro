@@ -23,7 +23,7 @@ const products: Product[] = [
     price: "40.00 грн./шт.",
     imageSrc: {
       image: "/images/products/1.mechanism-junior-strong/item1.jpg",
-      drawing: "/images/products/1.mechanism-junior-strong/item2.jpg",
+      drawing: "",
     },
     imageAlt: "Junior mechanism with rib",
     category: "mechanisms",

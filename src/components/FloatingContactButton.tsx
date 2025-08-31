@@ -1,16 +1,44 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { FaPhoneAlt } from "react-icons/fa";
-import { SiVodafone } from "react-icons/si"; // додаємо іконку Київстар
-import kyivstarLogo from "./../../public/images/phones/kyivstar.jpeg";
+import { SiVodafone } from "react-icons/si";
+import { IoClose } from "react-icons/io5"; // ❌ хрестик
+import kyivstarLogo from "./../../public/images/phones/kyivstar.jpeg"; // ✅ JPEG іконка
 
 export default function FloatingContactButton() {
   const [open, setOpen] = useState(false);
   const [showText, setShowText] = useState(false);
   const [animate, setAnimate] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
 
-  // Періодична зміна між текстом і іконкою
+  // 📏 Визначення мобільного режиму
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth <= 768);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  // 👆 Закривання при кліку поза блоком у мобільному режимі
+  useEffect(() => {
+    if (!isMobile || !open) return;
+
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        containerRef.current &&
+        !containerRef.current.contains(event.target as Node)
+      ) {
+        setOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [isMobile, open]);
+
+  // ⏳ Періодична зміна між текстом і іконкою
   useEffect(() => {
     const interval = setInterval(() => {
       setShowText((prev) => !prev);
@@ -18,7 +46,7 @@ export default function FloatingContactButton() {
     return () => clearInterval(interval);
   }, []);
 
-  // Запускаємо анімацію вібрації при появі іконки
+  // 📳 Запускаємо анімацію вібрації при появі іконки
   useEffect(() => {
     if (!showText) {
       setAnimate(true);
@@ -27,40 +55,55 @@ export default function FloatingContactButton() {
     }
   }, [showText]);
 
+  // 📱 Кнопки операторів
   const buttons = [
     {
-      icon: <SiVodafone />,
+      icon: <SiVodafone className="w-7 h-7" />,
       bg: "bg-red-600",
       href: "tel:+380957989094",
       label: "Vodafone",
     },
     {
-      /* icon: <KyivstarIcon />, */
       icon: (
         <img
           src={kyivstarLogo.src}
           alt="Kyivstar"
-          className="w-7 h-7 rounded-full"
+          className="w-7 h-7 rounded-full object-cover"
         />
-      ), // JPEG замість SVG
+      ),
       bg: "bg-blue-600",
       href: "tel:+380963760986",
       label: "Kyivstar",
     },
   ];
 
+  // 👉 На мобільному додаємо кнопку ❌
+  const mobileButtons = [
+    ...buttons,
+    {
+      icon: <IoClose />,
+      bg: "bg-gray-700",
+      href: "#",
+      label: "Close",
+      close: true,
+    },
+  ];
+
   return (
     <div
+      ref={containerRef}
       className="fixed bottom-68 left-12 flex items-center gap-4 z-50"
-      onMouseLeave={() => setOpen(false)}
+      onMouseLeave={() => !isMobile && setOpen(false)} // на десктопі закриваємо по hover leave
     >
-      {/* Головна кнопка */}
+      {/* 🔘 Головна кнопка */}
       <div
         className={`w-14 h-14 rounded-full bg-purple-900 flex items-center justify-center text-white text-lg cursor-pointer transition-all duration-500 relative overflow-hidden ${
           open ? "opacity-100" : "opacity-60"
         }`}
-        onMouseEnter={() => setOpen(true)}
+        onClick={() => isMobile && setOpen((prev) => !prev)} // 📱 на мобільному toggle
+        onMouseEnter={() => !isMobile && setOpen(true)} // 🖥️ на десктопі — по hover
       >
+        {/* Текст кнопки */}
         <span
           className={`absolute inset-0 flex items-center justify-center text-xs px-2 text-center transition-opacity duration-700 ${
             showText ? "opacity-100" : "opacity-0"
@@ -69,6 +112,7 @@ export default function FloatingContactButton() {
           Кнопка зв'язку
         </span>
 
+        {/* 📞 Іконка телефону */}
         {!showText && (
           <div className={animate ? "vibrate-once" : ""}>
             <FaPhoneAlt className="text-2xl" />
@@ -76,13 +120,19 @@ export default function FloatingContactButton() {
         )}
       </div>
 
-      {/* Контейнер кнопок операторів */}
+      {/* 📌 Контейнер кнопок */}
       <div className="flex items-center gap-4">
-        {buttons.map((btn, idx) => (
+        {(isMobile ? mobileButtons : buttons).map((btn, idx) => (
           <a
             key={idx}
-            href={btn.href}
+            href={btn.close ? "#" : btn.href}
             title={btn.label}
+            onClick={(e) => {
+              if (btn.close) {
+                e.preventDefault();
+                setOpen(false);
+              }
+            }}
             className={`w-14 h-14 rounded-full flex items-center justify-center text-white text-2xl cursor-pointer transform transition-all duration-300 ${btn.bg}`}
             style={{
               transitionDelay: open
@@ -90,6 +140,7 @@ export default function FloatingContactButton() {
                 : `${(buttons.length - idx) * 100}ms`,
               opacity: open ? 1 : 0,
               transform: open ? "translateX(0)" : "translateX(-2rem)",
+              pointerEvents: open ? "auto" : "none",
             }}
           >
             {btn.icon}
@@ -97,6 +148,7 @@ export default function FloatingContactButton() {
         ))}
       </div>
 
+      {/* 🎞️ Анімація вібрації */}
       <style jsx>{`
         @keyframes vibrateOnce {
           0% {

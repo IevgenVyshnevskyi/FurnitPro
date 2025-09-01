@@ -7,6 +7,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 //import BackgroundLayout from "@/components/BackgroundLayout";
 import { notFound, redirect } from "next/navigation";
+//import AppBreadcrumbs from "@/components/AppBreadcrumbs";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -43,19 +44,20 @@ export default async function RootLayout({
     notFound();
   }
   return (
-    //<html /* lang="ua" */>
-    /*  <body
+    <html /* lang={locale} */ /* lang="ua" */>
+    {/*  <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      > */
+      > */}
     <NextIntlClientProvider locale={locale} messages={messages}>
       <Header />
+      {/* <AppBreadcrumbs/> */}
       <main className="flex-grow">
         {/* <BackgroundLayout>{children}</BackgroundLayout> */}
         {children}
       </main>
       <Footer />
     </NextIntlClientProvider>
-    /* </body> */
-    //</html>
+    {/* </body> */}
+    </html>
   );
 }

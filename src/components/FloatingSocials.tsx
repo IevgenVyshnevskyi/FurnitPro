@@ -39,16 +39,19 @@ export default function FloatingSocials() {
       icon: <FaInstagram />,
       bg: "bg-pink-500",
       url: "https://www.instagram.com/FurnitPro",
+      close: false,
     },
     {
       icon: <FaFacebook />,
       bg: "bg-blue-600",
       url: "https://www.facebook.com/profile.php?id=61578154867004",
+      close: false,
     },
     {
       icon: <FaTiktok />,
       bg: "bg-black",
       url: "https://www.tiktok.com/@FurnitPro7",
+      close: false,
     },
   ];
 

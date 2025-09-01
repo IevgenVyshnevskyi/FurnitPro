@@ -40,16 +40,19 @@ export default function FloatingMessenger() {
       icon: <SiGmail />,
       bg: "bg-red-600",
       url: "mailto:furnitpro7@gmail.com",
+      close: false,
     },
     {
       icon: <FaTelegramPlane />,
       bg: "bg-cyan-500",
       url: "tg://resolve?phone=380987781679",
+      close: false,
     },
     {
       icon: <FaViber />,
       bg: "bg-purple-600",
       url: "viber://chat?number=%2B380963760986",
+      close: false,
     },
   ];
 

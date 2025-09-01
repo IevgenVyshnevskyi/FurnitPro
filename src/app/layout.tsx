@@ -6,6 +6,7 @@ import "./globals.css";
 //import Header from "@/components/Header";
 //import Footer from "@/components/Footer";
 import BackgroundLayout from "@/components/BackgroundLayout";
+//import AppBreadcrumbs from "@/components/AppBreadcrumbs";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -60,6 +61,7 @@ export default function RootLayout({
         {/* Можна додати manifest для PWA */}
         {/* <link rel="manifest" href="/site.webmanifest" /> */}
       </head>
+      {/* <AppBreadcrumbs/> */}
       <body
         className={`${geistSans.variable} ${geistMono.variable}  h-full`}
       >

@@ -1,4 +1,11 @@
 {
+  "Breadcrumbs": {
+    "home": "Home",
+    "products": "Products",
+    "sofas": "Sofas",
+    "chairs": "Chairs",
+    "contact": "Contact"
+  },
   "HomePage": {
     "title": "Welcome to the homepage!",
     "about": "About us"

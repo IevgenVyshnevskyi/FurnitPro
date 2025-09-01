@@ -11,6 +11,9 @@
   "dependencies": {
     "@headlessui/react": "^2.2.7",
     "@heroicons/react": "^2.2.0",
+    "@heroui/breadcrumbs": "^2.2.21",
+    "@heroui/react": "^2.8.3",
+    "keen-slider": "^6.8.6",
     "next": "15.5.0",
     "next-intl": "^4.3.5",
     "react": "19.1.0",

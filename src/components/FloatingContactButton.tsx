@@ -62,6 +62,7 @@ export default function FloatingContactButton() {
       bg: "bg-red-600",
       href: "tel:+380957989094",
       label: "Vodafone",
+      close: false,
     },
     {
       icon: (
@@ -74,6 +75,7 @@ export default function FloatingContactButton() {
       bg: "bg-blue-600",
       href: "tel:+380963760986",
       label: "Kyivstar",
+      close: false,
     },
   ];
 
@@ -109,7 +111,7 @@ export default function FloatingContactButton() {
             showText ? "opacity-100" : "opacity-0"
           }`}
         >
-          Кнопка зв'язку
+          Кнопка зв&apos;язку
         </span>
 
         {/* 📞 Іконка телефону */}

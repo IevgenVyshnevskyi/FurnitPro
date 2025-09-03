@@ -3,9 +3,11 @@
 import products, { Product } from "@/../data/products";
 import { useParams } from "next/navigation";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 export default function CategoryPage() {
   const params = useParams();
+  const t = useTranslations("CategoryPage");
   const category = params.category as string;
 
   // Фільтруємо продукти за категорією
@@ -15,7 +17,7 @@ export default function CategoryPage() {
     <div className="bg-gray-0 min-h-screen">
       <div className="px-4 py-16 mx-auto max-w-7xl sm:px-6 sm:py-24">
         <h1 className="text-3xl font-bold mb-8 text-gray-900 capitalize">
-          {category}
+          {t(`categories.${category}`)}
         </h1>
 
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
@@ -41,18 +43,22 @@ export default function CategoryPage() {
                 <div className="absolute inset-0 flex items-center justify-center">
                   <span className="hidden lg:inline-block">
                     <div className="px-4 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 transition transform scale-90 opacity-0 group-hover:opacity-100 group-hover:scale-100 duration-300">
-                      Переглянути
+                      {/* Переглянути */} {t("view")}
                     </div>
                   </span>
                 </div>
               </div>
 
               <h3 className="mt-4 text-lg font-semibold text-gray-800">
-                {product.name}
+                {/* {product.name} */}
+                {t(`products.${product.name}`)}
               </h3>
-              <p className="mt-2 text-sm text-gray-600">{product.imageAlt}</p>
+
+              {/* <p className="mt-2 text-sm text-gray-600">{product.imageAlt}</p> */}
               <p className="mt-2 text-lg font-medium text-gray-900">
-                {product.price}
+                {/* {product.price} */}
+                {/* {t(`prices.${product.price}`)} */}
+                {t(`prices.${product.name}`)}
               </p>
             </Link>
           ))}

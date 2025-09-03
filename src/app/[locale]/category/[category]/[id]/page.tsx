@@ -6,9 +6,11 @@ import { useParams } from "next/navigation";
 import Link from "next/link";
 import { useKeenSlider } from "keen-slider/react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import { useTranslations } from "next-intl";
 
 export default function ProductPage() {
   const params = useParams();
+  const t = useTranslations("ProductPage"); // Ініціалізуємо хук перекладів
   const category = params.category as string;
   const id = params.id as string;
 
@@ -35,74 +37,141 @@ export default function ProductPage() {
       <div className="flex flex-col items-center justify-center min-h-screen px-4">
         <h1 className="text-3xl font-bold mb-4">Продукт не знайдено</h1>
         <Link href="/" className="text-blue-600 hover:underline">
-          Повернутися на головну сторінку
+          у {t("backToCatalog")}
         </Link>
       </div>
     );
   }
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen px-4">
-      <div className="max-w-md w-full text-center">
-        <h1 className="text-3xl font-bold mb-6">{product.name}</h1>
+    <div className="flex flex-col items-center justify-center min-h-screen px-4 py-10">
+      <div className="max-w-4xl w-full text-center sm:text-left bg-white p-6 rounded-xl shadow-lg">
+        <h1 className="text-3xl font-bold mb-6 text-gray-900">
+          {t(`products.${product.name}`)}
+        </h1>
 
-        {images.length > 1 ? (
-          // Slider для кількох зображень
-          <div className="relative">
-            <div ref={sliderRef} className="keen-slider rounded-xl shadow-md">
-              {images.map((src, idx) => (
-                <div key={idx} className="keen-slider__slide">
-                  <img
-                    src={src}
-                    alt={product.imageAlt}
-                    className="w-full object-cover rounded-xl"
-                  />
+        <div className="flex flex-col md:flex-row items-center md:items-start gap-8">
+          {/* Контейнер для зображень */}
+          <div className="w-full md:w-1/2">
+            {images.length > 1 ? (
+              // Slider для кількох зображень
+              <div className="relative">
+                <div
+                  ref={sliderRef}
+                  className="keen-slider rounded-xl shadow-md"
+                >
+                  {images.map((src, idx) => (
+                    <div key={idx} className="keen-slider__slide">
+                      <img
+                        src={src}
+                        alt={product.imageAlt}
+                        className="w-full object-cover rounded-xl"
+                      />
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
 
-            {/* Left button */}
-            <button
-              onClick={() => instanceRef.current?.prev()}
-              className="absolute left-3 bg-white/80 hover:bg-white text-gray-700 p-3 rounded-full shadow-md
-             top-1/5 sm:top-[50%] -translate-y-1/2 sm:-translate-y-0 transition-all"
-            >
-              <FaChevronLeft />
-            </button>
-
-            {/* Right button */}
-            <button
-              onClick={() => instanceRef.current?.next()}
-              className="absolute right-3 bg-white/80 hover:bg-white text-gray-700 p-3 rounded-full shadow-md
-             top-1/5 sm:top-[50%] -translate-y-1/2 sm:-translate-y-0 transition-all"
-            >
-              <FaChevronRight />
-            </button>
-
-            {/* Dots */}
-            <div className="absolute bottom-3 w-full flex justify-center gap-2">
-              {images.map((_, idx) => (
+                {/* Buttons */}
                 <button
-                  key={idx}
-                  onClick={() => instanceRef.current?.moveToIdx(idx)}
-                  className={`w-3 h-3 rounded-full transition ${
-                    currentSlide === idx ? "bg-blue-600" : "bg-gray-300"
-                  }`}
-                />
-              ))}
-            </div>
-          </div>
-        ) : (
-          // Якщо одна картинка, просто показуємо її
-          <img
-            src={images[0]}
-            alt={product.imageAlt}
-            className="w-full rounded-xl shadow-md"
-          />
-        )}
+                  onClick={() => instanceRef.current?.prev()}
+                  className="absolute left-3 bg-white/80 hover:bg-white text-gray-700 p-3 rounded-full shadow-md
+                  top-1/2 -translate-y-1/2 transition-all"
+                >
+                  <FaChevronLeft />
+                </button>
 
-        <p className="text-gray-600 mt-6 mb-3">{product.imageAlt}</p>
-        <p className="text-lg font-medium text-gray-900">{product.price}</p>
+                <button
+                  onClick={() => instanceRef.current?.next()}
+                  className="absolute right-3 bg-white/80 hover:bg-white text-gray-700 p-3 rounded-full shadow-md
+                  top-1/2 -translate-y-1/2 transition-all"
+                >
+                  <FaChevronRight />
+                </button>
+
+                {/* Dots */}
+                <div className="absolute bottom-3 w-full flex justify-center gap-2">
+                  {images.map((_, idx) => (
+                    <button
+                      key={idx}
+                      onClick={() => instanceRef.current?.moveToIdx(idx)}
+                      className={`w-3 h-3 rounded-full transition ${
+                        currentSlide === idx ? "bg-blue-600" : "bg-gray-300"
+                      }`}
+                    />
+                  ))}
+                </div>
+              </div>
+            ) : (
+              // Якщо одна картинка, просто показуємо її
+              <img
+                src={images[0]}
+                alt={product.imageAlt}
+                className="w-full rounded-xl shadow-md"
+              />
+            )}
+          </div>
+
+          {/* Інформація про продукт (стилізований блок) */}
+          <div className="w-full md:w-1/2 text-center md:text-left mt-6 md:mt-0 p-4 border rounded-xl shadow-sm bg-gray-50">
+            {/* Ціна */}
+            <div className="pb-4 mb-4 border-b border-gray-200">
+              <p className="text-3xl font-extrabold text-blue-600">
+                {t(`prices.${product.name}`)}
+              </p>
+            </div>
+
+            {/* Характеристики */}
+            <div className="space-y-3">
+              {product.thickness && (
+                <div className="flex justify-between items-center text-gray-700">
+                  <span className="font-semibold text-gray-900">
+                    {t("thickness")}:
+                  </span>
+                  <span>{product.thickness}</span>
+                </div>
+              )}
+
+              {product.size && (
+                <div className="flex justify-between items-center text-gray-700">
+                  <span className="font-semibold text-gray-900">
+                    {t("size")}:
+                  </span>
+                  <span>{product.size}</span>
+                </div>
+              )}
+
+              {product.type && (
+                <div className="flex justify-between items-center text-gray-700">
+                  <span className="font-semibold text-gray-900">
+                    {t("type")}:
+                  </span>
+                  <span>{product.type}</span>
+                </div>
+              )}
+            </div>
+
+            {product.description && (
+              <div className="mt-6 pt-4 border-t border-gray-200">
+                <h3 className="text-xl font-bold mb-2 text-gray-900">
+                  {t("description")}
+                </h3>
+                <p className="text-gray-700">
+                  {t(`descriptions.${product.name}`)}
+                </p>
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* Посилання на головну */}
+        <div className="mt-8 text-center">
+          <Link
+            href="/"
+            className="inline-block px-6 py-3 text-lg font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors"
+          >
+            {t("backToCatalog")}
+          </Link>
+        </div>
       </div>
     </div>
   );

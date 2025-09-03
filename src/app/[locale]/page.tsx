@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 // import FloatingContactButton from "@/components/FloatingContactButton";
 // import FloatingMessenger from "@/components/FloatingMessenger";
 // import ScrollToTop from "@/components/ScrollToTop";
@@ -8,24 +9,28 @@ import Link from "next/link";
 const categories = [
   {
     id: 0,
+    key: "mechanisms",
     category: "mechanisms",
     imageSrc: "/images/products/1.mechanism-junior-strong/item2.jpg",
     imageAlt: "Junior mechanism with rib",
   },
   {
     id: 1,
+    key: "hooks",
     category: "hooks",
     imageSrc: "/images/products/3.latch-large/item2.jpg",
     imageAlt: "Зачіп посилений для великих меблевих елементів.",
   },
   {
     id: 2,
+    key: "curtains",
     category: "curtains",
     imageSrc: "/images/products/7.hinge-large-190/item2.jpg",
     imageAlt: "Металева меблева петля для складних конструкцій.",
   },
   {
     id: 3,
+    key: "corners",
     category: "corners",
     imageSrc: "/images/products/9.angle-106/item3.jpg",
     imageAlt: "Меблевий з’єднувальний куток 106.",
@@ -40,10 +45,11 @@ export interface Categorie {
 }
 
 export default function HomePage() {
+  const t = useTranslations("HomePage");
   return (
     <div className="bg-gray-0 min-h-screen">
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-24">
-        <h1 className="text-3xl font-bold mb-8 text-gray-900">Продукти</h1>
+        <h1 className="text-3xl font-bold mb-8 text-gray-900">{t("title")}</h1>
 
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {categories.map((cat) => (
@@ -69,7 +75,7 @@ export default function HomePage() {
                 <div className="absolute inset-0 flex items-center justify-center">
                   <span className="hidden lg:inline-block">
                     <div className="px-4 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 transition transform scale-90 opacity-0 group-hover:opacity-100 group-hover:scale-100 duration-300">
-                      Переглянути
+                      {t("button-title")}
                     </div>
                   </span>
                 </div>
@@ -77,23 +83,14 @@ export default function HomePage() {
 
               {/* Текст */}
               <h3 className="mt-4 text-lg font-semibold text-gray-800 capitalize">
-                {cat.category}
+                {/* {cat.category} */}
+                {t(`categories.${cat.category}`)}
               </h3>
-              <p className="mt-2 text-sm text-gray-600">{cat.imageAlt}</p>
+              {/* <p className="mt-2 text-sm text-gray-600">{cat.imageAlt}</p> */}
             </Link>
           ))}
         </div>
       </div>
-      {/* 🔘 Кнопка зв'язку */}
-      {/* <Link
-        href="/contact" // можна замінити на mailto:your@email.com або телеграм
-        className="fixed bottom-60 left-6 z-50 px-5 py-3 bg-green-600 text-white font-semibold rounded-full shadow-lg hover:bg-green-700 transition transform hover:scale-105"
-      >
-        Зв’язатись
-      </Link> */}
-{/*       <FloatingMessenger />
-      <ScrollToTop/>
-      <FloatingContactButton/> */}
     </div>
   );
 }

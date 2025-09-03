@@ -16,10 +16,120 @@
     "features": "Features",
     "marketplace": "Marketplace",
     "company": "Company",
-    "logIn": "Log in" 
+    "contacts": "Contacts"
   },
-  "Cards": {
-    "title": "Cards",
-    "description": "Here is the list of cards."
+  "HomePage": {
+    "title": "Categories",
+    "button-title": "View",
+    "categories": {
+      "mechanisms": "Mechanisms",
+      "hooks": "Hooks",
+      "curtains": "Hinges",
+      "corners": "Corners"
+    }
+  },
+  "CategoryPage": {
+    "view": "View",
+    "categories": {
+      "mechanisms": "Mechanisms",
+      "hooks": "Latches",
+      "curtains": "Hinges",
+      "corners": "Corners"
+    },
+    "products": {
+      "Механізм Юніор з ребром": "Junior Mechanism with Rib",
+      "Mеханізм Юніор": "Junior Mechanism",
+      "Зачіп великий": "Big Latch",
+      "Зачіп середній": "Medium Latch",
+      "Зачіп слайдер Н-16": "Latch Slider H-16",
+      "Зачіп слайдер Н-10": "Latch Slider H-10",
+      "Завіса велика 190": "Large Hinge 190",
+      "Завіса мала": "Small Hinge",
+      "Куток 106 оцинкований": "Galvanized Corner 106",
+      "Механізм Блюз": "Blues Mechanism",
+      "Механізм ліжковий гідравлічний": "Hydraulic Bed Mechanism",
+      "Механізм Алігатор": "Alligator Mechanism",
+      "Механізм Євро-Книжка": "Euro-Book Mechanism"
+    },
+    "prices": {
+      "Механізм Юніор з ребром": "40.00 UAH/pc.",
+      "Mеханізм Юніор": "38.00 UAH/pc.",
+      "Зачіп великий": "4.90 UAH/pc.",
+      "Зачіп середній": "4.50 UAH/pc.",
+      "Зачіп слайдер Н-16": "9.20 UAH/pc.",
+      "Зачіп слайдер Н-10": "8.80 UAH/pc.",
+      "Завіса велика 190": "24.00 UAH/pc.",
+      "Завіса мала": "8.50 UAH/pc.",
+      "Куток 106 оцинкований": "2.50 UAH/pc.",
+      "Механізм Блюз": "??? UAH/pc.",
+      "Механізм ліжковий гідравлічний": "??? UAH/pc.",
+      "Механізм Алігатор": "??? UAH/pc.",
+      "Механізм Євро-Книжка": "??? UAH/pc."
+    }
+  },
+  "ProductPage": {
+    "productNotFound": "Product not found",
+    "backToCatalog": "Return to catalog",
+    "thickness": "Thickness",
+    "size": "Size",
+    "type": "Type",
+    "description": "Description",
+    "products": {
+      "Механізм Юніор з ребром": "Junior Mechanism with Rib",
+      "Mеханізм Юніор": "Junior Mechanism",
+      "Зачіп великий": "Large Latch",
+      "Зачіп середній": "Medium Latch",
+      "Зачіп слайдер Н-16": "Latch Slider H-16",
+      "Зачіп слайдер Н-10": "Latch Slider H-10",
+      "Завіса велика 190": "Large Hinge 190",
+      "Завіса мала": "Small Hinge",
+      "Куток 106 оцинкований": "Galvanized Corner 106",
+      "Механізм Блюз": "Blues Mechanism",
+      "Механізм ліжковий гідравлічний": "Hydraulic Bed Mechanism",
+      "Механізм Алігатор": "Alligator Mechanism",
+      "Механізм Євро-Книжка": "Euro-Book Mechanism"
+    },
+    "prices": {
+      "Механізм Юніор з ребром": "40.00 UAH/pc.",
+      "Mеханізм Юніор": "38.00 UAH/pc.",
+      "Зачіп великий": "4.90 UAH/pc.",
+      "Зачіп середній": "4.50 UAH/pc.",
+      "Зачіп слайдер Н-16": "9.20 UAH/pc.",
+      "Зачіп слайдер Н-10": "8.80 UAH/pc.",
+      "Завіса велика 190": "24.00 UAH/pc.",
+      "Завіса мала": "8.50 UAH/pc.",
+      "Куток 106 оцинкований": "2.50 UAH/pc.",
+      "Механізм Блюз": "??? UAH/pc.",
+      "Механізм ліжковий гідравлічний": "??? UAH/pc.",
+      "Механізм Алігатор": "??? UAH/pc.",
+      "Механізм Євро-Книжка": "??? UAH/pc."
+    },
+    "descriptions": {
+      "Механізм Юніор з ребром": "Reinforced version of the Junior mechanism with a stiffening rib. For heavier structures.",
+      "Mеханізм Юніор": "Furniture lifting mechanism without stiffener. Suitable for medium loads.",
+      "Зачіп великий": "Reinforced hook for large furniture elements. Made of galvanized steel. Thickness: 1.5 mm.",
+      "Зачіп середній": "Designed for fixing furniture elements. Material: galvanized steel. Thickness: 1.5 mm.",
+      "Зачіп слайдер Н-16": "Slider-type hook for furniture guides. Height: 16 mm.",
+      "Зачіп слайдер Н-10": "Compact hook for rails. Height: 10 mm.",
+      "Завіса велика 190": "Metal furniture hinge for complex structures. Size: 180×40×2.5 mm. Material: steel.",
+      "Завіса мала": "Compact furniture hinge for precise opening. Size: 90×40×1.8 mm. Material: steel.",
+      "Куток 106 оцинкований": "Furniture connecting corner 106. Material: galvanized steel. Size: 33×34×1.5 mm.",
+      "Механізм Блюз": "Spring mechanism for upholstered furniture. Used in folding sofas.",
+      "Механізм ліжковий гідравлічний": "Hydraulic lifting mechanism for beds. Convenient for daily use.",
+      "Механізм Алігатор": "White furniture transformation mechanism. Suitable for compact designs. Color: white.",
+      "Механізм Євро-Книжка": "Mechanism for transforming sofas into a 'bed' position. Color: white."
+    }
+  },
+  "Footer": {
+    "aboutUsTitle": "About Us",
+    "aboutUsText": "FurnitPro is dedicated to providing high-quality furniture for furniture, with an emphasis on durability, reliability and functionality. Our products are a solid foundation for creating comfortable and durable beds and sofas that serve you for years.",
+    "quickLinksTitle": "Quick Links",
+    "home": "Home",
+    "privacyPolicy": "Privacy Policy",
+    "termsOfUse": "Terms of Use",
+    "contactTitle": "Contact",
+    "email": "Email",
+    "phone": "Phone",
+    "copyright": "All rights reserved."
   }
 }

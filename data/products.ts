@@ -1,6 +1,7 @@
 export interface Product {
   id: number;
   name: string;
+  //mechanism_junior_strong: string;
   href: string;
   price: string;
   imageSrc: {
@@ -19,6 +20,7 @@ const products: Product[] = [
   {
     id: 1,
     name: "Механізм Юніор з ребром",
+    //mechanism_junior_strong: "Механізм Юніор з ребром",
     href: "/mechanism-junior-strong",
     price: "40.00 грн./шт.",
     imageSrc: {
@@ -27,7 +29,7 @@ const products: Product[] = [
     },
     imageAlt: "Junior mechanism with rib",
     category: "mechanisms",
-    thickness: "2,0мм",
+    thickness: "2,0 мм",
     size: "",
     type: "З ребром жорсткості",
     description:
@@ -56,7 +58,7 @@ const products: Product[] = [
       image: "/images/products/2.mechanism-junior/item1.jpg",
       drawing: "/images/products/2.mechanism-junior/item2.jpg",
     },
-    imageAlt: "Механізм меблевий підйомний без ребра жорсткості.",
+    imageAlt: "Junior mechanism.",
     category: "mechanisms",
     thickness: "2,0 мм",
     size: "",
@@ -88,7 +90,7 @@ const products: Product[] = [
       image: "/images/products/3.latch-large/item1.jpg",
       drawing: "/images/products/3.latch-large/item2.jpg",
     },
-    imageAlt: "Зачіп посилений для великих меблевих елементів.",
+    imageAlt: "Big hook.",
     category: "hooks",
     thickness: "1,5 мм",
     size: "",
@@ -121,7 +123,7 @@ const products: Product[] = [
       image: "/images/products/4.latch-medium/item1.jpg",
       drawing: "/images/products/4.latch-medium/item2.jpg",
     },
-    imageAlt: "Призначений для фіксації меблевих елементів.",
+    imageAlt: "Medium hook.",
     category: "hooks",
     thickness: "1,5 мм",
     size: "",
@@ -154,7 +156,7 @@ const products: Product[] = [
       image: "/images/products/5.latch-slider-h16/item1.jpg",
       /* drawing: "/images/products/5.latch-slider-h16/item2.jpg", */
     },
-    imageAlt: "Зачіп типу слайдер для меблевих направляючих.",
+    imageAlt: "Hook slider H-16.",
     category: "hooks",
     thickness: "1,5 мм",
     size: "",
@@ -186,7 +188,7 @@ const products: Product[] = [
       image: "/images/products/6.latch-slider-h10/item1.jpg",
       /* drawing: "/images/products/6.latch-slider-h10/item2.jpg", */
     },
-    imageAlt: "Компактний зачіп для направляючих.",
+    imageAlt: "Hook slider H-10.",
     category: "hooks",
     thickness: "1,5 мм",
     size: "",
@@ -222,7 +224,7 @@ const products: Product[] = [
     category: "curtains",
     thickness: "2,5 мм",
     size: "180×40×2,5 мм",
-    type: "Слайдер Н-10",
+    type: "Large curtain 190",
     description:
       "Металева меблева петля для складних конструкцій. Розмір: 180×40×2,5 мм. Матеріал: сталь.",
   },
@@ -251,10 +253,10 @@ const products: Product[] = [
       image: "/images/products/8.hinge-small/item1.jpg",
       drawing: "/images/products/8.hinge-small/item2.jpg",
     },
-    imageAlt: "Компактна меблева петля для точного відкривання.",
+    imageAlt: "Small curtain.",
     category: "curtains",
     thickness: "1,8 мм",
-    size: "180×40×2,5 мм",
+    size: "90×40×1,8 мм",
     type: "",
     description:
       "Компактна меблева петля для точного відкривання. Розмір: 90×40×1,8 мм. Матеріал: сталь.",
@@ -284,7 +286,7 @@ const products: Product[] = [
       image: "/images/products/9.angle-106/item1.jpg",
       drawing: "/images/products/9.angle-106/item2.jpg",
     },
-    imageAlt: "Меблевий з’єднувальний куток 106. ",
+    imageAlt: "Corner 106 galvanized.",
     category: "corners",
     thickness: "1,5 мм",
     size: "33×34×1,5 мм",
@@ -317,7 +319,7 @@ const products: Product[] = [
       image: "/images/products/10.mechanism-blues/item1.jpg",
       /* drawing: "/images/products/10.mechanism-blues/item2.jpg", */
     },
-    imageAlt: "Механізм пружинний для м’яких меблів.",
+    imageAlt: "Mechanism Blues.",
     category: "mechanisms",
     thickness: "1,5 мм",
     size: "33×34×1,5 мм",
@@ -348,7 +350,7 @@ const products: Product[] = [
       image: "/images/products/12.mechanism-bed/item1.jpg",
       /* drawing: "/images/products/12.mechanism-bed/item2.jpg", */
     },
-    imageAlt: "Підйомний гідравлічний механізм для ліжок. ",
+    imageAlt: "Hydraulic bed mechanism.",
     category: "mechanisms",
     thickness: "",
     size: "",

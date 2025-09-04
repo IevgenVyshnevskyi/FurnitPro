@@ -1,0 +1,66 @@
+[{
+        "id": 1,
+        "name": "Junior mechanism with rib",
+        "category": "mechanisms"
+    },
+    {
+        "id": 2,
+        "name": "Junior mechanism",
+        "category": "mechanisms"
+    },
+    {
+        "id": 3,
+        "name": "Big hook",
+        "category": "hooks"
+    },
+    {
+        "id": 4,
+        "name": "Medium hook",
+        "category": "hooks"
+    },
+    {
+        "id": 5,
+        "name": "Hook slider H-16",
+        "category": "hooks"
+    },
+    {
+        "id": 6,
+        "name": "Hook slider H-10",
+        "category": "hooks"
+    },
+    {
+        "id": 7,
+        "name": "Large curtain 190",
+        "category": "curtains"
+    },
+    {
+        "id": 8,
+        "name": "Small curtain",
+        "category": "curtains"
+    },
+    {
+        "id": 9,
+        "name": "Corner 106 galvanized",
+        "category": "corners"
+    },
+    {
+        "id": 10,
+        "name": "Mechanism Blues",
+        "category": "mechanisms"
+    },
+    {
+        "id": 11,
+        "name": "Hydraulic bed mechanism",
+        "category": "mechanisms"
+    },
+    {
+        "id": 12,
+        "name": "Mechanism Alligator",
+        "category": "mechanisms"
+    },
+    {
+        "id": 13,
+        "name": "Mechanism Euro-Book",
+        "category": "mechanisms"
+    }
+]

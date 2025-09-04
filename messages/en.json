@@ -1,14 +1,12 @@
 {
   "Breadcrumbs": {
     "home": "Home",
-    "products": "Products",
-    "sofas": "Sofas",
-    "chairs": "Chairs",
-    "contact": "Contact"
-  },
-  "HomePage": {
-    "title": "Welcome to the homepage!",
-    "about": "About us"
+    "en": "Ukraine",
+    "category": "Categories",
+    "mechanisms": "Mechanisms",
+    "hooks": "Hooks",
+    "curtains": "Hinges",
+    "corners": "Corners"
   },
   "Header": {
     "product": "Product",
@@ -104,6 +102,22 @@
       "Механізм Алігатор": "??? UAH/pc.",
       "Механізм Євро-Книжка": "??? UAH/pc."
     },
+    "types": {
+      "Механізм Юніор з ребром": "With stiffening rib",
+      "Mеханізм Юніор": "Without stiffening rib",
+      "Зачіп великий": "",
+      "Зачіп середній": "",
+      "Зачіп слайдер Н-16": "Slider H-16",
+      "Зачіп слайдер Н-10": "Slider H-10",
+      "Завіса велика 190": "",
+      "Завіса мала": "",
+      "Куток 106 оцинкований": "",
+      "Механізм Блюз": "Springy",
+      "Механізм ліжковий гідравлічний": "Hydraulic",
+      "Механізм Алігатор": "",
+      "Механізм Євро-Книжка": ""
+
+    },
     "descriptions": {
       "Механізм Юніор з ребром": "Reinforced version of the Junior mechanism with a stiffening rib. For heavier structures.",
       "Mеханізм Юніор": "Furniture lifting mechanism without stiffener. Suitable for medium loads.",
@@ -131,5 +145,8 @@
     "email": "Email",
     "phone": "Phone",
     "copyright": "All rights reserved."
+  },
+  "FloatingContactButton": {
+    "contactButtonLabel": "Contact Button"
   }
 }

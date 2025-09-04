@@ -3,8 +3,10 @@
 import { useState, useEffect, useRef } from "react";
 import { FaPhoneAlt } from "react-icons/fa";
 import { SiVodafone } from "react-icons/si";
-import { IoClose } from "react-icons/io5"; // ❌ хрестик
-import kyivstarLogo from "./../../public/images/phones/kyivstar.jpeg"; // ✅ JPEG іконка
+import { IoClose } from "react-icons/io5";
+import Image from "next/image";
+import kyivstarLogo from "./../../public/images/phones/kyivstar.jpeg";
+import { useTranslations } from "next-intl"; // ✅ Імпорт хука для перекладу
 
 export default function FloatingContactButton() {
   const [open, setOpen] = useState(false);
@@ -12,6 +14,10 @@ export default function FloatingContactButton() {
   const [animate, setAnimate] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
+  const [showButtons, setShowButtons] = useState(false);
+
+  // ✅ Використання useTranslations для отримання перекладу
+  const t = useTranslations("FloatingContactButton");
 
   // 📏 Визначення мобільного режиму
   useEffect(() => {
@@ -55,6 +61,16 @@ export default function FloatingContactButton() {
     }
   }, [showText]);
 
+  // ✨ Керування анімацією появи/зникнення
+  useEffect(() => {
+    if (open) {
+      setShowButtons(true);
+    } else {
+      const timer = setTimeout(() => setShowButtons(false), 300); // Час збігається з тривалістю transition
+      return () => clearTimeout(timer);
+    }
+  }, [open]);
+
   // 📱 Кнопки операторів
   const buttons = [
     {
@@ -66,8 +82,8 @@ export default function FloatingContactButton() {
     },
     {
       icon: (
-        <img
-          src={kyivstarLogo.src}
+        <Image
+          src={kyivstarLogo}
           alt="Kyivstar"
           className="w-7 h-7 rounded-full object-cover"
         />
@@ -95,15 +111,15 @@ export default function FloatingContactButton() {
     <div
       ref={containerRef}
       className="fixed bottom-68 left-12 flex items-center gap-4 z-50"
-      onMouseLeave={() => !isMobile && setOpen(false)} // на десктопі закриваємо по hover leave
+      onMouseLeave={() => !isMobile && setOpen(false)}
     >
       {/* 🔘 Головна кнопка */}
       <div
         className={`w-14 h-14 rounded-full bg-purple-900 flex items-center justify-center text-white text-lg cursor-pointer transition-all duration-500 relative overflow-hidden ${
           open ? "opacity-100" : "opacity-60"
         }`}
-        onClick={() => isMobile && setOpen((prev) => !prev)} // 📱 на мобільному toggle
-        onMouseEnter={() => !isMobile && setOpen(true)} // 🖥️ на десктопі — по hover
+        onClick={() => isMobile && setOpen((prev) => !prev)}
+        onMouseEnter={() => !isMobile && setOpen(true)}
       >
         {/* Текст кнопки */}
         <span
@@ -111,7 +127,8 @@ export default function FloatingContactButton() {
             showText ? "opacity-100" : "opacity-0"
           }`}
         >
-          Кнопка зв&apos;язку
+          {/* ✅ Переклад тексту */}
+          {t("contactButtonLabel")}
         </span>
 
         {/* 📞 Іконка телефону */}
@@ -123,32 +140,34 @@ export default function FloatingContactButton() {
       </div>
 
       {/* 📌 Контейнер кнопок */}
-      <div className="flex items-center gap-4">
-        {(isMobile ? mobileButtons : buttons).map((btn, idx) => (
-          <a
-            key={idx}
-            href={btn.close ? "#" : btn.href}
-            title={btn.label}
-            onClick={(e) => {
-              if (btn.close) {
-                e.preventDefault();
-                setOpen(false);
-              }
-            }}
-            className={`w-14 h-14 rounded-full flex items-center justify-center text-white text-2xl cursor-pointer transform transition-all duration-300 ${btn.bg}`}
-            style={{
-              transitionDelay: open
-                ? `${idx * 100}ms`
-                : `${(buttons.length - idx) * 100}ms`,
-              opacity: open ? 1 : 0,
-              transform: open ? "translateX(0)" : "translateX(-2rem)",
-              pointerEvents: open ? "auto" : "none",
-            }}
-          >
-            {btn.icon}
-          </a>
-        ))}
-      </div>
+      {showButtons && (
+        <div className="flex items-center gap-4">
+          {(isMobile ? mobileButtons : buttons).map((btn, idx) => (
+            <a
+              key={idx}
+              href={btn.close ? "#" : btn.href}
+              title={btn.label}
+              onClick={(e) => {
+                if (btn.close) {
+                  e.preventDefault();
+                  setOpen(false);
+                }
+              }}
+              className={`w-14 h-14 rounded-full flex items-center justify-center text-white text-2xl cursor-pointer transform transition-all duration-300 ${btn.bg}`}
+              style={{
+                transitionDelay: open
+                  ? `${idx * 100}ms`
+                  : `${(buttons.length - idx) * 100}ms`,
+                opacity: open ? 1 : 0,
+                transform: open ? "translateX(0)" : "translateX(-2rem)",
+                pointerEvents: open ? "auto" : "none",
+              }}
+            >
+              {btn.icon}
+            </a>
+          ))}
+        </div>
+      )}
 
       {/* 🎞️ Анімація вібрації */}
       <style jsx>{`

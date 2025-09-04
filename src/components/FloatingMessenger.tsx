@@ -8,7 +8,8 @@ import { IoClose } from "react-icons/io5"; // ❌ хрестик
 export default function FloatingMessenger() {
   const [open, setOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
-  const containerRef = useRef<HTMLDivElement>(null); // посилання на контейнер
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [showButtons, setShowButtons] = useState(false);
 
   // Перевірка ширини екрану
   useEffect(() => {
@@ -34,6 +35,16 @@ export default function FloatingMessenger() {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [isMobile, open]);
+
+  // ✨ Керування анімацією появи/зникнення
+  useEffect(() => {
+    if (open) {
+      setShowButtons(true);
+    } else {
+      const timer = setTimeout(() => setShowButtons(false), 300); // Час збігається з тривалістю transition
+      return () => clearTimeout(timer);
+    }
+  }, [open]);
 
   const buttons = [
     {
@@ -63,7 +74,7 @@ export default function FloatingMessenger() {
       icon: <IoClose />,
       bg: "bg-gray-700",
       url: "#",
-      close: true, // спеціальний прапор
+      close: true,
     },
   ];
 
@@ -71,47 +82,49 @@ export default function FloatingMessenger() {
     <div
       ref={containerRef}
       className="fixed bottom-32 left-12 flex items-center gap-4 z-50"
-      onMouseLeave={() => !isMobile && setOpen(false)} // на мобільному не закриваємо по hover
+      onMouseLeave={() => !isMobile && setOpen(false)}
     >
       {/* Головна кнопка */}
       <div
         className={`w-14 h-14 rounded-full bg-purple-900 flex items-center justify-center text-white text-2xl cursor-pointer transition-opacity duration-300 ${
           open ? "opacity-100" : "opacity-60"
         }`}
-        onClick={() => isMobile && setOpen((prev) => !prev)} // на мобільному відкриваємо по кліку
-        onMouseEnter={() => !isMobile && setOpen(true)} // на десктопі — по hover
+        onClick={() => isMobile && setOpen((prev) => !prev)}
+        onMouseEnter={() => !isMobile && setOpen(true)}
       >
         <FaCommentDots />
       </div>
 
       {/* Контейнер кнопок */}
-      <div className="flex items-center gap-4">
-        {(isMobile ? mobileButtons : buttons).map((btn, idx) => (
-          <a
-            key={idx}
-            href={btn.close ? "#" : btn.url}
-            target={btn.close ? "_self" : "_blank"}
-            rel="noopener noreferrer"
-            onClick={(e) => {
-              if (btn.close) {
-                e.preventDefault();
-                setOpen(false); // закриваємо меню
-              }
-            }}
-            className={`w-14 h-14 rounded-full flex items-center justify-center text-white text-2xl cursor-pointer transform transition-all duration-300 ${btn.bg}`}
-            style={{
-              transitionDelay: open
-                ? `${idx * 100}ms`
-                : `${(buttons.length - idx) * 100}ms`,
-              opacity: open ? 1 : 0,
-              transform: open ? "translateX(0)" : "translateX(-2rem)",
-              pointerEvents: open ? "auto" : "none",
-            }}
-          >
-            {btn.icon}
-          </a>
-        ))}
-      </div>
+      {showButtons && (
+        <div className="flex items-center gap-4">
+          {(isMobile ? mobileButtons : buttons).map((btn, idx) => (
+            <a
+              key={idx}
+              href={btn.close ? "#" : btn.url}
+              target={btn.close ? "_self" : "_blank"}
+              rel="noopener noreferrer"
+              onClick={(e) => {
+                if (btn.close) {
+                  e.preventDefault();
+                  setOpen(false);
+                }
+              }}
+              className={`w-14 h-14 rounded-full flex items-center justify-center text-white text-2xl cursor-pointer transform transition-all duration-300 ${btn.bg}`}
+              style={{
+                transitionDelay: open
+                  ? `${idx * 100}ms`
+                  : `${(buttons.length - idx) * 100}ms`,
+                opacity: open ? 1 : 0,
+                transform: open ? "translateX(0)" : "translateX(-2rem)",
+                pointerEvents: open ? "auto" : "none",
+              }}
+            >
+              {btn.icon}
+            </a>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

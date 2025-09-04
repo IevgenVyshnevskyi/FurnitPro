@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import products from "@/../data/products";
+import products from "../../../../../../public/data/products";
 import { useParams } from "next/navigation";
 import Link from "next/link";
 import { useKeenSlider } from "keen-slider/react";
@@ -139,13 +139,24 @@ export default function ProductPage() {
                   <span>{product.size}</span>
                 </div>
               )}
+            </div>
+
+            <div className="space-y-3">
+             {/*  {product.thickness && (
+                <div className="flex justify-between items-center text-gray-700">
+                  <span className="font-semibold text-gray-900">
+                    {t("type")}:
+                  </span>
+                  <span>{product.thickness}</span>
+                </div>
+              )} */}
 
               {product.type && (
                 <div className="flex justify-between items-center text-gray-700">
                   <span className="font-semibold text-gray-900">
                     {t("type")}:
                   </span>
-                  <span>{product.type}</span>
+                  <span>{t(`types.${product.name}`)}</span>
                 </div>
               )}
             </div>

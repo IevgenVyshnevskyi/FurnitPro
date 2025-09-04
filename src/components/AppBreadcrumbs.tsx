@@ -1,20 +1,37 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { Breadcrumbs, BreadcrumbItem } from "@heroui/react";
-import { usePathname } from "next/navigation";
+import { usePathname, useParams } from "next/navigation";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
-import products from "../../data/product.json"; // Ваш JSON з товарами
+
+interface Product {
+  id: number;
+  name: string;
+  category: string;
+}
 
 export default function AppBreadcrumbs() {
-  const pathname = usePathname(); // наприклад "/products/sofas/1"
+  const pathname = usePathname();
+  const { locale } = useParams(); // "ua" або "en"
   const t = useTranslations("Breadcrumbs");
 
-  const segments = pathname.split("/").filter(Boolean); // ["products", "sofas", "1"]
+  const [products, setProducts] = useState<Product[]>([]);
+
+  // Динамічне завантаження JSON за мовою
+  useEffect(() => {
+    fetch(`/data/product.${locale}.json`)
+      .then((res) => res.json())
+      .then((data: Product[]) => setProducts(data))
+      .catch((err) => console.error("Failed to load products:", err));
+  }, [locale]);
+
+  const segments = pathname.split("/").filter(Boolean);
 
   return (
     <Breadcrumbs>
-      {/* Перша завжди — головна */}
+      {/* Перша крихта завжди "Головна" */}
       <BreadcrumbItem>
         <Link href="/">{t("home")}</Link>
       </BreadcrumbItem>
@@ -24,18 +41,18 @@ export default function AppBreadcrumbs() {
 
         let label = seg;
 
-        // Якщо останній сегмент і число — вважаємо товаром
+        // Перевірка: останній сегмент — ID товару
         const isProductId = idx === segments.length - 1 && /^\d+$/.test(seg);
         if (isProductId) {
           const product = products.find((p) => p.id.toString() === seg);
           label = product ? product.name : seg;
         } else {
-          // Переклад сегментів для категорій
-          label = t(seg) || seg;
+          // Переклад категорій
+          label = t(seg, { default: seg });
         }
 
         return (
-          <BreadcrumbItem key={idx}>
+          <BreadcrumbItem key={`${idx}-${href}`}>
             <Link href={href}>{label}</Link>
           </BreadcrumbItem>
         );

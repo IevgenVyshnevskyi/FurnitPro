@@ -1,0 +1,66 @@
+[{
+    "id": 1,
+    "name": "Механізм Юніор з ребром",
+    "category": "mechanisms"
+  },
+  {
+    "id": 2,
+    "name": "Mеханізм Юніор",
+    "category": "mechanisms"
+  },
+  {
+    "id": 3,
+    "name": "Зачіп великий",
+    "category": "hooks"
+  },
+  {
+    "id": 4,
+    "name": "Зачіп середній",
+    "category": "hooks"
+  },
+  {
+    "id": 5,
+    "name": "Зачіп слайдер Н-16",
+    "category": "hooks"
+  },
+  {
+    "id": 6,
+    "name": "Зачіп слайдер Н-10",
+    "category": "hooks"
+  },
+  {
+    "id": 7,
+    "name": "Завіса велика 190",
+    "category": "curtains"
+  },
+  {
+    "id": 8,
+    "name": "Завіса мала",
+    "category": "curtains"
+  },
+  {
+    "id": 9,
+    "name": "Куток 106 оцинкований",
+    "category": "corners"
+  },
+  {
+    "id": 10,
+    "name": "Механізм Блюз",
+    "category": "mechanisms"
+  },
+  {
+    "id": 11,
+    "name": "Механізм ліжковий гідравлічний",
+    "category": "mechanisms"
+  },
+  {
+    "id": 12,
+    "name": "Механізм Алігатор",
+    "category": "mechanisms"
+  },
+  {
+    "id": 13,
+    "name": "Механізм Євро-Книжка",
+    "category": "mechanisms"
+  }
+]

@@ -1,6 +1,6 @@
 "use client";
 
-import products, { Product } from "@/../data/products";
+import products, { Product } from "../../../../../public/data/products";
 import { useParams } from "next/navigation";
 import Link from "next/link";
 import { useTranslations } from "next-intl";

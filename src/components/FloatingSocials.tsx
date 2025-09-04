@@ -2,12 +2,13 @@
 
 import { useState, useEffect, useRef } from "react";
 import { FaShareAlt, FaInstagram, FaFacebook, FaTiktok } from "react-icons/fa";
-import { IoClose } from "react-icons/io5"; // ❌ хрестик
+import { IoClose } from "react-icons/io5";
 
 export default function FloatingSocials() {
   const [open, setOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
+  const [showButtons, setShowButtons] = useState(false); // ✅ Новий стан для керування рендерингом
 
   // 📏 Перевірка ширини екрану
   useEffect(() => {
@@ -33,6 +34,17 @@ export default function FloatingSocials() {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [isMobile, open]);
+
+  // ✅ Керування анімацією появи/зникнення
+  useEffect(() => {
+    if (open) {
+      setShowButtons(true);
+    } else {
+      // ⏳ Затримка видалення елементів до завершення анімації
+      const timer = setTimeout(() => setShowButtons(false), 300);
+      return () => clearTimeout(timer);
+    }
+  }, [open]);
 
   const socials = [
     {
@@ -77,40 +89,42 @@ export default function FloatingSocials() {
         className={`w-14 h-14 rounded-full bg-purple-900 flex items-center justify-center text-white text-2xl cursor-pointer transition-opacity duration-300 ${
           open ? "opacity-100" : "opacity-60"
         }`}
-        onClick={() => isMobile && setOpen((prev) => !prev)} // 📱 відкриття по кліку
-        onMouseEnter={() => !isMobile && setOpen(true)} // 🖱️ відкриття по hover
+        onClick={() => isMobile && setOpen((prev) => !prev)}
+        onMouseEnter={() => !isMobile && setOpen(true)}
       >
         <FaShareAlt />
       </div>
 
-      {/* 📌 Кнопки соцмереж */}
-      <div className="flex items-center gap-4">
-        {(isMobile ? mobileSocials : socials).map((btn, idx) => (
-          <a
-            key={idx}
-            href={btn.close ? "#" : btn.url}
-            target={btn.close ? "_self" : "_blank"}
-            rel="noopener noreferrer"
-            onClick={(e) => {
-              if (btn.close) {
-                e.preventDefault();
-                setOpen(false);
-              }
-            }}
-            className={`w-14 h-14 rounded-full flex items-center justify-center text-white text-2xl cursor-pointer transform transition-all duration-300 ${btn.bg}`}
-            style={{
-              transitionDelay: open
-                ? `${idx * 100}ms`
-                : `${(socials.length - idx) * 100}ms`,
-              opacity: open ? 1 : 0,
-              transform: open ? "translateX(0)" : "translateX(-2rem)",
-              pointerEvents: open ? "auto" : "none",
-            }}
-          >
-            {btn.icon}
-          </a>
-        ))}
-      </div>
+      {/* 📌 Контейнер кнопок */}
+      {showButtons && (
+        <div className="flex items-center gap-4">
+          {(isMobile ? mobileSocials : socials).map((btn, idx) => (
+            <a
+              key={idx}
+              href={btn.close ? "#" : btn.url}
+              target={btn.close ? "_self" : "_blank"}
+              rel="noopener noreferrer"
+              onClick={(e) => {
+                if (btn.close) {
+                  e.preventDefault();
+                  setOpen(false);
+                }
+              }}
+              className={`w-14 h-14 rounded-full flex items-center justify-center text-white text-2xl cursor-pointer transform transition-all duration-300 ${btn.bg}`}
+              style={{
+                transitionDelay: open
+                  ? `${idx * 100}ms`
+                  : `${(socials.length - idx) * 100}ms`,
+                opacity: open ? 1 : 0,
+                transform: open ? "translateX(0)" : "translateX(-2rem)",
+                pointerEvents: open ? "auto" : "none",
+              }}
+            >
+              {btn.icon}
+            </a>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

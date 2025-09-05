@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+//import { ThemeProvider } from "next-themes";
+import type { ReactNode } from "react";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
@@ -25,23 +27,9 @@ export const metadata: Metadata = {
   description: "High-quality furniture hardware",
 };
 
-export default async function RootLayout({
-  children,
-  /* params: { locale }, */ // ✅ Отримуємо поточну локаль з параметрів маршруту
-}: Readonly<{
-  children: React.ReactNode;
-  /* params: { locale: string }; */
-}>) {
-  // ✅ Отримуємо переклади для поточної локалі на сервері
-  //const messages = await getMessages({ locale });
-
-  // ✅ Обробка випадку, коли переклади не знайдено
- /*  if (!messages) {
-    notFound();
-  } */
-
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html className="h-full" /* lang={locale} */>
+    <html className="light"/*  style={{color-scheme:"light"}} */ /* className="h-full" */ /* lang={locale} */ /* style={{ background: "var(--foreground)", color: "var(--background)" }} */>
       <head>
         {/* Стандартний favicon */}
         <link rel="icon" href="/favicon.png" />
@@ -69,10 +57,18 @@ export default async function RootLayout({
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable} h-full`}>
         {/* ✅ Обгортаємо вміст у провайдер, передаючи переклади з сервера на клієнт */}
-        <NextIntlClientProvider /* locale={locale} */ /* messages={messages} */>
-          <BackgroundLayout>{children}</BackgroundLayout>
-          {/* <AppBreadcrumbs /> */}
-        </NextIntlClientProvider>
+        {/* <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        > */}
+          <NextIntlClientProvider /* locale={locale} */ /* messages={messages} */
+          >
+            <BackgroundLayout>{children}</BackgroundLayout>
+            {/* <AppBreadcrumbs /> */}
+          </NextIntlClientProvider>
+        {/* </ThemeProvider> */}
       </body>
     </html>
   );

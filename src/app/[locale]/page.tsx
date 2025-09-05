@@ -1,6 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
+import Image from "next/image";
 // import FloatingContactButton from "@/components/FloatingContactButton";
 // import FloatingMessenger from "@/components/FloatingMessenger";
 // import ScrollToTop from "@/components/ScrollToTop";
@@ -62,9 +63,11 @@ export default function HomePage() {
             >
               {/* Блок з картинкою */}
               <div className="relative overflow-hidden rounded-xl">
-                <img
+                <Image
                   alt={cat.imageAlt}
                   src={cat.imageSrc}
+                  width={500} // потрібно обовʼязково вказати width і height
+                  height={500}
                   className="aspect-square w-full rounded-xl bg-gray-100 object-cover transform transition-transform duration-500 group-hover:scale-105"
                 />
 

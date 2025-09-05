@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 
 type LangSwitcherProps = {
@@ -21,7 +22,9 @@ export default function LangSwitcher({ mobile = false }: LangSwitcherProps) {
   const flagSizeClass = mobile ? "h-4 w-6" : "h-5 w-8";
 
   const getFlagClass = (lang: string) =>
-    currentLang === lang ? "opacity-100 border-2 border-white rounded" : "opacity-50";
+    currentLang === lang
+      ? "opacity-100 border-2 border-white rounded"
+      : "opacity-50";
 
   return (
     <div className={containerClass}>
@@ -30,7 +33,13 @@ export default function LangSwitcher({ mobile = false }: LangSwitcherProps) {
         locale="ua"
         className={`${flagSizeClass} ${getFlagClass("ua")}`}
       >
-        <img src="/flags/ua-flag.svg" alt="UA" className="h-full w-full" />
+        <Image
+          src="/flags/ua-flag.svg"
+          alt="UA"
+          width={500} // потрібно обовʼязково вказати width і height
+          height={500}
+          className="h-full w-full"
+        />
       </Link>
       <span className="text-white">|</span>
       <Link
@@ -38,7 +47,13 @@ export default function LangSwitcher({ mobile = false }: LangSwitcherProps) {
         locale="en"
         className={`${flagSizeClass} ${getFlagClass("en")}`}
       >
-        <img src="/flags/uk-flag.svg" alt="GB" className="h-full w-full" />
+        <Image
+          src="/flags/uk-flag.svg"
+          alt="GB"
+          width={500} // потрібно обовʼязково вказати width і height
+          height={500}
+          className="h-full w-full"
+        />
       </Link>
     </div>
   );

@@ -38,6 +38,7 @@ import {
 
 import LangSwitcher from "./LangSwitcher";
 import AppBreadcrumbs from "./AppBreadcrumbs";
+//import ThemeSwitcher from "./ThemeSwitcher";
 
 const products = [
   {
@@ -120,7 +121,7 @@ export default function Header() {
 
   return (
     <>
-      <header className="bg-gray-900">
+      <header className="bg-gray-900" /* style={{ background: "var(--foreground)", color: "var(--background)" }} */>
         <nav
           aria-label="Global"
           className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8"
@@ -254,8 +255,8 @@ export default function Header() {
               </PopoverPanel>
             </Popover>
           </PopoverGroup>
-
           <LangSwitcher />
+          {/* <ThemeSwitcher /> */}
         </nav>
 
         {/* Mobile menu */}

@@ -3,6 +3,7 @@
 import products, { Product } from "../../../../../public/data/products";
 import { useParams } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import { useTranslations } from "next-intl";
 
 export default function CategoryPage() {
@@ -30,9 +31,11 @@ export default function CategoryPage() {
                          block"
             >
               <div className="relative overflow-hidden rounded-xl">
-                <img
+                <Image
                   alt={product.imageAlt}
                   src={product.imageSrc.image}
+                  width={500} // потрібно обовʼязково вказати width і height
+                  height={500}
                   className="aspect-square w-full rounded-xl bg-gray-100 object-cover transform transition-transform duration-500 group-hover:scale-105"
                 />
 

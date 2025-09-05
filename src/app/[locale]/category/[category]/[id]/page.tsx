@@ -7,6 +7,7 @@ import Link from "next/link";
 import { useKeenSlider } from "keen-slider/react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { useTranslations } from "next-intl";
+import Image from "next/image";
 
 export default function ProductPage() {
   const params = useParams();
@@ -62,9 +63,11 @@ export default function ProductPage() {
                 >
                   {images.map((src, idx) => (
                     <div key={idx} className="keen-slider__slide">
-                      <img
-                        src={src}
+                      <Image
+                        src={product.imageSrc.image}
                         alt={product.imageAlt}
+                        width={500} // потрібно обовʼязково вказати width і height
+                        height={500}
                         className="w-full object-cover rounded-xl"
                       />
                     </div>
@@ -142,7 +145,7 @@ export default function ProductPage() {
             </div>
 
             <div className="space-y-3">
-             {/*  {product.thickness && (
+              {/*  {product.thickness && (
                 <div className="flex justify-between items-center text-gray-700">
                   <span className="font-semibold text-gray-900">
                     {t("type")}:

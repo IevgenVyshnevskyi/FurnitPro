@@ -14,6 +14,9 @@ export default function LangSwitcher({ mobile = false }: LangSwitcherProps) {
   // Визначаємо поточну мову з шляху
   const currentLang = pathname.startsWith("/en") ? "en" : "ua";
 
+  // Прибираємо поточний префікс мови (/ua або /en)
+  const basePath = pathname.replace(/^\/(ua|en)/, "");
+
   // Клас для контейнера
   const containerClass = mobile
     ? "flex gap-4 justify-center items-center"
@@ -29,28 +32,26 @@ export default function LangSwitcher({ mobile = false }: LangSwitcherProps) {
   return (
     <div className={containerClass}>
       <Link
-        href={`/ua${pathname.replace(/^\/(ua|en)/, "")}`}
-        locale="ua"
+        href={`/ua${basePath}`}
         className={`${flagSizeClass} ${getFlagClass("ua")}`}
       >
         <Image
           src="/flags/ua-flag.svg"
           alt="UA"
-          width={500} // потрібно обовʼязково вказати width і height
+          width={500}
           height={500}
           className="h-full w-full"
         />
       </Link>
       <span className="text-white">|</span>
       <Link
-        href={`/en${pathname.replace(/^\/(ua|en)/, "")}`}
-        locale="en"
+        href={`/en${basePath}`}
         className={`${flagSizeClass} ${getFlagClass("en")}`}
       >
         <Image
           src="/flags/uk-flag.svg"
           alt="GB"
-          width={500} // потрібно обовʼязково вказати width і height
+          width={500}
           height={500}
           className="h-full w-full"
         />

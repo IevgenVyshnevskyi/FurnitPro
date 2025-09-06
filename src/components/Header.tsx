@@ -113,21 +113,22 @@ const phoneNumbers = [
   },
 ];
 
-//const phoneNumbers = ["+380963760986", "+380963760986", "+380957989094"];
-
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const t = useTranslations("Header");
 
   return (
     <>
-      <header className="bg-gray-900" /* style={{ background: "var(--foreground)", color: "var(--background)" }} */>
+      <header
+        className="bg-gray-900"
+        //className="bg-gray-900 fixed top-0 left-0 w-full z-50 " /* style={{ background: "var(--foreground)", color: "var(--background)" }} */
+      >
         <nav
           aria-label="Global"
           className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8"
         >
           <div className="flex lg:flex-1">
-            <Link href="/" className="-m-1.5 p-1.5">
+            <Link href="/" scroll={false} className="-m-1.5 p-1.5">
               <span className="sr-only">Your Company</span>
               <Image
                 src={logo}
@@ -209,19 +210,22 @@ export default function Header() {
             </Popover>
 
             <Link
-              href="features"
+              href="/features"
+              scroll={false}
               className="text-sm/6 font-semibold text-white transition-colors hover:text-gray-400"
             >
               {t("features")}
             </Link>
             <Link
-              href="marketplace"
+              href="/marketplace"
+              scroll={false}
               className="text-sm/6 font-semibold text-white transition-colors hover:text-gray-400"
             >
               {t("marketplace")}
             </Link>
             <Link
-              href="company"
+              href="/company"
+              scroll={false}
               className="text-sm/6 font-semibold text-white transition-colors hover:text-gray-400"
             >
               {t("company")}
@@ -268,7 +272,7 @@ export default function Header() {
           <div className="fixed inset-0 z-50" />
           <DialogPanel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-gray-900 p-6 sm:max-w-sm sm:ring-1 sm:ring-gray-100/10">
             <div className="flex items-center justify-between">
-              <Link href="/" className="-m-1.5 p-1.5">
+              <Link href="/" scroll={false} className="-m-1.5 p-1.5">
                 <span className="sr-only">Your Company</span>
                 <Image src={logo} alt="logo" width={50} height={50} />
               </Link>
@@ -295,7 +299,7 @@ export default function Header() {
                       />
                     </DisclosureButton>
                     <DisclosurePanel className="mt-2 space-y-2">
-                      {phoneNumbers.map((phone) => (
+                      {/*  {phoneNumbers.map((phone) => (
                         <Link
                           key={phone.number}
                           href={`tel:${phone.number}`}
@@ -304,24 +308,27 @@ export default function Header() {
                           {phone.icon}
                           <span>{phone.number}</span>
                         </Link>
-                      ))}
+                      ))} */}
                     </DisclosurePanel>
                   </Disclosure>
 
                   <Link
-                    href="features"
+                    href="/features"
+                    scroll={false}
                     className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-white hover:bg-white/5"
                   >
                     {t("features")}
                   </Link>
                   <Link
-                    href="marketplace"
+                    href="/marketplace"
+                    scroll={false}
                     className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-white hover:bg-white/5"
                   >
                     {t("marketplace")}
                   </Link>
                   <Link
-                    href="company"
+                    href="/company"
+                    scroll={false}
                     className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-white hover:bg-white/5"
                   >
                     {t("company")}

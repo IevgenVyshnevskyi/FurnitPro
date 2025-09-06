@@ -51,7 +51,7 @@ export default function AppBreadcrumbs() {
   return (
     <div
       ref={containerRef}
-      className={isMobile ? "overflow-x-auto w-full ml-2 mb-[-30]" : "mx-auto max-w-2xl items-center justify-between pt-1 mb-[-60]"}
+      className={isMobile ? "overflow-x-auto ml-2 mb-[-30]" : "mx-auto max-w-2xl items-center justify-between pt-1 mb-[-60]"}
       style={isMobile ? { whiteSpace: "nowrap" } : undefined}
     >
       <Breadcrumbs

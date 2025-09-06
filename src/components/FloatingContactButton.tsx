@@ -18,7 +18,7 @@ export default function FloatingContactButton() {
 
   const t = useTranslations("FloatingContactButton");
 
-  // Визначаємо мобільний режим
+  // Визначення мобільного режиму
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth <= 768);
     checkMobile();
@@ -26,7 +26,7 @@ export default function FloatingContactButton() {
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
-  // Закриття при кліку поза блоком
+  // Закриття при кліку поза блоком (тільки для мобільного)
   useEffect(() => {
     if (!isMobile || !open) return;
 
@@ -58,7 +58,7 @@ export default function FloatingContactButton() {
     }
   }, [showText]);
 
-  // Керування появою/зникнення кнопок
+  // Поява/зникнення кнопок
   useEffect(() => {
     if (open) {
       setShowButtons(true);
@@ -71,7 +71,7 @@ export default function FloatingContactButton() {
   // Кнопки операторів
   const buttons = [
     {
-      icon: <SiVodafone className="w-7 h-7" />,
+      icon: <SiVodafone className={isMobile ? "w-5 h-5" : "w-7 h-7"} />,
       bg: "bg-red-600",
       href: "tel:+380957989094",
       label: "Vodafone",
@@ -82,7 +82,9 @@ export default function FloatingContactButton() {
         <Image
           src={kyivstarLogo}
           alt="Kyivstar"
-          className="w-7 h-7 rounded-full object-cover"
+          className={`rounded-full object-cover ${
+            isMobile ? "w-5 h-5" : "w-7 h-7"
+          }`}
         />
       ),
       bg: "bg-blue-600",
@@ -95,7 +97,7 @@ export default function FloatingContactButton() {
   const mobileButtons = [
     ...buttons,
     {
-      icon: <IoClose />,
+      icon: <IoClose className={isMobile ? "w-5 h-5" : "w-7 h-7"} />,
       bg: "bg-gray-700",
       href: "#",
       label: "Close",
@@ -103,22 +105,29 @@ export default function FloatingContactButton() {
     },
   ];
 
+  const mainButtonSize = isMobile ? "40px" : "56px";
+  const gapSize = isMobile ? "6px" : "16px";
+
   return (
     <div
       ref={containerRef}
-      className="fixed flex items-center z-50"
+      className="fixed flex items-center z-50 transition-all duration-300"
       style={{
-        bottom: "268px",
-        left: isMobile ? "16px" : "48px", // ✅ адаптивний лівий відступ
-        gap: isMobile ? "6px" : "16px",
+        bottom: isMobile ? "174px" : "216px",
+        left: isMobile ? "16px" : "48px",
+        gap: gapSize,
       }}
       onMouseLeave={() => !isMobile && setOpen(false)}
     >
       {/* Головна кнопка */}
       <div
-        className={`w-14 h-14 rounded-full bg-purple-900 flex items-center justify-center text-white text-lg cursor-pointer transition-all duration-500 relative overflow-hidden ${
+        className={`rounded-full bg-purple-900 flex items-center justify-center text-white text-lg cursor-pointer transition-all duration-500 relative overflow-hidden ${
           open ? "opacity-100" : "opacity-60"
         }`}
+        style={{
+          width: mainButtonSize,
+          height: mainButtonSize,
+        }}
         onClick={() => isMobile && setOpen((prev) => !prev)}
         onMouseEnter={() => !isMobile && setOpen(true)}
       >
@@ -126,6 +135,9 @@ export default function FloatingContactButton() {
           className={`absolute inset-0 flex items-center justify-center text-xs px-2 text-center transition-opacity duration-700 ${
             showText ? "opacity-100" : "opacity-0"
           }`}
+          style={{
+            fontSize: isMobile ? "10px" : "14px",
+          }}
         >
           {t("contactButtonLabel")}
         </span>
@@ -139,11 +151,7 @@ export default function FloatingContactButton() {
 
       {/* Кнопки операторів */}
       {showButtons && (
-        <div
-          className={
-            isMobile ? "flex items-center gap-2" : "flex items-center gap-4"
-          }
-        >
+        <div className="flex items-center" style={{ gap: gapSize }}>
           {(isMobile ? mobileButtons : buttons).map((btn, idx) => (
             <a
               key={idx}
@@ -155,8 +163,10 @@ export default function FloatingContactButton() {
                   setOpen(false);
                 }
               }}
-              className={`w-14 h-14 rounded-full flex items-center justify-center text-white text-2xl cursor-pointer transform transition-all duration-300 ${btn.bg}`}
+              className={`rounded-full flex items-center justify-center text-white text-2xl cursor-pointer transform transition-all duration-300 ${btn.bg}`}
               style={{
+                width: mainButtonSize,
+                height: mainButtonSize,
                 transitionDelay: open
                   ? `${idx * 100}ms`
                   : `${(buttons.length - idx) * 100}ms`,

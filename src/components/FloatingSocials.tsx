@@ -8,7 +8,7 @@ export default function FloatingSocials() {
   const [open, setOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
-  const [showButtons, setShowButtons] = useState(false); // ✅ Новий стан для керування рендерингом
+  const [showButtons, setShowButtons] = useState(false);
 
   // 📏 Перевірка ширини екрану
   useEffect(() => {
@@ -35,43 +35,47 @@ export default function FloatingSocials() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [isMobile, open]);
 
-  // ✅ Керування анімацією появи/зникнення
+  // ✅ Керування появою/зникнення кнопок
   useEffect(() => {
     if (open) {
       setShowButtons(true);
     } else {
-      // ⏳ Затримка видалення елементів до завершення анімації
       const timer = setTimeout(() => setShowButtons(false), 300);
       return () => clearTimeout(timer);
     }
   }, [open]);
 
+  // ⚡ Динамічні розміри
+  const buttonSize = isMobile ? "40px" : "56px";
+  const iconSizeClass = isMobile ? "text-xl" : "text-2xl";
+  const gapSize = isMobile ? "6px" : "16px";
+
   const socials = [
     {
-      icon: <FaInstagram />,
+      icon: <FaInstagram className={iconSizeClass} />,
       bg: "bg-pink-500",
       url: "https://www.instagram.com/FurnitPro",
       close: false,
     },
     {
-      icon: <FaFacebook />,
+      icon: <FaFacebook className={iconSizeClass} />,
       bg: "bg-blue-600",
       url: "https://www.facebook.com/profile.php?id=61578154867004",
       close: false,
     },
     {
-      icon: <FaTiktok />,
+      icon: <FaTiktok className={iconSizeClass} />,
       bg: "bg-black",
       url: "https://www.tiktok.com/@FurnitPro7",
       close: false,
     },
   ];
 
-  // 📱 Для мобільного режиму додаємо кнопку ❌
+  // 📱 Мобільний режим — додаємо кнопку ❌
   const mobileSocials = [
     ...socials,
     {
-      icon: <IoClose />,
+      icon: <IoClose className={iconSizeClass} />,
       bg: "bg-gray-700",
       url: "#",
       close: true,
@@ -81,32 +85,33 @@ export default function FloatingSocials() {
   return (
     <div
       ref={containerRef}
-      className="fixed flex items-center z-50"
+      className="fixed flex items-center z-50 transition-all duration-300"
       style={{
-        bottom: "196px",
-        left: isMobile ? "16px" : "48px", // ✅ адаптивний лівий відступ
-        gap: isMobile ? "6px" : "16px",
+        bottom: isMobile ? "124px" : "152px",
+        left: isMobile ? "16px" : "48px",
+        gap: gapSize,
       }}
       onMouseLeave={() => !isMobile && setOpen(false)}
     >
       {/* 🔘 Головна кнопка */}
       <div
-        className={`w-14 h-14 rounded-full bg-purple-900 flex items-center justify-center text-white text-2xl cursor-pointer transition-opacity duration-300 ${
+        className={`rounded-full bg-purple-900 flex items-center justify-center text-white cursor-pointer transition-opacity duration-300 ${
           open ? "opacity-100" : "opacity-60"
         }`}
+        style={{
+          width: buttonSize,
+          height: buttonSize,
+          fontSize: isMobile ? "1rem" : "1.5rem",
+        }}
         onClick={() => isMobile && setOpen((prev) => !prev)}
         onMouseEnter={() => !isMobile && setOpen(true)}
       >
-        <FaShareAlt />
+        <FaShareAlt className={iconSizeClass} />
       </div>
 
       {/* 📌 Контейнер кнопок */}
       {showButtons && (
-        <div
-          className={
-            isMobile ? "flex items-center gap-2" : "flex items-center gap-4"
-          }
-        >
+        <div className="flex items-center" style={{ gap: gapSize }}>
           {(isMobile ? mobileSocials : socials).map((btn, idx) => (
             <a
               key={idx}
@@ -119,14 +124,17 @@ export default function FloatingSocials() {
                   setOpen(false);
                 }
               }}
-              className={`w-14 h-14 rounded-full flex items-center justify-center text-white text-2xl cursor-pointer transform transition-all duration-300 ${btn.bg}`}
+              className={`rounded-full flex items-center justify-center text-white cursor-pointer transform transition-all duration-300 ${btn.bg}`}
               style={{
+                width: buttonSize,
+                height: buttonSize,
                 transitionDelay: open
                   ? `${idx * 100}ms`
                   : `${(socials.length - idx) * 100}ms`,
                 opacity: open ? 1 : 0,
                 transform: open ? "translateX(0)" : "translateX(-2rem)",
                 pointerEvents: open ? "auto" : "none",
+                fontSize: isMobile ? "1rem" : "1.5rem",
               }}
             >
               {btn.icon}

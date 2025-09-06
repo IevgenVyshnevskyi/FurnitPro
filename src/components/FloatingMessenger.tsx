@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import { FaCommentDots, FaTelegramPlane, FaViber } from "react-icons/fa";
 import { SiGmail } from "react-icons/si";
-import { IoClose } from "react-icons/io5"; // ❌ хрестик
+import { IoClose } from "react-icons/io5";
 
 export default function FloatingMessenger() {
   const [open, setOpen] = useState(false);
@@ -36,31 +36,36 @@ export default function FloatingMessenger() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [isMobile, open]);
 
-  // ✨ Керування анімацією появи/зникнення
+  // Керування появою/зникнення кнопок
   useEffect(() => {
     if (open) {
       setShowButtons(true);
     } else {
-      const timer = setTimeout(() => setShowButtons(false), 300); // Час збігається з тривалістю transition
+      const timer = setTimeout(() => setShowButtons(false), 300);
       return () => clearTimeout(timer);
     }
   }, [open]);
 
+  // ⚡ Динамічні розміри
+  const buttonSize = isMobile ? "40px" : "56px";
+  const iconSizeClass = isMobile ? "text-xl" : "text-2xl";
+  const gapSize = isMobile ? "6px" : "16px";
+
   const buttons = [
     {
-      icon: <SiGmail />,
+      icon: <SiGmail className={iconSizeClass} />,
       bg: "bg-red-600",
       url: "mailto:furnitpro7@gmail.com",
       close: false,
     },
     {
-      icon: <FaTelegramPlane />,
+      icon: <FaTelegramPlane className={iconSizeClass} />,
       bg: "bg-cyan-500",
       url: "tg://resolve?phone=380987781679",
       close: false,
     },
     {
-      icon: <FaViber />,
+      icon: <FaViber className={iconSizeClass} />,
       bg: "bg-purple-600",
       url: "viber://chat?number=%2B380963760986",
       close: false,
@@ -71,7 +76,7 @@ export default function FloatingMessenger() {
   const mobileButtons = [
     ...buttons,
     {
-      icon: <IoClose />,
+      icon: <IoClose className={iconSizeClass} />,
       bg: "bg-gray-700",
       url: "#",
       close: true,
@@ -81,32 +86,33 @@ export default function FloatingMessenger() {
   return (
     <div
       ref={containerRef}
-      className="fixed flex items-center z-50"
+      className="fixed flex items-center z-50 transition-all duration-300"
       style={{
-        bottom: "126px",
-        left: isMobile ? "16px" : "48px", // ✅ адаптивний лівий відступ
-        gap: isMobile ? "6px" : "16px",
+        bottom: isMobile ? "74px" : "88px",
+        left: isMobile ? "16px" : "48px",
+        gap: gapSize,
       }}
       onMouseLeave={() => !isMobile && setOpen(false)}
     >
       {/* Головна кнопка */}
       <div
-        className={`w-14 h-14 rounded-full bg-purple-900 flex items-center justify-center text-white text-2xl cursor-pointer transition-opacity duration-300 ${
+        className={`rounded-full bg-purple-900 flex items-center justify-center text-white cursor-pointer transition-opacity duration-300 ${
           open ? "opacity-100" : "opacity-60"
         }`}
+        style={{
+          width: buttonSize,
+          height: buttonSize,
+          fontSize: isMobile ? "1rem" : "1.5rem",
+        }}
         onClick={() => isMobile && setOpen((prev) => !prev)}
         onMouseEnter={() => !isMobile && setOpen(true)}
       >
-        <FaCommentDots />
+        <FaCommentDots className={iconSizeClass} />
       </div>
 
       {/* Контейнер кнопок */}
       {showButtons && (
-        <div
-          className={
-            isMobile ? "flex items-center gap-2" : "flex items-center gap-4"
-          }
-        >
+        <div className="flex items-center" style={{ gap: gapSize }}>
           {(isMobile ? mobileButtons : buttons).map((btn, idx) => (
             <a
               key={idx}
@@ -119,15 +125,17 @@ export default function FloatingMessenger() {
                   setOpen(false);
                 }
               }}
-              className={`w-14 h-14 rounded-full flex items-center justify-center text-white text-2xl cursor-pointer transform transition-all duration-300 ${btn.bg}`}
+              className={`rounded-full flex items-center justify-center text-white cursor-pointer transform transition-all duration-300 ${btn.bg}`}
               style={{
+                width: buttonSize,
+                height: buttonSize,
                 transitionDelay: open
                   ? `${idx * 100}ms`
                   : `${(buttons.length - idx) * 100}ms`,
                 opacity: open ? 1 : 0,
                 transform: open ? "translateX(0)" : "translateX(-2rem)",
                 pointerEvents: open ? "auto" : "none",
-                gap: isMobile ? "6px" : "16px",
+                fontSize: isMobile ? "1rem" : "1.5rem",
               }}
             >
               {btn.icon}

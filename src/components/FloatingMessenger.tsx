@@ -81,7 +81,11 @@ export default function FloatingMessenger() {
   return (
     <div
       ref={containerRef}
-      className="fixed bottom-32 left-12 flex items-center gap-4 z-50"
+       className="fixed flex items-center gap-4 z-50"
+      style={{
+        bottom: "125px",
+        left: isMobile ? "16px" : "48px", // ✅ адаптивний лівий відступ
+      }}
       onMouseLeave={() => !isMobile && setOpen(false)}
     >
       {/* Головна кнопка */}

@@ -64,12 +64,17 @@ export default function ProductPage() {
                   {images.map((src, idx) => (
                     <div key={idx} className="keen-slider__slide">
                       <Image
-                        src={product.imageSrc.image}
+                        src={src!} // TypeScript знає, що src не undefined
                         alt={product.imageAlt}
-                        width={500} // потрібно обовʼязково вказати width і height
+                        width={500}
                         height={500}
                         className="w-full object-cover rounded-xl"
                       />
+                      {/* <img
+                        src={src}
+                        alt={product.imageAlt}
+                        className="w-full object-cover rounded-xl"
+                      /> */}
                     </div>
                   ))}
                 </div>
@@ -106,11 +111,15 @@ export default function ProductPage() {
               </div>
             ) : (
               // Якщо одна картинка, просто показуємо її
-              <img
-                src={images[0]}
-                alt={product.imageAlt}
-                className="w-full rounded-xl shadow-md"
-              />
+              images.length === 1 && (
+                <Image
+                  src={images[0]!}
+                  alt={product.imageAlt}
+                  width={500}
+                  height={500}
+                  className="w-full rounded-xl shadow-md"
+                />
+              )
             )}
           </div>
 

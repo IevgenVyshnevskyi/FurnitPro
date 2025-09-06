@@ -81,10 +81,11 @@ export default function FloatingMessenger() {
   return (
     <div
       ref={containerRef}
-       className="fixed flex items-center gap-4 z-50"
+      className="fixed flex items-center z-50"
       style={{
-        bottom: "125px",
+        bottom: "126px",
         left: isMobile ? "16px" : "48px", // ✅ адаптивний лівий відступ
+        gap: isMobile ? "6px" : "16px",
       }}
       onMouseLeave={() => !isMobile && setOpen(false)}
     >
@@ -101,7 +102,11 @@ export default function FloatingMessenger() {
 
       {/* Контейнер кнопок */}
       {showButtons && (
-        <div className="flex items-center gap-4">
+        <div
+          className={
+            isMobile ? "flex items-center gap-2" : "flex items-center gap-4"
+          }
+        >
           {(isMobile ? mobileButtons : buttons).map((btn, idx) => (
             <a
               key={idx}
@@ -122,6 +127,7 @@ export default function FloatingMessenger() {
                 opacity: open ? 1 : 0,
                 transform: open ? "translateX(0)" : "translateX(-2rem)",
                 pointerEvents: open ? "auto" : "none",
+                gap: isMobile ? "6px" : "16px",
               }}
             >
               {btn.icon}

@@ -106,10 +106,11 @@ export default function FloatingContactButton() {
   return (
     <div
       ref={containerRef}
-      className="fixed flex items-center gap-4 z-50"
+      className="fixed flex items-center z-50"
       style={{
         bottom: "268px",
         left: isMobile ? "16px" : "48px", // ✅ адаптивний лівий відступ
+        gap: isMobile ? "6px" : "16px",
       }}
       onMouseLeave={() => !isMobile && setOpen(false)}
     >
@@ -138,7 +139,11 @@ export default function FloatingContactButton() {
 
       {/* Кнопки операторів */}
       {showButtons && (
-        <div className="flex items-center gap-4">
+        <div
+          className={
+            isMobile ? "flex items-center gap-2" : "flex items-center gap-4"
+          }
+        >
           {(isMobile ? mobileButtons : buttons).map((btn, idx) => (
             <a
               key={idx}
@@ -169,12 +174,24 @@ export default function FloatingContactButton() {
       {/* Анімація вібрації */}
       <style jsx>{`
         @keyframes vibrateOnce {
-          0% { transform: rotate(0deg); }
-          20% { transform: rotate(-10deg); }
-          40% { transform: rotate(10deg); }
-          60% { transform: rotate(-10deg); }
-          80% { transform: rotate(10deg); }
-          100% { transform: rotate(0deg); }
+          0% {
+            transform: rotate(0deg);
+          }
+          20% {
+            transform: rotate(-10deg);
+          }
+          40% {
+            transform: rotate(10deg);
+          }
+          60% {
+            transform: rotate(-10deg);
+          }
+          80% {
+            transform: rotate(10deg);
+          }
+          100% {
+            transform: rotate(0deg);
+          }
         }
         .vibrate-once {
           display: inline-block;

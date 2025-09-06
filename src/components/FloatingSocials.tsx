@@ -81,10 +81,11 @@ export default function FloatingSocials() {
   return (
     <div
       ref={containerRef}
-      className="fixed flex items-center gap-4 z-50"
+      className="fixed flex items-center z-50"
       style={{
         bottom: "196px",
         left: isMobile ? "16px" : "48px", // ✅ адаптивний лівий відступ
+        gap: isMobile ? "6px" : "16px",
       }}
       onMouseLeave={() => !isMobile && setOpen(false)}
     >
@@ -101,7 +102,11 @@ export default function FloatingSocials() {
 
       {/* 📌 Контейнер кнопок */}
       {showButtons && (
-        <div className="flex items-center gap-4">
+        <div
+          className={
+            isMobile ? "flex items-center gap-2" : "flex items-center gap-4"
+          }
+        >
           {(isMobile ? mobileSocials : socials).map((btn, idx) => (
             <a
               key={idx}

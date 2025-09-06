@@ -106,6 +106,7 @@ export default function FloatingContactButton() {
   ];
 
   const mainButtonSize = isMobile ? "48px" : "56px";
+  const gapSize = isMobile ? "6px" : "16px";
 
   return (
     <div
@@ -114,7 +115,7 @@ export default function FloatingContactButton() {
       style={{
         bottom: isMobile ? "194px" : "216px",
         left: isMobile ? "16px" : "48px",
-        gap: isMobile ? "6px" : "16px",
+        gap: gapSize,
       }}
       onMouseLeave={() => !isMobile && setOpen(false)}
     >

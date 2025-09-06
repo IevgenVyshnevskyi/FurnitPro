@@ -33,8 +33,8 @@ export default function ScrollToTop() {
     <button
       onClick={scrollToTop}
       className={`
-        fixed bottom-6 left-12 z-50 flex ${
-          isMobile ? "h-10 w-10" : "h-14 w-14"
+        fixed bottom-7 left-12 z-50 flex ${
+          isMobile ? "h-12 w-12" : "h-14 w-14"
         } items-center justify-center
         rounded-full bg-purple-900 text-white shadow-lg transition-all duration-300
         ${isVisible ? "opacity-60 scale-100" : "opacity-0 scale-0"}

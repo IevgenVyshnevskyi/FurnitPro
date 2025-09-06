@@ -46,7 +46,7 @@ export default function FloatingSocials() {
   }, [open]);
 
   // ⚡ Динамічні розміри
-  const buttonSize = isMobile ? "40px" : "56px";
+  const buttonSize = isMobile ? "48px" : "56px";
   const iconSizeClass = isMobile ? "text-xl" : "text-2xl";
   const gapSize = isMobile ? "6px" : "16px";
 
@@ -87,7 +87,7 @@ export default function FloatingSocials() {
       ref={containerRef}
       className="fixed flex items-center z-50 transition-all duration-300"
       style={{
-        bottom: isMobile ? "124px" : "152px",
+        bottom: isMobile ? "138px" : "152px",
         left: isMobile ? "16px" : "48px",
         gap: gapSize,
       }}

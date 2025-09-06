@@ -105,17 +105,16 @@ export default function FloatingContactButton() {
     },
   ];
 
-  const mainButtonSize = isMobile ? "40px" : "56px";
-  const gapSize = isMobile ? "6px" : "16px";
+  const mainButtonSize = isMobile ? "48px" : "56px";
 
   return (
     <div
       ref={containerRef}
       className="fixed flex items-center z-50 transition-all duration-300"
       style={{
-        bottom: isMobile ? "174px" : "216px",
+        bottom: isMobile ? "194px" : "216px",
         left: isMobile ? "16px" : "48px",
-        gap: gapSize,
+        gap: isMobile ? "6px" : "16px",
       }}
       onMouseLeave={() => !isMobile && setOpen(false)}
     >

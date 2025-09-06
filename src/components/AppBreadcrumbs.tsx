@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Breadcrumbs, BreadcrumbItem } from "@heroui/react";
 import { usePathname, useParams } from "next/navigation";
 import Link from "next/link";
@@ -18,8 +18,19 @@ export default function AppBreadcrumbs() {
   const t = useTranslations("Breadcrumbs");
 
   const [products, setProducts] = useState<Product[]>([]);
+  const [isMobile, setIsMobile] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const lastItemRef = useRef<HTMLLIElement>(null);
 
-  // Динамічне завантаження JSON за мовою
+  // Перевірка мобільного режиму
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth <= 768);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  // Завантаження продуктів
   useEffect(() => {
     fetch(`/data/product.${locale}.json`)
       .then((res) => res.json())
@@ -29,34 +40,49 @@ export default function AppBreadcrumbs() {
 
   const segments = pathname.split("/").filter(Boolean);
 
+  // Автоматичне прокручування до останньої крихти (тільки на мобільному)
+  useEffect(() => {
+    if (isMobile && lastItemRef.current && containerRef.current) {
+      lastItemRef.current.scrollIntoView({ behavior: "smooth", inline: "end" });
+    }
+  }, [segments, products, isMobile]);
+
   return (
-    <Breadcrumbs>
-      {/* Перша крихта завжди "Головна" */}
-      <BreadcrumbItem>
-        <Link href="/">{t("home")}</Link>
-      </BreadcrumbItem>
+    <div
+      ref={containerRef}
+      className={isMobile ? "overflow-x-auto w-full" : "w-full"}
+      style={isMobile ? { whiteSpace: "nowrap" } : undefined}
+    >
+      <Breadcrumbs
+        className="flex flex-nowrap"
+        style={isMobile ? { minWidth: "max-content" } : undefined}
+      >
+        <BreadcrumbItem>
+          <Link href="/">{t("home")}</Link>
+        </BreadcrumbItem>
 
-      {segments.map((seg, idx) => {
-        const href = "/" + segments.slice(0, idx + 1).join("/");
+        {segments.map((seg, idx) => {
+          const href = "/" + segments.slice(0, idx + 1).join("/");
+          let label = seg;
 
-        let label = seg;
+          const isProductId = idx === segments.length - 1 && /^\d+$/.test(seg);
+          if (isProductId) {
+            const product = products.find((p) => p.id.toString() === seg);
+            label = product ? product.name : seg;
+          } else {
+            label = t(seg, { default: seg });
+          }
 
-        // Перевірка: останній сегмент — ID товару
-        const isProductId = idx === segments.length - 1 && /^\d+$/.test(seg);
-        if (isProductId) {
-          const product = products.find((p) => p.id.toString() === seg);
-          label = product ? product.name : seg;
-        } else {
-          // Переклад категорій
-          label = t(seg, { default: seg });
-        }
+          const refProp =
+            idx === segments.length - 1 ? { ref: lastItemRef } : {};
 
-        return (
-          <BreadcrumbItem key={`${idx}-${href}`}>
-            <Link href={href}>{label}</Link>
-          </BreadcrumbItem>
-        );
-      })}
-    </Breadcrumbs>
+          return (
+            <BreadcrumbItem key={`${idx}-${href}`} {...refProp}>
+              <Link href={href}>{label}</Link>
+            </BreadcrumbItem>
+          );
+        })}
+      </Breadcrumbs>
+    </div>
   );
 }

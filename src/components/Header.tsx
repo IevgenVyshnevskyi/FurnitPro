@@ -4,8 +4,8 @@ import { useState } from "react";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
-//import logo from "../../public/logo/logo.jpg";
 import logo from "../../public/logo/logo.png";
+import logo1 from "../../public/logo/logo1.jpg";
 import { SiVodafone } from "react-icons/si";
 import kyivstarLogo from "./../../public/images/phones/kyivstar.jpeg"; // ✅ JPEG іконка
 
@@ -275,7 +275,13 @@ export default function Header() {
             <div className="flex items-center justify-between">
               <Link href="/" scroll={false} className="-m-1.5 p-1.5">
                 <span className="sr-only">Your Company</span>
-                <Image src={logo} alt="logo" width={50} height={50} />
+                <Image
+                  src={logo1}
+                  alt="logo"
+                  width={50}
+                  height={50}
+                  className="transition hover:opacity-60 rounded-sm ml-[-6] lg:ml-[0]"
+                />
               </Link>
               <LangSwitcher mobile />
               <button

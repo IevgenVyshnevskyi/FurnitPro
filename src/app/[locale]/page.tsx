@@ -45,8 +45,8 @@ export interface Categorie {
 export default function HomePage() {
   const t = useTranslations("HomePage");
   return (
-    <div className="bg-gray-0 min-h-screen">
-      <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-24">
+    <div className="bg-gray-0 min-h-screen mb-[-30] sm:mb-[-10] md:mb-[-30]">
+      <div className="mx-auto max-w-7xl px-4 pt-12 pb-2 sm:px-6 sm:py-24">
         <h1 className="text-3xl font-bold mb-8 text-gray-900">{t("title")}</h1>
 
         {/* 🔹 Змінив тут: базово 2 колонки замість 1 */}

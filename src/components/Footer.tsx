@@ -51,15 +51,34 @@ export default function Footer() {
             {t("contactTitle")}
           </h2>
           <ul className="mt-2 space-y-2">
-            <li>{t("email")}: furnitpro7@gmail.com</li>
-            <li>{t("phone")}: +38 (095) 798 90 94</li>
             <li>
+              {t("email")}:{" "}
+              <a
+                href="mailto:furnitpro7@gmail.com"
+                className="hover:underline text-blue-600"
+              >
+                furnitpro7@gmail.com
+              </a>
+            </li>
+
+            <li>
+              {t("phone")}:{" "}
+              <a
+                href="tel:+380957989094"
+                className="hover:underline text-blue-600"
+              >
+                +38 (095) 798 90 94
+              </a>
+            </li>
+
+            <li>
+              Telegram:{" "}
               <Link
                 href="tg://resolve?phone=380987781679"
                 target="_blank"
-                className="hover:underline"
+                className="hover:underline text-blue-600"
               >
-                Telegram
+                FurnitPro
               </Link>
             </li>
           </ul>

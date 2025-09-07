@@ -5,7 +5,7 @@ import { Breadcrumbs, BreadcrumbItem } from "@heroui/react";
 import { usePathname, useParams } from "next/navigation";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
-
+import { useLocalizedHref } from "@/hooks/useLocalizedHref"; // ✅ імпорт хуку
 
 interface Product {
   id: number;
@@ -17,6 +17,7 @@ export default function AppBreadcrumbs() {
   const pathname = usePathname();
   const { locale } = useParams(); // "ua" або "en"
   const t = useTranslations("Breadcrumbs");
+  const localizeHref = useLocalizedHref(); // ✅ підключаємо хук
 
   const [products, setProducts] = useState<Product[]>([]);
   const [isMobile, setIsMobile] = useState(false);
@@ -51,7 +52,11 @@ export default function AppBreadcrumbs() {
   return (
     <div
       ref={containerRef}
-      className={isMobile ? "overflow-x-auto ml-2 mb-[-30]" : "mx-auto max-w-2xl items-center justify-between pt-1 mb-[-60]"}
+      className={
+        isMobile
+          ? "overflow-x-auto ml-2 mb-[-30]"
+          : "mx-auto max-w-2xl items-center justify-between pt-1 mb-[-60]"
+      }
       style={isMobile ? { whiteSpace: "nowrap" } : undefined}
     >
       <Breadcrumbs
@@ -59,11 +64,12 @@ export default function AppBreadcrumbs() {
         style={isMobile ? { minWidth: "max-content" } : undefined}
       >
         <BreadcrumbItem>
-          <Link href="/">{t("home")}</Link>
+          <Link href={localizeHref("/")}>{t("home")}</Link>
         </BreadcrumbItem>
 
         {segments.map((seg, idx) => {
-          const href = "/" + segments.slice(0, idx + 1).join("/");
+          const rawHref = "/" + segments.slice(0, idx + 1).join("/");
+          const href = localizeHref(rawHref); // ✅ локалізоване посилання
           let label = seg;
 
           const isProductId = idx === segments.length - 1 && /^\d+$/.test(seg);

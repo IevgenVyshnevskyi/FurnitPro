@@ -45,7 +45,7 @@ export default function ProductPage() {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen px-4 py-10">
+    <div className="flex flex-col items-center justify-center min-h-screen px-4 pt-10 pb-0">
       <div className="max-w-4xl w-full text-center sm:text-left bg-white p-6 rounded-xl shadow-lg">
         <h1 className="text-3xl font-bold mb-6 text-gray-900">
           {t(`products.${product.name}`)}
@@ -124,18 +124,18 @@ export default function ProductPage() {
           </div>
 
           {/* Інформація про продукт (стилізований блок) */}
-          <div className="w-full md:w-1/2 text-center md:text-left mt-6 md:mt-0 p-4 border rounded-xl shadow-sm bg-gray-50">
+          <div className="w-full md:w-1/2 text-center md:text-left mt-[-16] md:mt-0 p-2 md:p-4 border rounded-xl shadow-sm bg-gray-50">
             {/* Ціна */}
-            <div className="pb-4 mb-4 border-b border-gray-200">
-              <p className="text-3xl font-extrabold text-blue-600">
+            <div className="pb-2 mb-2 md:pb-4 md:mb-4 border-b border-gray-200">
+              <p className="text-2xl md:text-3xl font-extrabold text-blue-600">
                 {t(`prices.${product.name}`)}
               </p>
             </div>
 
             {/* Характеристики */}
-            <div className="space-y-3">
+            <div className="space-y-2 md:space-y-3">
               {product.thickness && (
-                <div className="flex justify-between items-center text-gray-700">
+                <div className="flex justify-between items-center text-gray-700 text-sm md:text-base">
                   <span className="font-semibold text-gray-900">
                     {t("thickness")}:
                   </span>
@@ -144,7 +144,7 @@ export default function ProductPage() {
               )}
 
               {product.size && (
-                <div className="flex justify-between items-center text-gray-700">
+                <div className="flex justify-between items-center text-gray-700 text-sm md:text-base">
                   <span className="font-semibold text-gray-900">
                     {t("size")}:
                   </span>
@@ -153,32 +153,13 @@ export default function ProductPage() {
               )}
             </div>
 
-            <div className="space-y-3">
-              {/*  {product.thickness && (
-                <div className="flex justify-between items-center text-gray-700">
-                  <span className="font-semibold text-gray-900">
-                    {t("type")}:
-                  </span>
-                  <span>{product.thickness}</span>
-                </div>
-              )} */}
-
-              {product.type && (
-                <div className="flex justify-between items-center text-gray-700">
-                  <span className="font-semibold text-gray-900">
-                    {t("type")}:
-                  </span>
-                  <span>{t(`types.${product.name}`)}</span>
-                </div>
-              )}
-            </div>
-
+            {/* Опис */}
             {product.description && (
-              <div className="mt-6 pt-4 border-t border-gray-200">
-                <h3 className="text-xl font-bold mb-2 text-gray-900">
+              <div className="mt-4 md:mt-6 pt-2 md:pt-4 border-t border-gray-200">
+                <h3 className="text-lg md:text-xl font-bold mb-1 md:mb-2 text-gray-900">
                   {t("description")}
                 </h3>
-                <p className="text-gray-700">
+                <p className="text-sm md:text-base text-gray-700">
                   {t(`descriptions.${product.name}`)}
                 </p>
               </div>
@@ -187,7 +168,7 @@ export default function ProductPage() {
         </div>
 
         {/* Посилання на головну */}
-        <div className="mt-8 text-center">
+        <div className="mt-6 text-center">
           <Link
             href="/"
             className="inline-block px-6 py-3 text-lg font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors"

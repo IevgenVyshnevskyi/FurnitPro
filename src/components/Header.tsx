@@ -280,6 +280,7 @@ export default function Header() {
                   alt="logo"
                   width={50}
                   height={50}
+                  onClick={() => setMobileMenuOpen(false)}
                   className="transition hover:opacity-60 rounded-sm ml-[-6] lg:ml-[0]"
                 />
               </Link>

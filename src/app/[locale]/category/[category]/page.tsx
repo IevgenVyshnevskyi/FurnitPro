@@ -16,7 +16,7 @@ export default function CategoryPage() {
 
   return (
     <div className="bg-gray-0 min-h-screen">
-      <div className="px-4 py-16 mx-auto max-w-7xl sm:px-6 sm:py-24">
+      <div className="px-4 pt-12 pb-2 mx-auto max-w-7xl sm:px-6 sm:py-24">
         <h1 className="text-3xl font-bold mb-8 text-gray-900 capitalize">
           {t(`categories.${category}`)}
         </h1>

@@ -4,7 +4,8 @@ import { useState } from "react";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
-import logo from "../../public/logo/logo.jpg";
+//import logo from "../../public/logo/logo.jpg";
+import logo from "../../public/logo/logo.png";
 import { SiVodafone } from "react-icons/si";
 import kyivstarLogo from "./../../public/images/phones/kyivstar.jpeg"; // ✅ JPEG іконка
 
@@ -133,9 +134,9 @@ export default function Header() {
               <Image
                 src={logo}
                 alt="logo"
-                width={50}
-                height={50}
-                className="transition hover:opacity-60"
+                width={150}
+                height={40}
+                className="transition hover:opacity-60 rounded-sm ml-[-6] lg:ml-[0]"
               />
             </Link>
           </div>

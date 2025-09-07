@@ -33,7 +33,7 @@ const categories = [
     id: 3,
     key: "corners",
     category: "corners",
-    imageSrc: "/images/products/9.angle-106/item2.jpg",
+    imageSrc: "/images/products/9.angle-106/item3.jpg",
     imageAlt: "Меблевий з’єднувальний куток 106.",
   },
 ];

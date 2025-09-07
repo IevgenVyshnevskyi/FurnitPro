@@ -2,9 +2,6 @@
 
 import { useTranslations } from "next-intl";
 import Image from "next/image";
-// import FloatingContactButton from "@/components/FloatingContactButton";
-// import FloatingMessenger from "@/components/FloatingMessenger";
-// import ScrollToTop from "@/components/ScrollToTop";
 import Link from "next/link";
 
 const categories = [
@@ -52,7 +49,8 @@ export default function HomePage() {
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-24">
         <h1 className="text-3xl font-bold mb-8 text-gray-900">{t("title")}</h1>
 
-        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        {/* 🔹 Змінив тут: базово 2 колонки замість 1 */}
+        <div className="grid grid-cols-2 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {categories.map((cat) => (
             <Link
               key={cat.id}
@@ -66,15 +64,15 @@ export default function HomePage() {
                 <Image
                   alt={cat.imageAlt}
                   src={cat.imageSrc}
-                  width={500} // потрібно обовʼязково вказати width і height
+                  width={500}
                   height={500}
                   className="aspect-square w-full rounded-xl bg-gray-100 object-cover transform transition-transform duration-500 group-hover:scale-105"
                 />
 
-                {/* Overlay (для великих екранів) */}
+                {/* Overlay */}
                 <div className="absolute inset-0 rounded-xl bg-black bg-opacity-50 opacity-0 lg:group-hover:opacity-50 transition-opacity duration-300" />
 
-                {/* Кнопка (зникне на sm і менше) */}
+                {/* Кнопка */}
                 <div className="absolute inset-0 flex items-center justify-center">
                   <span className="hidden lg:inline-block">
                     <div className="px-4 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 transition transform scale-90 opacity-0 group-hover:opacity-100 group-hover:scale-100 duration-300">
@@ -86,10 +84,8 @@ export default function HomePage() {
 
               {/* Текст */}
               <h3 className="mt-4 text-lg font-semibold text-gray-800 capitalize">
-                {/* {cat.category} */}
                 {t(`categories.${cat.category}`)}
               </h3>
-              {/* <p className="mt-2 text-sm text-gray-600">{cat.imageAlt}</p> */}
             </Link>
           ))}
         </div>

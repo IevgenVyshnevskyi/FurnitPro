@@ -2,24 +2,21 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
-import { useLocalizedHref } from "@/hooks/useLocalizedHref"; // ✅ імпорт хуку
+import { usePathname, useRouter } from "next/navigation";
 
 type LangSwitcherProps = {
   mobile?: boolean;
 };
 
 export default function LangSwitcher({ mobile = false }: LangSwitcherProps) {
-  const pathname = usePathname();
-  const localizeHref = useLocalizedHref();
+  const pathname = usePathname(); // поточний шлях
+  const router = useRouter();
 
-  // Визначаємо поточну мову з шляху
-  const currentLang = pathname.startsWith("/en") ? "en" : "ua";
+  const segments = pathname.split("/").filter(Boolean);
+  const currentLang = segments[0] === "ua" ? "ua" : "en";
+  const restSegments = segments.slice(1).join("/"); // всі сегменти крім локалі
 
-  // Прибираємо поточний префікс мови (/ua або /en)
-  const basePath = pathname.replace(/^\/(ua|en)/, "");
-
-  // Клас для контейнера
+  // клас для контейнера
   const containerClass = mobile
     ? "flex gap-4 justify-center items-center"
     : "hidden lg:flex lg:flex-1 lg:justify-end gap-2 items-center";
@@ -31,11 +28,22 @@ export default function LangSwitcher({ mobile = false }: LangSwitcherProps) {
       ? "opacity-100 border-2 border-white rounded"
       : "opacity-50";
 
+  // формуємо чисті URL без повторної локалі
+  const getHref = (lang: "ua" | "en") => {
+    // прибираємо зайву локаль, якщо вона є
+    const cleanRest = restSegments.replace(/^(ua|en)\//, "");
+    return `/${lang}${cleanRest ? "/" + cleanRest : ""}`;
+  };
+
+  const handleClick = (lang: "ua" | "en") => {
+    const href = getHref(lang);
+    router.push(href);
+  };
+
   return (
     <div className={containerClass}>
-      <Link
-        //href={`/ua${basePath}`}
-        href={localizeHref(`/ua${basePath}`)}
+      <button
+        onClick={() => handleClick("ua")}
         className={`${flagSizeClass} ${getFlagClass("ua")}`}
       >
         <Image
@@ -45,11 +53,10 @@ export default function LangSwitcher({ mobile = false }: LangSwitcherProps) {
           height={500}
           className="h-full w-full"
         />
-      </Link>
+      </button>
       <span className="text-white">|</span>
-      <Link
-        //href={`/en${basePath}`}
-        href={localizeHref(`/en${basePath}`)}
+      <button
+        onClick={() => handleClick("en")}
         className={`${flagSizeClass} ${getFlagClass("en")}`}
       >
         <Image
@@ -59,7 +66,7 @@ export default function LangSwitcher({ mobile = false }: LangSwitcherProps) {
           height={500}
           className="h-full w-full"
         />
-      </Link>
+      </button>
     </div>
   );
 }

@@ -49,14 +49,14 @@ export default async function RootLayout({
     <NextIntlClientProvider locale={locale} messages={messages}>
       <Header />
       {/* <AppBreadcrumbs/> */}
-          {/*  <body
+      {/*  <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       > */}
       <main className="flex-grow">
         {/* <BackgroundLayout>{children}</BackgroundLayout> */}
         {children}
       </main>
-          {/* </body> */}
+      {/* </body> */}
       <Footer />
     </NextIntlClientProvider>
 

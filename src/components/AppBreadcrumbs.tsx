@@ -5,7 +5,7 @@ import { Breadcrumbs, BreadcrumbItem } from "@heroui/react";
 import { usePathname, useParams } from "next/navigation";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
-import { useLocalizedHref } from "@/hooks/useLocalizedHref"; // ✅ імпорт хуку
+import { useLocalizedHref } from "@/hooks/useLocalizedHref";
 
 interface Product {
   id: number;
@@ -17,7 +17,7 @@ export default function AppBreadcrumbs() {
   const pathname = usePathname();
   const { locale } = useParams(); // "ua" або "en"
   const t = useTranslations("Breadcrumbs");
-  const localizeHref = useLocalizedHref(); // ✅ підключаємо хук
+  const localizeHref = useLocalizedHref();
 
   const [products, setProducts] = useState<Product[]>([]);
   const [isMobile, setIsMobile] = useState(false);
@@ -32,7 +32,7 @@ export default function AppBreadcrumbs() {
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
-  // Завантаження продуктів
+  // Завантаження продуктів для вибраної мови
   useEffect(() => {
     fetch(`/data/product.${locale}.json`)
       .then((res) => res.json())
@@ -40,8 +40,7 @@ export default function AppBreadcrumbs() {
       .catch((err) => console.error("Failed to load products:", err));
   }, [locale]);
 
-  //const segments = pathname.split("/").filter(Boolean);
-
+  // Розбиваємо шлях і прибираємо перший сегмент (locale)
   let segments = pathname.split("/").filter(Boolean);
   if (segments[0] === locale) {
     segments = segments.slice(1);
@@ -68,20 +67,24 @@ export default function AppBreadcrumbs() {
         className="flex flex-nowrap"
         style={isMobile ? { minWidth: "max-content" } : undefined}
       >
+        {/* Головна */}
         <BreadcrumbItem>
           <Link href={localizeHref("/")}>{t("home")}</Link>
         </BreadcrumbItem>
 
+        {/* Інші сегменти */}
         {segments.map((seg, idx) => {
           const rawHref = "/" + segments.slice(0, idx + 1).join("/");
-          const href = localizeHref(rawHref); // ✅ локалізоване посилання
-          let label = seg;
+          const href = localizeHref(rawHref); // ✅ локалізація один раз
+          let label: string = seg;
 
+          // Якщо це productId → шукаємо в JSON
           const isProductId = idx === segments.length - 1 && /^\d+$/.test(seg);
           if (isProductId) {
             const product = products.find((p) => p.id.toString() === seg);
             label = product ? product.name : seg;
           } else {
+            // Інакше переклад сегмента
             label = t(seg, { default: seg });
           }
 
@@ -90,7 +93,7 @@ export default function AppBreadcrumbs() {
 
           return (
             <BreadcrumbItem key={`${idx}-${href}`} {...refProp}>
-              <Link href={localizeHref(href)}>{label}</Link>
+              <Link href={href}>{label}</Link>
             </BreadcrumbItem>
           );
         })}

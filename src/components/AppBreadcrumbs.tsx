@@ -40,7 +40,12 @@ export default function AppBreadcrumbs() {
       .catch((err) => console.error("Failed to load products:", err));
   }, [locale]);
 
-  const segments = pathname.split("/").filter(Boolean);
+  //const segments = pathname.split("/").filter(Boolean);
+
+  let segments = pathname.split("/").filter(Boolean);
+  if (segments[0] === locale) {
+    segments = segments.slice(1);
+  }
 
   // Автоматичне прокручування до останньої крихти (тільки на мобільному)
   useEffect(() => {

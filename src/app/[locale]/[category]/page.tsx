@@ -1,6 +1,6 @@
 "use client";
 
-import products /* , { Product } */ from "../../../../../public/data/products";
+import products /* , { Product } */ from "../../../../public/data/products";
 import { useParams } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
@@ -25,7 +25,8 @@ export default function CategoryPage() {
           {filteredProducts.map((product) => (
             <Link
               key={product.id}
-              href={`/category/${product.category}/${product.id}`}
+              href={`${product.category}/${product.id}`}
+              //href={`/category/${product.category}/${product.id}`}
               className="group relative rounded-2xl bg-white p-4 shadow-md transition-shadow duration-300
                  sm:hover:scale-105 sm:hover:opacity-90
                  block flex flex-col" // 🔹 флекс + колонки

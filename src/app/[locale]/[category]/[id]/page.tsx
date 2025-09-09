@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import products from "../../../../../../public/data/products";
+import products from "../../../../../public/data/products";
 import { useParams } from "next/navigation";
 import Link from "next/link";
 import { useKeenSlider } from "keen-slider/react";

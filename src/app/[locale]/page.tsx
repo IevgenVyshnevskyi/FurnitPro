@@ -54,7 +54,8 @@ export default function HomePage() {
           {categories.map((cat) => (
             <Link
               key={cat.id}
-              href={`/category/${cat.category}`}
+              /* href={`/category/${cat.category}`} */
+              href={`${cat.category}`}
               className="group relative rounded-2xl bg-white p-4 shadow-md hover:shadow-xl transition-shadow duration-300
                          sm:hover:scale-105 sm:hover:opacity-90 sm:duration-300 transition-transform
                          block"

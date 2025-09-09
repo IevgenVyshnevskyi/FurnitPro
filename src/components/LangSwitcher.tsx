@@ -3,6 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
+import { useLocalizedHref } from "@/hooks/useLocalizedHref"; // ✅ імпорт хуку
 
 type LangSwitcherProps = {
   mobile?: boolean;
@@ -10,6 +11,7 @@ type LangSwitcherProps = {
 
 export default function LangSwitcher({ mobile = false }: LangSwitcherProps) {
   const pathname = usePathname();
+  const localizeHref = useLocalizedHref();
 
   // Визначаємо поточну мову з шляху
   const currentLang = pathname.startsWith("/en") ? "en" : "ua";
@@ -32,7 +34,8 @@ export default function LangSwitcher({ mobile = false }: LangSwitcherProps) {
   return (
     <div className={containerClass}>
       <Link
-        href={`/ua${basePath}`}
+        //href={`/ua${basePath}`}
+        href={localizeHref(`/ua${basePath}`)}
         className={`${flagSizeClass} ${getFlagClass("ua")}`}
       >
         <Image
@@ -45,7 +48,8 @@ export default function LangSwitcher({ mobile = false }: LangSwitcherProps) {
       </Link>
       <span className="text-white">|</span>
       <Link
-        href={`/en${basePath}`}
+        //href={`/en${basePath}`}
+        href={localizeHref(`/en${basePath}`)}
         className={`${flagSizeClass} ${getFlagClass("en")}`}
       >
         <Image

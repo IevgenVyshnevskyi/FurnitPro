@@ -3,6 +3,7 @@
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
+import { useLocalizedHref } from "@/hooks/useLocalizedHref"; // ✅ імпорт хуку
 
 const categories = [
   {
@@ -44,6 +45,8 @@ export interface Categorie {
 
 export default function HomePage() {
   const t = useTranslations("HomePage");
+  const localizeHref = useLocalizedHref();
+
   return (
     <div className="bg-gray-0 min-h-screen mb-[-30] sm:mb-[-10] md:mb-[-30]">
       <div className="mx-auto max-w-7xl px-4 pt-12 pb-2 sm:px-6 sm:py-24">
@@ -55,7 +58,8 @@ export default function HomePage() {
             <Link
               key={cat.id}
               /* href={`/category/${cat.category}`} */
-              href={`${cat.category}`}
+              //href={localizeHref("/")}
+              href={localizeHref(`${cat.category}`)}
               className="group relative rounded-2xl bg-white p-4 shadow-md hover:shadow-xl transition-shadow duration-300
                          sm:hover:scale-105 sm:hover:opacity-90 sm:duration-300 transition-transform
                          block"

@@ -18,7 +18,7 @@ import { NextConfig } from "next";
 import createNextIntlPlugin from "next-intl/plugin";
 
 const nextConfig: NextConfig = {
-  /* i18n: {
+ /*  i18n: {
     locales: ["ua", "en"], // перелік мов
     defaultLocale: "ua", // мова за замовчуванням
   }, */

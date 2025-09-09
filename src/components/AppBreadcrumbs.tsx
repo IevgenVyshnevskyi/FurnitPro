@@ -90,7 +90,7 @@ export default function AppBreadcrumbs() {
 
           return (
             <BreadcrumbItem key={`${idx}-${href}`} {...refProp}>
-              <Link href={href}>{label}</Link>
+              <Link href={localizeHref(href)}>{label}</Link>
             </BreadcrumbItem>
           );
         })}

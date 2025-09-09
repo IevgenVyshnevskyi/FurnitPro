@@ -5,11 +5,14 @@ import { useParams } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
+import { useLocalizedHref } from "@/hooks/useLocalizedHref";
 
 export default function CategoryPage() {
   const params = useParams();
-  const t = useTranslations("CategoryPage");
   const category = params.category as string;
+  const t = useTranslations("CategoryPage");
+  const localizeHref = useLocalizedHref();
+
 
   // Фільтруємо продукти за категорією
   const filteredProducts = products.filter((p) => p.category === category);
@@ -25,7 +28,8 @@ export default function CategoryPage() {
           {filteredProducts.map((product) => (
             <Link
               key={product.id}
-              href={`${product.category}/${product.id}`}
+              //href={`${product.category}/${product.id}`}
+              href={localizeHref(`${product.category}/${product.id}`)}
               //href={`/category/${product.category}/${product.id}`}
               className="group relative rounded-2xl bg-white p-4 shadow-md transition-shadow duration-300
                  sm:hover:scale-105 sm:hover:opacity-90

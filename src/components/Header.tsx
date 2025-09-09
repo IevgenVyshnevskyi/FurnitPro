@@ -8,6 +8,7 @@ import logo from "../../public/logo/logo.png";
 import logo1 from "../../public/logo/logo1.jpg";
 import { SiVodafone } from "react-icons/si";
 import kyivstarLogo from "./../../public/images/phones/kyivstar.jpeg"; // ✅ JPEG іконка
+import { useLocalizedHref } from "@/hooks/useLocalizedHref"; // ✅ імпорт хуку
 
 import {
   Dialog,
@@ -117,6 +118,7 @@ const phoneNumbers = [
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const t = useTranslations("Header");
+  const localizeHref = useLocalizedHref();
 
   return (
     <>
@@ -129,7 +131,11 @@ export default function Header() {
           className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8"
         >
           <div className="flex lg:flex-1">
-            <Link href="/" scroll={false} className="-m-1.5 p-1.5">
+            <Link
+              href={localizeHref("/")}
+              scroll={false}
+              className="-m-1.5 p-1.5"
+            >
               <span className="sr-only">Your Company</span>
               <Image
                 src={logo}
@@ -196,7 +202,8 @@ export default function Header() {
                   {callsToAction.map((item) => (
                     <Link
                       key={item.name}
-                      href={item.href}
+                      href={localizeHref(`${item.href}`)}
+                      //href={item.href}
                       className="flex items-center justify-center gap-x-2.5 p-3 text-sm/6 font-semibold text-white hover:bg-gray-700/50"
                     >
                       <item.icon
@@ -211,21 +218,24 @@ export default function Header() {
             </Popover>
 
             <Link
-              href="/features"
+              //href="/features"
+              href={localizeHref("/features")}
               scroll={false}
               className="text-sm/6 font-semibold text-white transition-colors hover:text-gray-400"
             >
               {t("features")}
             </Link>
             <Link
-              href="/marketplace"
+              //href="/marketplace"
+              href={localizeHref("/marketplace")}
               scroll={false}
               className="text-sm/6 font-semibold text-white transition-colors hover:text-gray-400"
             >
               {t("marketplace")}
             </Link>
             <Link
-              href="/company"
+              //href="/company"
+              href={localizeHref("/company")}
               scroll={false}
               className="text-sm/6 font-semibold text-white transition-colors hover:text-gray-400"
             >
@@ -249,7 +259,8 @@ export default function Header() {
                   {phoneNumbers.map((phone) => (
                     <Link
                       key={phone.number}
-                      href={`tel:${phone.number}`}
+                      //href={`tel:${phone.number}`}
+                      href={localizeHref(`tel:${phone.number}`)}
                       className="flex items-center gap-3 rounded-lg px-4 py-2 text-sm font-semibold text-white hover:bg-gray-700"
                     >
                       {phone.icon}
@@ -273,7 +284,11 @@ export default function Header() {
           <div className="fixed inset-0 z-50" />
           <DialogPanel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-gray-900 p-6 sm:max-w-sm sm:ring-1 sm:ring-gray-100/10">
             <div className="flex items-center justify-between">
-              <Link href="/" scroll={false} className="-m-1.5 p-1.5">
+              <Link
+                href={localizeHref("/")}
+                scroll={false}
+                className="-m-1.5 p-1.5"
+              >
                 <span className="sr-only">Your Company</span>
                 <Image
                   src={logo1}
@@ -321,21 +336,24 @@ export default function Header() {
                   </Disclosure>
 
                   <Link
-                    href="/features"
+                    //href="/features"
+                    href={localizeHref("/features")}
                     scroll={false}
                     className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-white hover:bg-white/5"
                   >
                     {t("features")}
                   </Link>
                   <Link
-                    href="/marketplace"
+                    //href="/marketplace"
+                    href={localizeHref("/marketplace")}
                     scroll={false}
                     className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-white hover:bg-white/5"
                   >
                     {t("marketplace")}
                   </Link>
                   <Link
-                    href="/company"
+                    //href="/company"
+                    href={localizeHref("/company")}
                     scroll={false}
                     className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-white hover:bg-white/5"
                   >
@@ -357,7 +375,8 @@ export default function Header() {
                       {phoneNumbers.map((phone) => (
                         <Link
                           key={phone.number}
-                          href={`tel:${phone.number}`}
+                          //href={`tel:${phone.number}`}
+                          href={localizeHref(`tel:${phone.number}`)}
                           className="flex items-center gap-3 rounded-lg py-2 pr-3 pl-6 text-sm font-semibold text-white hover:bg-white/5"
                         >
                           {phone.icon}

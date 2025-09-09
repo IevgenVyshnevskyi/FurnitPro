@@ -7,6 +7,7 @@ import Link from "next/link";
 import { useKeenSlider } from "keen-slider/react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { useTranslations } from "next-intl";
+import { useLocalizedHref } from "@/hooks/useLocalizedHref";
 import Image from "next/image";
 
 export default function ProductPage() {
@@ -14,6 +15,7 @@ export default function ProductPage() {
   const t = useTranslations("ProductPage"); // Ініціалізуємо хук перекладів
   const category = params.category as string;
   const id = params.id as string;
+  const localizeHref = useLocalizedHref();
 
   const product = products.find(
     (p) => p.category === category && p.id.toString() === id
@@ -37,7 +39,10 @@ export default function ProductPage() {
     return (
       <div className="flex flex-col items-center justify-center min-h-screen px-4">
         <h1 className="text-3xl font-bold mb-4">Продукт не знайдено</h1>
-        <Link href="/" className="text-blue-600 hover:underline">
+        <Link
+          href={localizeHref("/")}
+          className="text-blue-600 hover:underline"
+        >
           у {t("backToCatalog")}
         </Link>
       </div>
@@ -170,7 +175,7 @@ export default function ProductPage() {
         {/* Посилання на головну */}
         <div className="mt-6 text-center">
           <Link
-            href="/"
+            href={localizeHref("/")}
             className="inline-block px-6 py-3 text-lg font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors"
           >
             {t("backToCatalog")}

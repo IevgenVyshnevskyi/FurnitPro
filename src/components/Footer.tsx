@@ -6,9 +6,11 @@ import ScrollToTop from "./ScrollToTop";
 import FloatingContactButton from "./FloatingContactButton";
 import FloatingSocials from "./FloatingSocials";
 import { useTranslations } from "next-intl";
+import { useLocalizedHref } from "@/hooks/useLocalizedHref"; // ✅ імпорт хуку
 
 export default function Footer() {
   const t = useTranslations("Footer"); // Ініціалізуємо хук для доступу до перекладів у просторі імен "Footer"
+  const localizeHref = useLocalizedHref();
 
   return (
     <footer className="w-full bg-gray-900 text-gray-300 mt-10">
@@ -28,17 +30,17 @@ export default function Footer() {
           </h2>
           <ul className="mt-2 space-y-2">
             <li>
-              <Link href="/" className="hover:underline">
+              <Link href={localizeHref("/")} className="hover:underline">
                 {t("home")}
               </Link>
             </li>
             <li>
-              <Link href="/privacy" className="hover:underline">
+              <Link href={localizeHref("/privacy")} className="hover:underline">
                 {t("privacyPolicy")}
               </Link>
             </li>
             <li>
-              <Link href="/terms" className="hover:underline">
+              <Link href={localizeHref("/terms")} className="hover:underline">
                 {t("termsOfUse")}
               </Link>
             </li>
@@ -53,22 +55,22 @@ export default function Footer() {
           <ul className="mt-2 space-y-2">
             <li>
               {t("email")}:{" "}
-              <a
+              <Link
                 href="mailto:furnitpro7@gmail.com"
                 className="hover:underline text-blue-600"
               >
                 furnitpro7@gmail.com
-              </a>
+              </Link>
             </li>
 
             <li>
               {t("phone")}:{" "}
-              <a
+              <Link
                 href="tel:+380957989094"
                 className="hover:underline text-blue-600"
               >
                 +38 (095) 798 90 94
-              </a>
+              </Link>
             </li>
 
             <li>

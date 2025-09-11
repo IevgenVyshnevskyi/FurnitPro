@@ -22,14 +22,146 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
+/* export const metadata: Metadata = {
   title: "FurnitPro",
   description: "High-quality furniture hardware",
+}; */
+
+export const metadata: Metadata = {
+  title: {
+    default: "Фурніт-Про", // Фурніт-Про
+    template: "%s | Фурніт-Про", // Фурніт-Про
+  },
+  description: "Онлайн-магазин із локалізацією українською та англійською.",
+  keywords: [
+    "фурнітура",
+    "меблі",
+    "петлі",
+    "напрямні",
+    "магазин",
+    "онлайн",
+    "купити",
+    "товари",
+    "фурнітура",
+    "джуніор механізм з ребром",
+    "джуніор",
+    "механізм",
+    "зачіп посилений для великих меблевих елементів",
+    "зачіп посилений",
+    "зачіп",
+    "металева меблева петля для складних конструкцій",
+    "металева меблева петля",
+    "металева петля",
+    "меблева петля",
+    "петля",
+    "меблевий з’єднувальний куток 106",
+    "меблевий з’єднувальний куток",
+    "меблевий куток",
+    "з’єднувальний куток",
+    "механізм Блюз",
+    "Блюз",
+    "механізм ліжковий гідравлічни",
+    "механізм ліжковий",
+    "механізм гідравлічни",
+    "механізм",
+    "алігатор",
+    "механізм Євро-Книжка",
+    "механізм Книжка",
+    "механізм Євро",
+    "юніор ",
+    "зачіп великий",
+    "механізм Юніор",
+    "зачіп середній",
+    "зачіп слайдер Н-16",
+    "зачіп слайдер",
+    "зачіп Н-16",
+    "Н-16",
+    "зачіп слайдер Н-10",
+    "зачіп слайдер",
+    "зачіп Н-10",
+    "Н-10",
+    "Завіса велика 190",
+    "Завіса велика",
+    "Завіса 190",
+    "Завіса мала",
+    "Куток 106 оцинкований",
+    "Куток 106",
+    "Куток",
+    "Куток 106 оцинкований",
+    "Куток 106 оцинкований",
+    "механізм ліжковий гідравлічний",
+    "механізм ліжковий",
+    "механізм гідравлічний",
+    "меблева фурнітура",
+    "купити меблевий куток",
+    "петля для шафи",
+    "напрямні для ящиків",
+    "інтернет-магазин меблевої фурнітури",
+    "фурнітура Україна",
+    "купити петлю Черкаси",
+    "купити напрямні Черкаси",
+    "купити фурнітуру Черкаси",
+    "купити зачіп Черкаси",
+    "меблева фурнітура",
+    "купити меблеву фурнітуру",
+    "купити меблевий куток",
+    "петля для шафи",
+    "меблеві петлі купити",
+    "напрямні для ящиків",
+    "купити механізм для дивана",
+    "меблева фурнітура Київ",
+    "фурнітура для меблів Україна",
+    "інтернет-магазин меблевої фурнітури",
+    // --- Англійською ---
+    "furniture hardware",
+    "buy furniture fittings",
+    "cabinet hinges",
+    "buy drawer slides",
+    "sofa bed mechanism",
+    "metal furniture corner",
+    "furniture hardware online store",
+    "furniture accessories Ukraine",
+    "hinges for furniture",
+    "furniture connectors",
+  ],
+  authors: [{ name: "Johnny Mnemonic" }],
+  openGraph: {
+    title: "Фурніт-Про",
+    description: "Інтернет-магазин меблевої фурнітури.",
+    url: "https://furnit-pro.vercel.app", // пізніше виправити під реальний домен
+    siteName: "FurntPro",
+    images: [
+      {
+        url: "https://example.com/og/home.jpg", // або "/og/home.jpg", потрібно уточнити !!!
+        width: 1200,
+        height: 630,
+        alt: "Фурніт-Про",
+      },
+    ],
+    locale: "uk_UA",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    site: "@furnitpro",
+    title: "Фурніт-Про",
+    description: "Інтернет-магазин меблевої фурнітури.",
+    images: ["/og/home.jpg"], // або "https://example.com/og/home.jpg", потрібно уточнити !!!
+  },
+  alternates: {
+    canonical: "https://furnit-pro.vercel.app",
+    languages: {
+      uk: "https://furnit-pro.vercel.app/ua",
+      en: "https://furnit-pro.vercel.app/en",
+    },
+  },
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html className="light"/*  style={{color-scheme:"light"}} */ /* className="h-full" */ /* lang={locale} */ /* style={{ background: "var(--foreground)", color: "var(--background)" }} */>
+    <html
+      className="light" /*  style={{color-scheme:"light"}} */ /* className="h-full" */ /* lang={locale} */ /* style={{ background: "var(--foreground)", color: "var(--background)" }} */
+    >
       <head>
         {/* Стандартний favicon */}
         <link rel="icon" href="/favicon.png" />
@@ -63,11 +195,10 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           enableSystem
           disableTransitionOnChange
         > */}
-          <NextIntlClientProvider /* locale={locale} */ /* messages={messages} */
-          >
-            <BackgroundLayout>{children}</BackgroundLayout>
-            {/* <AppBreadcrumbs /> */}
-          </NextIntlClientProvider>
+        <NextIntlClientProvider /* locale={locale} */ /* messages={messages} */>
+          <BackgroundLayout>{children}</BackgroundLayout>
+          {/* <AppBreadcrumbs /> */}
+        </NextIntlClientProvider>
         {/* </ThemeProvider> */}
       </body>
     </html>

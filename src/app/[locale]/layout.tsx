@@ -22,6 +22,12 @@ import { notFound, redirect } from "next/navigation";
 export const metadata: Metadata = {
   title: "FurnitPro",
   description: "High-quality furniture hardware",
+  alternates: {
+    languages: {
+      uk: "https://furnit-pro.vercel.app/ua",
+      en: "https://furnit-pro.vercel.app/en",
+    },
+  },
 };
 
 export default async function RootLayout({

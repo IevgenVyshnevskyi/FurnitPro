@@ -11,7 +11,7 @@ const categories = [
     key: "mechanisms",
     category: "mechanisms",
     imageSrc: "/images/products/1.mechanism-junior-strong/item2.jpg",
-    imageAlt: "Junior mechanism with rib",
+    imageAlt: "Джуніор механізм з ребром.",
   },
   {
     id: 1,

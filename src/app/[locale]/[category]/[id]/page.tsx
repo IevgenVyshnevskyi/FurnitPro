@@ -1,4 +1,3 @@
-// src/app/[locale]/[category]/[id]/page.tsx
 "use client";
 
 import { useState } from "react";
@@ -9,8 +8,8 @@ import { useKeenSlider } from "keen-slider/react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { useTranslations } from "next-intl";
 import { useLocalizedHref } from "@/hooks/useLocalizedHref";
-import Image from "next/image";
 import ProductSchema from "./ProductSchema";
+import ProductImageZoom from "@/components/ProductImageZoom";
 
 export default function ProductPage() {
   const params = useParams();
@@ -71,17 +70,12 @@ export default function ProductPage() {
                   >
                     {images.map((src, idx) => (
                       <div key={idx} className="keen-slider__slide">
-                        <Image
-                          src={src!}
-                          alt={product.imageAlt}
-                          width={500}
-                          height={500}
-                          className="w-full object-cover rounded-xl"
-                        />
+                        <ProductImageZoom src={src!} alt={product.imageAlt} />
                       </div>
                     ))}
                   </div>
 
+                  {/* Кнопки навігації */}
                   <button
                     onClick={() => instanceRef.current?.prev()}
                     className="absolute left-3 bg-white/80 hover:bg-white text-gray-700 p-3 rounded-full shadow-md
@@ -98,6 +92,7 @@ export default function ProductPage() {
                     <FaChevronRight />
                   </button>
 
+                  {/* Індикатори слайдів */}
                   <div className="absolute bottom-3 w-full flex justify-center gap-2">
                     {images.map((_, idx) => (
                       <button
@@ -112,13 +107,7 @@ export default function ProductPage() {
                 </div>
               ) : (
                 images.length === 1 && (
-                  <Image
-                    src={images[0]!}
-                    alt={product.imageAlt}
-                    width={500}
-                    height={500}
-                    className="w-full rounded-xl shadow-md"
-                  />
+                  <ProductImageZoom src={images[0]!} alt={product.imageAlt} />
                 )
               )}
             </div>

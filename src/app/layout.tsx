@@ -27,12 +27,17 @@ const geistMono = Geist_Mono({
   description: "High-quality furniture hardware",
 }; */
 
+// ✅ Підтягуємо URL із .env
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: {
     default: "Фурніт-Про", // Фурніт-Про
     template: "%s | Фурніт-Про", // Фурніт-Про
   },
-  description: "Онлайн-магазин із локалізацією українською та англійською.",
+  description:
+    "Магазин меблевої фурнітури із локалізацією українською та англійською.",
   keywords: [
     "фурнітура",
     "меблі",
@@ -124,15 +129,15 @@ export const metadata: Metadata = {
     "hinges for furniture",
     "furniture connectors",
   ],
-  authors: [{ name: "Johnny Mnemonic" }],
+  authors: [{ name: "Ievgen Vyshnevskyi" }],
   openGraph: {
     title: "Фурніт-Про",
-    description: "Інтернет-магазин меблевої фурнітури.",
-    url: "https://furnit-pro.vercel.app", // пізніше виправити під реальний домен
-    siteName: "FurntPro",
+    description: "Магазин меблевої фурнітури.",
+    url: siteUrl, // ✅ тут автоматично буде dev або prod
+    siteName: "Фурніт-Про",
     images: [
       {
-        url: "https://example.com/og/home.jpg", // або "/og/home.jpg", потрібно уточнити !!!
+        url: "/og/home.jpg", // ✅ тепер можна залишити відносний шлях
         width: 1200,
         height: 630,
         alt: "Фурніт-Про",
@@ -145,14 +150,14 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     site: "@furnitpro",
     title: "Фурніт-Про",
-    description: "Інтернет-магазин меблевої фурнітури.",
-    images: ["/og/home.jpg"], // або "https://example.com/og/home.jpg", потрібно уточнити !!!
+    description: "Магазин меблевої фурнітури.",
+    images: ["/og/home.jpg"], // ✅ теж відносний шлях
   },
   alternates: {
     canonical: "https://furnit-pro.vercel.app",
     languages: {
-      uk: "https://furnit-pro.vercel.app/ua",
-      en: "https://furnit-pro.vercel.app/en",
+      uk: `${siteUrl}/ua`,
+      en: `${siteUrl}/en`,
     },
   },
 };

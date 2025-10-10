@@ -12,12 +12,10 @@ interface ProductImageZoomProps {
 export default function ProductImageZoom({ src, alt }: ProductImageZoomProps) {
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // --- Desktop hover zoom ---
   const [isDesktop, setIsDesktop] = useState(true);
   const [isHoverZoom, setIsHoverZoom] = useState(false);
   const [zoomPos, setZoomPos] = useState({ x: 50, y: 50 });
 
-  // --- Mobile fullscreen zoom ---
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [scale, setScale] = useState(1);
   const [translate, setTranslate] = useState({ x: 0, y: 0 });
@@ -28,7 +26,7 @@ export default function ProductImageZoom({ src, alt }: ProductImageZoomProps) {
     setIsDesktop(!window.matchMedia("(pointer: coarse)").matches);
   }, []);
 
-  // --- Hover zoom ---
+  // Desktop hover zoom
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!containerRef.current) return;
     const rect = containerRef.current.getBoundingClientRect();
@@ -37,10 +35,11 @@ export default function ProductImageZoom({ src, alt }: ProductImageZoomProps) {
     setZoomPos({ x, y });
   };
 
-  // --- Mobile double tap ---
-  const handleTouchStart = (e: React.TouchEvent) => {
+  // --- Double tap to fullscreen ---
+  const handleTouchEndTap = (e: React.TouchEvent) => {
     const now = Date.now();
     if (now - doubleTapTime < 300) {
+      e.preventDefault();
       setIsFullscreen(true);
     }
     setDoubleTapTime(now);
@@ -49,7 +48,9 @@ export default function ProductImageZoom({ src, alt }: ProductImageZoomProps) {
   // --- Pinch zoom / pan ---
   const handleTouchMove = (e: React.TouchEvent) => {
     if (e.touches.length === 2) {
-      const [t1, t2] = e.touches;
+      e.preventDefault();
+      const touches = Array.from(e.touches) as [Touch, Touch];
+      const [t1, t2] = touches;
       const distance = Math.hypot(
         t2.clientX - t1.clientX,
         t2.clientY - t1.clientY
@@ -72,7 +73,6 @@ export default function ProductImageZoom({ src, alt }: ProductImageZoomProps) {
 
   const handleTouchEnd = () => setLastDistance(0);
 
-  // --- Close fullscreen ---
   const handleBackgroundClick = (e: React.MouseEvent) => {
     if (e.target === e.currentTarget) {
       setIsFullscreen(false);
@@ -81,18 +81,30 @@ export default function ProductImageZoom({ src, alt }: ProductImageZoomProps) {
     }
   };
 
+  // --- Prevent browser pinch zoom globally ---
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    const disableNativeZoom = (e: TouchEvent) => {
+      if (e.touches.length === 2) e.preventDefault();
+    };
+    el.addEventListener("touchmove", disableNativeZoom, { passive: false });
+    return () => el.removeEventListener("touchmove", disableNativeZoom);
+  }, []);
+
   return (
     <>
       {/* Основне зображення */}
       <div
         ref={containerRef}
-        className="relative w-full h-[400px] overflow-hidden rounded-xl cursor-zoom-in bg-white shadow-md"
+        className="relative w-full h-[400px] overflow-hidden rounded-xl bg-white shadow-md"
+        style={{ touchAction: "manipulation" }}
         onMouseEnter={() => isDesktop && setIsHoverZoom(true)}
         onMouseLeave={() => isDesktop && setIsHoverZoom(false)}
         onMouseMove={(e) => isDesktop && handleMouseMove(e)}
-        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEndTap}
         onTouchMove={handleTouchMove}
-        onTouchEnd={handleTouchEnd}
+        onTouchEndCapture={handleTouchEnd}
       >
         <Image
           src={src}
@@ -121,8 +133,7 @@ export default function ProductImageZoom({ src, alt }: ProductImageZoomProps) {
             onClick={handleBackgroundClick}
           >
             <div
-              ref={containerRef}
-              className="relative w-full h-full overflow-hidden touch-pan-y"
+              className="relative w-full h-full overflow-hidden"
               style={{ touchAction: "none" }}
               onTouchMove={handleTouchMove}
               onTouchEnd={handleTouchEnd}

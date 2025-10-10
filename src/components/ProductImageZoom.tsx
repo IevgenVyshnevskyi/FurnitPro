@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
@@ -9,14 +9,24 @@ import { X } from "lucide-react";
 interface ProductImageZoomProps {
   src: string;
   alt?: string;
+  resetSignal?: number; // сигнал для скидання zoom при зміні слайда
 }
 
-export default function ProductImageZoom({ src, alt }: ProductImageZoomProps) {
+export default function ProductImageZoom({
+  src,
+  alt,
+  resetSignal,
+}: ProductImageZoomProps) {
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [thumbnailRect, setThumbnailRect] = useState<DOMRect | null>(null);
   const [imageLoaded, setImageLoaded] = useState(false);
 
-  // Відкриття fullscreen з анімацією
+  // --- Скидання стану при зміні resetSignal ---
+  useEffect(() => {
+    setIsFullscreen(false);
+    setImageLoaded(false);
+  }, [resetSignal]);
+
   const handleOpen = (e: React.MouseEvent) => {
     const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
     setThumbnailRect(rect);
@@ -30,7 +40,7 @@ export default function ProductImageZoom({ src, alt }: ProductImageZoomProps) {
 
   return (
     <>
-      {/* Мінімальне зображення */}
+      {/* Thumbnail */}
       <div
         className="relative w-full h-[400px] overflow-hidden rounded-xl bg-white shadow-md cursor-zoom-in"
         onClick={handleOpen}
@@ -44,7 +54,7 @@ export default function ProductImageZoom({ src, alt }: ProductImageZoomProps) {
         />
       </div>
 
-      {/* Fullscreen режим */}
+      {/* Fullscreen */}
       <AnimatePresence>
         {isFullscreen && (
           <motion.div
@@ -54,7 +64,7 @@ export default function ProductImageZoom({ src, alt }: ProductImageZoomProps) {
             exit={{ opacity: 0 }}
             onClick={handleClose}
           >
-            {/* Кнопка “Закрити” */}
+            {/* Close button */}
             <button
               onClick={handleClose}
               className="absolute top-4 right-4 z-50 text-white bg-black/40 hover:bg-black/60 p-2 rounded-full transition-all"
@@ -63,7 +73,7 @@ export default function ProductImageZoom({ src, alt }: ProductImageZoomProps) {
               <X size={24} />
             </button>
 
-            {/* Анімація масштабування з місця thumbnail */}
+            {/* Thumbnail animation */}
             <motion.div
               className="relative w-full h-full flex items-center justify-center"
               initial={{
@@ -93,7 +103,6 @@ export default function ProductImageZoom({ src, alt }: ProductImageZoomProps) {
                 transition: { duration: 0.2 },
               }}
             >
-              {/* Zoomable область */}
               <TransformWrapper
                 initialScale={1}
                 minScale={1}

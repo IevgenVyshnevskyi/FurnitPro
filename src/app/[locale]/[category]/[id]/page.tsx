@@ -27,6 +27,8 @@ export default function ProductPage() {
     : [];
 
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [resetZoomSignal, setResetZoomSignal] = useState(0);
+
   const [sliderRef, instanceRef] = useKeenSlider<HTMLDivElement>({
     loop: images.length > 1,
     slideChanged(slider) {
@@ -50,7 +52,6 @@ export default function ProductPage() {
 
   return (
     <>
-      {/* JSON-LD Schema */}
       <ProductSchema product={product} />
 
       <div className="flex flex-col items-center justify-center min-h-screen px-4 pt-10 pb-0">
@@ -70,34 +71,45 @@ export default function ProductPage() {
                   >
                     {images.map((src, idx) => (
                       <div key={idx} className="keen-slider__slide">
-                        <ProductImageZoom src={src!} alt={product.imageAlt} />
+                        <ProductImageZoom
+                          src={src!}
+                          alt={product.imageAlt}
+                          resetSignal={resetZoomSignal}
+                        />
                       </div>
                     ))}
                   </div>
 
                   {/* Кнопки навігації */}
                   <button
-                    onClick={() => instanceRef.current?.prev()}
-                    className="absolute left-3 bg-white/80 hover:bg-white text-gray-700 p-3 rounded-full shadow-md
-                    top-1/2 -translate-y-1/2 transition-all"
+                    onClick={() => {
+                      instanceRef.current?.prev();
+                      setResetZoomSignal((prev) => prev + 1);
+                    }}
+                    className="absolute left-3 bg-white/80 hover:bg-white text-gray-700 p-3 rounded-full shadow-md top-1/2 -translate-y-1/2 transition-all"
                   >
                     <FaChevronLeft />
                   </button>
 
                   <button
-                    onClick={() => instanceRef.current?.next()}
-                    className="absolute right-3 bg-white/80 hover:bg-white text-gray-700 p-3 rounded-full shadow-md
-                    top-1/2 -translate-y-1/2 transition-all"
+                    onClick={() => {
+                      instanceRef.current?.next();
+                      setResetZoomSignal((prev) => prev + 1);
+                    }}
+                    className="absolute right-3 bg-white/80 hover:bg-white text-gray-700 p-3 rounded-full shadow-md top-1/2 -translate-y-1/2 transition-all"
                   >
                     <FaChevronRight />
                   </button>
 
-                  {/* Індикатори слайдів */}
+                  {/* Індикатори */}
                   <div className="absolute bottom-3 w-full flex justify-center gap-2">
                     {images.map((_, idx) => (
                       <button
                         key={idx}
-                        onClick={() => instanceRef.current?.moveToIdx(idx)}
+                        onClick={() => {
+                          instanceRef.current?.moveToIdx(idx);
+                          setResetZoomSignal((prev) => prev + 1);
+                        }}
                         className={`w-3 h-3 rounded-full transition ${
                           currentSlide === idx ? "bg-blue-600" : "bg-gray-300"
                         }`}
@@ -107,7 +119,11 @@ export default function ProductPage() {
                 </div>
               ) : (
                 images.length === 1 && (
-                  <ProductImageZoom src={images[0]!} alt={product.imageAlt} />
+                  <ProductImageZoom
+                    src={images[0]!}
+                    alt={product.imageAlt}
+                    resetSignal={resetZoomSignal}
+                  />
                 )
               )}
             </div>
@@ -119,37 +135,6 @@ export default function ProductPage() {
                   {t(`prices.${product.name}`)}
                 </p>
               </div>
-
-              <div className="space-y-2 md:space-y-3">
-                {product.thickness && (
-                  <div className="flex justify-between items-center text-gray-700 text-sm md:text-base">
-                    <span className="font-semibold text-gray-900">
-                      {t("thickness")}:
-                    </span>
-                    <span>{product.thickness}</span>
-                  </div>
-                )}
-
-                {product.size && (
-                  <div className="flex justify-between items-center text-gray-700 text-sm md:text-base">
-                    <span className="font-semibold text-gray-900">
-                      {t("size")}:
-                    </span>
-                    <span>{product.size}</span>
-                  </div>
-                )}
-              </div>
-
-              {product.description && (
-                <div className="mt-4 md:mt-6 pt-2 md:pt-4 border-t border-gray-200">
-                  <h3 className="text-lg md:text-xl font-bold mb-1 md:mb-2 text-gray-900">
-                    {t("description")}
-                  </h3>
-                  <p className="text-sm md:text-base text-gray-700">
-                    {t(`descriptions.${product.name}`)}
-                  </p>
-                </div>
-              )}
             </div>
           </div>
 

@@ -1,8 +1,10 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
+import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
+import { X } from "lucide-react";
 
 interface ProductImageZoomProps {
   src: string;
@@ -10,119 +12,39 @@ interface ProductImageZoomProps {
 }
 
 export default function ProductImageZoom({ src, alt }: ProductImageZoomProps) {
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  const [isDesktop, setIsDesktop] = useState(true);
-  const [isHoverZoom, setIsHoverZoom] = useState(false);
-  const [zoomPos, setZoomPos] = useState({ x: 50, y: 50 });
-
   const [isFullscreen, setIsFullscreen] = useState(false);
-  const [scale, setScale] = useState(1);
-  const [translate, setTranslate] = useState({ x: 0, y: 0 });
-  const [lastDistance, setLastDistance] = useState(0);
-  const [doubleTapTime, setDoubleTapTime] = useState(0);
+  const [thumbnailRect, setThumbnailRect] = useState<DOMRect | null>(null);
+  const [imageLoaded, setImageLoaded] = useState(false);
 
-  useEffect(() => {
-    setIsDesktop(!window.matchMedia("(pointer: coarse)").matches);
-  }, []);
-
-  // Desktop hover zoom
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!containerRef.current) return;
-    const rect = containerRef.current.getBoundingClientRect();
-    const x = ((e.clientX - rect.left) / rect.width) * 100;
-    const y = ((e.clientY - rect.top) / rect.height) * 100;
-    setZoomPos({ x, y });
+  // Відкриття fullscreen з анімацією
+  const handleOpen = (e: React.MouseEvent) => {
+    const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
+    setThumbnailRect(rect);
+    setIsFullscreen(true);
   };
 
-  // --- Double tap to fullscreen ---
-  const handleTouchEndTap = (e: React.TouchEvent) => {
-    const now = Date.now();
-    if (now - doubleTapTime < 300) {
-      e.preventDefault();
-      setIsFullscreen(true);
-    }
-    setDoubleTapTime(now);
+  const handleClose = () => {
+    setIsFullscreen(false);
+    setImageLoaded(false);
   };
-
-  // --- Pinch zoom / pan ---
-  const handleTouchMove = (e: React.TouchEvent) => {
-    if (e.touches.length === 2) {
-      e.preventDefault();
-      const touches = Array.from(e.touches) as [Touch, Touch];
-      const [t1, t2] = touches;
-      const distance = Math.hypot(
-        t2.clientX - t1.clientX,
-        t2.clientY - t1.clientY
-      );
-      if (lastDistance) {
-        const delta = distance / lastDistance;
-        setScale((prev) => Math.min(Math.max(prev * delta, 1), 4));
-      }
-      setLastDistance(distance);
-    } else if (e.touches.length === 1 && scale > 1) {
-      const touch = e.touches[0];
-      const rect = containerRef.current?.getBoundingClientRect();
-      if (rect) {
-        const offsetX = touch.clientX - rect.width / 2;
-        const offsetY = touch.clientY - rect.height / 2;
-        setTranslate({ x: offsetX / 3, y: offsetY / 3 });
-      }
-    }
-  };
-
-  const handleTouchEnd = () => setLastDistance(0);
-
-  const handleBackgroundClick = (e: React.MouseEvent) => {
-    if (e.target === e.currentTarget) {
-      setIsFullscreen(false);
-      setScale(1);
-      setTranslate({ x: 0, y: 0 });
-    }
-  };
-
-  // --- Prevent browser pinch zoom globally ---
-  useEffect(() => {
-    const el = containerRef.current;
-    if (!el) return;
-    const disableNativeZoom = (e: TouchEvent) => {
-      if (e.touches.length === 2) e.preventDefault();
-    };
-    el.addEventListener("touchmove", disableNativeZoom, { passive: false });
-    return () => el.removeEventListener("touchmove", disableNativeZoom);
-  }, []);
 
   return (
     <>
-      {/* Основне зображення */}
+      {/* Мінімальне зображення */}
       <div
-        ref={containerRef}
-        className="relative w-full h-[400px] overflow-hidden rounded-xl bg-white shadow-md"
-        style={{ touchAction: "manipulation" }}
-        onMouseEnter={() => isDesktop && setIsHoverZoom(true)}
-        onMouseLeave={() => isDesktop && setIsHoverZoom(false)}
-        onMouseMove={(e) => isDesktop && handleMouseMove(e)}
-        onTouchEnd={handleTouchEndTap}
-        onTouchMove={handleTouchMove}
-        onTouchEndCapture={handleTouchEnd}
+        className="relative w-full h-[400px] overflow-hidden rounded-xl bg-white shadow-md cursor-zoom-in"
+        onClick={handleOpen}
       >
         <Image
           src={src}
           alt={alt || "Product image"}
           fill
-          className={`object-contain transition-transform duration-200 ${
-            isHoverZoom && isDesktop ? "scale-150" : "scale-100"
-          }`}
-          style={
-            isHoverZoom && isDesktop
-              ? { transformOrigin: `${zoomPos.x}% ${zoomPos.y}%` }
-              : {}
-          }
+          className="object-contain transition-transform duration-200"
           priority
         />
       </div>
 
-      {/* Fullscreen Mobile Lightbox */}
+      {/* Fullscreen режим */}
       <AnimatePresence>
         {isFullscreen && (
           <motion.div
@@ -130,26 +52,74 @@ export default function ProductImageZoom({ src, alt }: ProductImageZoomProps) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            onClick={handleBackgroundClick}
+            onClick={handleClose}
           >
-            <div
-              className="relative w-full h-full overflow-hidden"
-              style={{ touchAction: "none" }}
-              onTouchMove={handleTouchMove}
-              onTouchEnd={handleTouchEnd}
+            {/* Кнопка “Закрити” */}
+            <button
+              onClick={handleClose}
+              className="absolute top-4 right-4 z-50 text-white bg-black/40 hover:bg-black/60 p-2 rounded-full transition-all"
+              aria-label="Закрити"
             >
-              <Image
-                src={src}
-                alt={alt || "Fullscreen product image"}
-                fill
-                className="object-contain select-none"
-                style={{
-                  transform: `scale(${scale}) translate(${translate.x}px, ${translate.y}px)`,
-                  transition: "transform 0.1s ease-out",
-                }}
-                priority
-              />
-            </div>
+              <X size={24} />
+            </button>
+
+            {/* Анімація масштабування з місця thumbnail */}
+            <motion.div
+              className="relative w-full h-full flex items-center justify-center"
+              initial={{
+                x: thumbnailRect
+                  ? thumbnailRect.left +
+                    thumbnailRect.width / 2 -
+                    window.innerWidth / 2
+                  : 0,
+                y: thumbnailRect
+                  ? thumbnailRect.top +
+                    thumbnailRect.height / 2 -
+                    window.innerHeight / 2
+                  : 0,
+                scale: thumbnailRect
+                  ? thumbnailRect.width / window.innerWidth
+                  : 0.5,
+              }}
+              animate={{
+                x: 0,
+                y: 0,
+                scale: 1,
+                transition: { type: "spring", stiffness: 120, damping: 15 },
+              }}
+              exit={{
+                opacity: 0,
+                scale: 0.9,
+                transition: { duration: 0.2 },
+              }}
+            >
+              {/* Zoomable область */}
+              <TransformWrapper
+                initialScale={1}
+                minScale={1}
+                maxScale={4}
+                doubleClick={{ mode: "toggle" }}
+                pinch={{ step: 0.1 }}
+                wheel={{ disabled: true }}
+                panning={{ velocityDisabled: true }}
+              >
+                <TransformComponent>
+                  <div className="relative w-screen h-screen flex items-center justify-center">
+                    <Image
+                      src={src}
+                      alt={alt || "Fullscreen product image"}
+                      fill
+                      className={`object-contain select-none transition-opacity duration-300 ${
+                        imageLoaded ? "opacity-100" : "opacity-0"
+                      }`}
+                      draggable={false}
+                      priority
+                      onLoad={() => setImageLoaded(true)}
+                    />
+                  </div>
+                </TransformComponent>
+              </TransformWrapper>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>

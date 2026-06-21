@@ -35,7 +35,7 @@ const products: Product[] = [
     description:
       "Підсилений варіант механізму Юніор з ребром жорсткості. Для важчих конструкцій.",
   },
-  /*     {
+  /* {
     id: 1,
     name: "Junior mechanism with rib",
     href: "/mechanism-junior-strong",
@@ -51,7 +51,7 @@ const products: Product[] = [
   }, */
   {
     id: 2,
-    name: "Mеханізм Юніор",
+    name: "Механізм Юніор", // ✅ Виправлено: тепер тут кирилична "М"
     href: "#",
     price: "38.00 грн./шт.",
     imageSrc: {
@@ -66,7 +66,7 @@ const products: Product[] = [
     description:
       "Меблевий підйомний механізм без ребра жорсткості. Підходить для середніх навантажень.",
   },
-  /*     {
+  /* {
     id: 2,
     name: "Mechanism Junior",
     href: "#",
@@ -98,7 +98,7 @@ const products: Product[] = [
     description:
       "Посилений зачіп для великих меблевих елементів. Виготовлений з оцинкованої сталі. Товщина: 1,5 мм.",
   },
-  /*    {
+  /* {
     id: 3,
     name: "Big hook",
     href: "#",
@@ -131,7 +131,7 @@ const products: Product[] = [
     description:
       "Призначений для фіксації меблевих елементів. Матеріал: оцинкована сталь. Товщина: 1,5 мм.",
   },
-  /*     {
+  /* {
     id: 4,
     name: "Medium hook",
     href: "#",
@@ -163,7 +163,7 @@ const products: Product[] = [
     type: "Слайдер Н-16",
     description: "Зачіп типу слайдер для меблевих направляючих. Висота: 16 мм.",
   },
-  /*     {
+  /* {
     id: 5,
     name: "Hook slider Н-16",
     href: "#",
@@ -195,7 +195,7 @@ const products: Product[] = [
     type: "Слайдер Н-10",
     description: "Компактний зачіп для направляючих. Висота: 10 мм.",
   },
-  /*     {
+  /* {
     id: 6,
     name: "Hook slider Н-10",
     href: "#",
@@ -228,7 +228,7 @@ const products: Product[] = [
     description:
       "Металева меблева петля для складних конструкцій. Розмір: 180×40×2,5 мм. Матеріал: сталь.",
   },
-  /*     {
+  /* {
     id: 7,
     name: "Large curtain 190",
     href: "#",
@@ -261,7 +261,7 @@ const products: Product[] = [
     description:
       "Компактна меблева петля для точного відкривання. Розмір: 90×40×1,8 мм. Матеріал: сталь.",
   },
-  /*     {
+  /* {
     id: 8,
     name: "Large curtain 190",
     href: "#",
@@ -294,7 +294,7 @@ const products: Product[] = [
     description:
       "Меблевий з’єднувальний куток 106. Матеріал: оцинкована сталь. Розмір: 33×34×1,5 мм",
   },
-  /*     {
+  /* {
     id: 9,
     name: "Corner 106 galvanized",
     href: "#",
@@ -327,7 +327,7 @@ const products: Product[] = [
     description:
       "Пружинний механізм для м’яких меблів. Використовується у розкладних диванах.",
   },
-  /*       {
+  /* {
     id: 10,
     name: "Mechanism Blues",
     href: "#",
@@ -358,7 +358,7 @@ const products: Product[] = [
     description:
       "Підйомний гідравлічний механізм для ліжок. Зручний у щоденному використанні.",
   },
-  /*     {
+  /* {
     id: 11,
     name: "Hydraulic bed mechanism",
     href: "#",
@@ -389,7 +389,7 @@ const products: Product[] = [
     description:
       "Механізм трансформації меблів білого кольору. Підходить для компактних конструкцій. Колір: білий.",
   },
-  /*   {
+  /* {
     id: 12,
     name: " Mechanism Alligator",
     href: "#",
@@ -420,7 +420,7 @@ const products: Product[] = [
     description:
       "Механізм для трансформації диванів у положення 'ліжко'. Колір: білий.",
   },
-  /*     {
+  /* {
     id: 13,
     name: "Mechanism Euro-Book",
     href: "#",

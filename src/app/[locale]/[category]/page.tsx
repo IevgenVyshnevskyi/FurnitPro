@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import products from "../../../../public/data/products";
 import CategoryPageClient from "./CategoryPageClient";
 
+// ✅ 1. Оновлено Props (додано Promise)
 type Props = {
-  params: { category: string; locale?: string };
+  params: Promise<{ category: string; locale?: string }>;
 };
 
 // 🔹 Базовий URL сайту з .env
@@ -11,8 +12,8 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
 
 // ✅ Генерація метаданих на сервері
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const category = params.category;
-  const locale = params.locale || "uk";
+  // ✅ 2. Додано await та деструктуризацію
+  const { category, locale = "uk" } = await params;
 
   const categoryProducts = products.filter((p) => p.category === category);
 
@@ -53,8 +54,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 // ✅ Server Component передає category у Client Component
-export default function CategoryPage({ params }: Props) {
-  return (
-    <CategoryPageClient category={params.category} locale={params.locale} />
-  );
+// ✅ 3. Додано async до компонента
+export default async function CategoryPage({ params }: Props) {
+  // ✅ 4. Додано await для отримання параметрів
+  const { category, locale } = await params;
+
+  return <CategoryPageClient category={category} locale={locale} />;
 }

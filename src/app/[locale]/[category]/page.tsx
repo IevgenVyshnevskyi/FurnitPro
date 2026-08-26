@@ -1,46 +1,40 @@
 import type { Metadata } from "next";
-import products from "../../../../public/data/products";
+import { getTranslations } from "next-intl/server";
+import allProducts from "@/../public/data/products";
+import { Product } from "@/types";
 import CategoryPageClient from "./CategoryPageClient";
 
-// ✅ 1. Оновлено Props (додано Promise)
 type Props = {
-  params: Promise<{ category: string; locale?: string }>;
+  params: Promise<{ locale: string; category: string }>;
 };
 
-// 🔹 Базовий URL сайту з .env
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
 
-// ✅ Генерація метаданих на сервері
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  // ✅ 2. Додано await та деструктуризацію
-  const { category, locale = "uk" } = await params;
+  const { category, locale } = await params;
+  const tCategory = await getTranslations({ locale, namespace: "CategoryPage" });
 
-  const categoryProducts = products.filter((p) => p.category === category);
-
-  if (!categoryProducts.length) {
+  if (!tCategory.has(`categories.${category}`)) {
     return {
-      title: `Категорія не знайдена — Фурніт-Про`,
-      description: `Сторінка категорії не знайдена`,
+      title: "Категорію не знайдено — Фурніт-Про",
+      description: "Сторінка категорії не знайдена.",
     };
   }
 
+  const categoryName = tCategory(`categories.${category}`);
+  const title = `${categoryName} — Фурніт-Про`;
+  const description = `Купити меблеву фурнітуру у категорії ${categoryName}`;
+
   return {
-    title: `Категорія: ${category}`,
-    description: `Купити меблеву фурнітуру у категорії ${category}`,
+    metadataBase: new URL(siteUrl),
+    title,
+    description,
     openGraph: {
-      title: `Категорія: ${category}`,
-      description: `Купити меблеву фурнітуру у категорії ${category}`,
+      title,
+      description,
       url: `${siteUrl}/${locale}/${category}`,
       siteName: "Фурніт-Про",
-      images: [
-        {
-          url: `${siteUrl}/og/categories/${category}.jpg`,
-          width: 1200,
-          height: 630,
-          alt: `Категорія ${category}`,
-        },
-      ],
-      locale: locale === "uk" ? "uk_UA" : "en_US",
+      locale: locale === "ua" ? "uk_UA" : "en_US",
       type: "website",
     },
     alternates: {
@@ -53,11 +47,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-// ✅ Server Component передає category у Client Component
-// ✅ 3. Додано async до компонента
 export default async function CategoryPage({ params }: Props) {
-  // ✅ 4. Додано await для отримання параметрів
   const { category, locale } = await params;
+  const t = await getTranslations({ locale, namespace: "ProductPage" });
 
-  return <CategoryPageClient category={category} locale={locale} />;
+  const products: Product[] = allProducts
+    .filter((p) => p.category === category)
+    .map((p) => ({
+      ...p,
+      name: t.has(`products.${p.name}`) ? t(`products.${p.name}`) : p.name,
+      price: t.has(`prices.${p.name}`) ? t(`prices.${p.name}`) : p.price,
+    }));
+
+  return <CategoryPageClient products={products} category={category} />;
 }

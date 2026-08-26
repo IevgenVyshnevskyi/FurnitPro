@@ -6,20 +6,15 @@ import { usePathname, useParams } from "next/navigation";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { useLocalizedHref } from "@/hooks/useLocalizedHref";
-
-interface Product {
-  id: number;
-  name: string;
-  category: string;
-}
+import allProducts from "@/../public/data/products";
 
 export default function AppBreadcrumbs() {
   const pathname = usePathname();
   const { locale } = useParams(); // "ua" або "en"
   const t = useTranslations("Breadcrumbs");
+  const tProduct = useTranslations("ProductPage");
   const localizeHref = useLocalizedHref();
 
-  const [products, setProducts] = useState<Product[]>([]);
   const [isMobile, setIsMobile] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const lastItemRef = useRef<HTMLLIElement>(null);
@@ -32,14 +27,6 @@ export default function AppBreadcrumbs() {
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
-  // Завантаження продуктів для вибраної мови
-  useEffect(() => {
-    fetch(`/data/product.${locale}.json`)
-      .then((res) => res.json())
-      .then((data: Product[]) => setProducts(data))
-      .catch((err) => console.error("Failed to load products:", err));
-  }, [locale]);
-
   // Розбиваємо шлях і прибираємо перший сегмент (locale)
   let segments = pathname.split("/").filter(Boolean);
   if (segments[0] === locale) {
@@ -51,7 +38,7 @@ export default function AppBreadcrumbs() {
     if (isMobile && lastItemRef.current && containerRef.current) {
       lastItemRef.current.scrollIntoView({ behavior: "smooth", inline: "end" });
     }
-  }, [segments, products, isMobile]);
+  }, [segments, isMobile]);
 
   return (
     <div
@@ -78,11 +65,15 @@ export default function AppBreadcrumbs() {
           const href = localizeHref(rawHref); // ✅ локалізація один раз
           let label: string = seg;
 
-          // Якщо це productId → шукаємо в JSON
+          // Якщо це productId → шукаємо серед локальних товарів
           const isProductId = idx === segments.length - 1 && /^\d+$/.test(seg);
           if (isProductId) {
-            const product = products.find((p) => p.id.toString() === seg);
-            label = product ? product.name : seg;
+            const product = allProducts.find((p) => p.id.toString() === seg);
+            label = product
+              ? tProduct.has(`products.${product.name}`)
+                ? tProduct(`products.${product.name}`)
+                : product.name
+              : seg;
           } else {
             // Інакше переклад сегмента
             label = t(seg, { default: seg });

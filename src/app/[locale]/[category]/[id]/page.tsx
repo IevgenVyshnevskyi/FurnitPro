@@ -1,153 +1,87 @@
-"use client";
+import type { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
+import allProducts from "@/../public/data/products";
+import { Product } from "@/types";
+import ProductPageClient from "./ProductPageClient";
 
-import { useState } from "react";
-import products from "@/../public/data/products";
-import { useParams } from "next/navigation";
-import Link from "next/link";
-import { useKeenSlider } from "keen-slider/react";
-import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
-import { useTranslations } from "next-intl";
-import { useLocalizedHref } from "@/hooks/useLocalizedHref";
-import ProductSchema from "./ProductSchema";
-import ProductImageZoom from "@/components/ProductImageZoom";
+type Props = {
+  params: Promise<{ locale: string; category: string; id: string }>;
+};
 
-export default function ProductPage() {
-  const params = useParams();
-  const t = useTranslations("ProductPage");
-  const category = params.category as string;
-  const id = params.id as string;
-  const localizeHref = useLocalizedHref();
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
 
-  const product = products.find(
+function findProduct(category: string, id: string) {
+  return allProducts.find(
     (p) => p.category === category && p.id.toString() === id
   );
+}
 
-  const images = product
-    ? [product.imageSrc.image, product.imageSrc.drawing].filter(Boolean)
-    : [];
-
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [resetZoomSignal, setResetZoomSignal] = useState(0);
-
-  const [sliderRef, instanceRef] = useKeenSlider<HTMLDivElement>({
-    loop: images.length > 1,
-    slideChanged(slider) {
-      setCurrentSlide(slider.track.details.rel);
-    },
-  });
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { category, id, locale } = await params;
+  const product = findProduct(category, id);
+  const t = await getTranslations({ locale, namespace: "ProductPage" });
 
   if (!product) {
-    return (
-      <div className="flex flex-col items-center justify-center min-h-screen px-4">
-        <h1 className="text-3xl font-bold mb-4">Продукт не знайдено</h1>
-        <Link
-          href={localizeHref("/")}
-          className="text-blue-600 hover:underline"
-        >
-          {t("backToCatalog")}
-        </Link>
-      </div>
-    );
+    return {
+      title: `${t("productNotFound")} — Фурніт-Про`,
+      description: t("productNotFound"),
+    };
   }
 
-  return (
-    <>
-      <ProductSchema product={product} />
+  const name = t.has(`products.${product.name}`)
+    ? t(`products.${product.name}`)
+    : product.name;
+  const description = t.has(`descriptions.${product.name}`)
+    ? t(`descriptions.${product.name}`)
+    : product.description;
 
-      <div className="flex flex-col items-center justify-center min-h-screen px-4 pt-10 pb-0">
-        <div className="max-w-4xl w-full text-center sm:text-left bg-white p-6 rounded-xl shadow-lg">
-          <h1 className="text-3xl font-bold mb-6 text-gray-900">
-            {t(`products.${product.name}`)}
-          </h1>
+  return {
+    metadataBase: new URL(siteUrl),
+    title: `${name} — Фурніт-Про`,
+    description,
+    openGraph: {
+      title: name,
+      description,
+      images: [`${siteUrl}${product.imageSrc.image}`],
+      url: `${siteUrl}/${locale}/${category}/${id}`,
+      locale: locale === "ua" ? "uk_UA" : "en_US",
+      type: "website",
+    },
+    alternates: {
+      canonical: `${siteUrl}/${locale}/${category}/${id}`,
+      languages: {
+        uk: `${siteUrl}/ua/${category}/${id}`,
+        en: `${siteUrl}/en/${category}/${id}`,
+      },
+    },
+  };
+}
 
-          <div className="flex flex-col md:flex-row items-center md:items-start gap-8">
-            {/* Галерея */}
-            <div className="w-full md:w-1/2">
-              {images.length > 1 ? (
-                <div className="relative">
-                  <div
-                    ref={sliderRef}
-                    className="keen-slider rounded-xl shadow-md"
-                  >
-                    {images.map((src, idx) => (
-                      <div key={idx} className="keen-slider__slide">
-                        <ProductImageZoom
-                          src={src!}
-                          alt={product.imageAlt}
-                          resetSignal={resetZoomSignal}
-                        />
-                      </div>
-                    ))}
-                  </div>
+export default async function ProductPage({ params }: Props) {
+  const { category, id, locale } = await params;
+  const rawProduct = findProduct(category, id);
 
-                  {/* Кнопки навігації */}
-                  <button
-                    onClick={() => {
-                      instanceRef.current?.prev();
-                      setResetZoomSignal((prev) => prev + 1);
-                    }}
-                    className="absolute left-3 bg-white/80 hover:bg-white text-gray-700 p-3 rounded-full shadow-md top-1/2 -translate-y-1/2 transition-all"
-                  >
-                    <FaChevronLeft />
-                  </button>
+  if (!rawProduct) {
+    return <ProductPageClient product={null} />;
+  }
 
-                  <button
-                    onClick={() => {
-                      instanceRef.current?.next();
-                      setResetZoomSignal((prev) => prev + 1);
-                    }}
-                    className="absolute right-3 bg-white/80 hover:bg-white text-gray-700 p-3 rounded-full shadow-md top-1/2 -translate-y-1/2 transition-all"
-                  >
-                    <FaChevronRight />
-                  </button>
+  const t = await getTranslations({ locale, namespace: "ProductPage" });
 
-                  {/* Індикатори */}
-                  <div className="absolute bottom-3 w-full flex justify-center gap-2">
-                    {images.map((_, idx) => (
-                      <button
-                        key={idx}
-                        onClick={() => {
-                          instanceRef.current?.moveToIdx(idx);
-                          setResetZoomSignal((prev) => prev + 1);
-                        }}
-                        className={`w-3 h-3 rounded-full transition ${
-                          currentSlide === idx ? "bg-blue-600" : "bg-gray-300"
-                        }`}
-                      />
-                    ))}
-                  </div>
-                </div>
-              ) : (
-                images.length === 1 && (
-                  <ProductImageZoom
-                    src={images[0]!}
-                    alt={product.imageAlt}
-                    resetSignal={resetZoomSignal}
-                  />
-                )
-              )}
-            </div>
+  const product: Product = {
+    ...rawProduct,
+    name: t.has(`products.${rawProduct.name}`)
+      ? t(`products.${rawProduct.name}`)
+      : rawProduct.name,
+    price: t.has(`prices.${rawProduct.name}`)
+      ? t(`prices.${rawProduct.name}`)
+      : rawProduct.price,
+    type: t.has(`types.${rawProduct.name}`)
+      ? t(`types.${rawProduct.name}`)
+      : rawProduct.type,
+    description: t.has(`descriptions.${rawProduct.name}`)
+      ? t(`descriptions.${rawProduct.name}`)
+      : rawProduct.description,
+  };
 
-            {/* Інформація */}
-            <div className="w-full md:w-1/2 text-center md:text-left mt-[-16] md:mt-0 p-2 md:p-4 border rounded-xl shadow-sm bg-gray-50">
-              <div className="pb-2 mb-2 md:pb-4 md:mb-4 border-b border-gray-200">
-                <p className="text-2xl md:text-3xl font-extrabold text-blue-600">
-                  {t(`prices.${product.name}`)}
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div className="mt-6 text-center">
-            <Link
-              href={localizeHref("/")}
-              className="inline-block px-6 py-3 text-lg font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors"
-            >
-              {t("backToCatalog")}
-            </Link>
-          </div>
-        </div>
-      </div>
-    </>
-  );
+  return <ProductPageClient product={product} />;
 }

@@ -1,23 +1,9 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-//import "./globals.css";
 import { NextIntlClientProvider } from "next-intl";
 
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-//import BackgroundLayout from "@/components/BackgroundLayout";
 import { notFound, redirect } from "next/navigation";
-//import AppBreadcrumbs from "@/components/AppBreadcrumbs";
-
-/* const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-}); */
-
-/* const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-}); */
 
 export const metadata: Metadata = {
   title: "FurnitPro",
@@ -35,37 +21,26 @@ export default async function RootLayout({
   params,
 }: Readonly<{
   children: React.ReactNode;
-  params: Promise<{ locale: string }>; // 👈 тут Promise
+  params: Promise<{ locale: string }>;
 }>) {
-  const { locale } = await params; // 👈 обов’язково await
+  const { locale } = await params;
   // Якщо URL не містить мови, перенаправляємо на українську
   if (!locale) {
     redirect("/ua");
   }
+
   let messages;
   try {
-    //messages = (await import(`../../messages/${locale}.json`)).default;
     messages = (await import(`../../../messages/${locale}.json`)).default;
-  } catch (error) {
+  } catch {
     notFound();
   }
-  return (
-    //<html /* lang={locale} */ /* lang="ua" */>
 
+  return (
     <NextIntlClientProvider locale={locale} messages={messages}>
       <Header />
-      {/* <AppBreadcrumbs/> */}
-      {/*  <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      > */}
-      <main className="flex-grow">
-        {/* <BackgroundLayout>{children}</BackgroundLayout> */}
-        {children}
-      </main>
-      {/* </body> */}
+      <main className="flex-grow">{children}</main>
       <Footer />
     </NextIntlClientProvider>
-
-    //</html>
   );
 }

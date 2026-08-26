@@ -1,20 +1,4 @@
-export interface Product {
-  id: number;
-  name: string;
-  //mechanism_junior_strong: string;
-  href: string;
-  price: string;
-  imageSrc: {
-    image: string;
-    drawing?: string;
-  };
-  imageAlt: string;
-  category: string;
-  thickness: string;
-  size: string;
-  type: string;
-  description: string;
-}
+import { Product } from "@/types";
 
 const products: Product[] = [
   {

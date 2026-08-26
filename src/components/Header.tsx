@@ -23,7 +23,6 @@ import {
 } from "@headlessui/react";
 
 import {
-  ArrowPathIcon,
   Bars3Icon,
   ChartPieIcon,
   CursorArrowRaysIcon,
@@ -32,52 +31,16 @@ import {
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 
-import {
-  ChevronDownIcon,
-  PhoneIcon,
-  PlayCircleIcon,
-} from "@heroicons/react/20/solid";
+import { ChevronDownIcon } from "@heroicons/react/20/solid";
 
 import LangSwitcher from "./LangSwitcher";
 import AppBreadcrumbs from "./AppBreadcrumbs";
-//import ThemeSwitcher from "./ThemeSwitcher";
 
-const products = [
-  {
-    name: "Analytics",
-    description: "Get a better understanding of your traffic",
-    href: "#",
-    icon: ChartPieIcon,
-  },
-  {
-    name: "Engagement",
-    description: "Speak directly to your customers",
-    href: "#",
-    icon: CursorArrowRaysIcon,
-  },
-  {
-    name: "Security",
-    description: "Your customers’ data will be safe and secure",
-    href: "#",
-    icon: FingerPrintIcon,
-  },
-  {
-    name: "Integrations",
-    description: "Connect with third-party tools",
-    href: "#",
-    icon: SquaresPlusIcon,
-  },
-  {
-    name: "Automations",
-    description: "Build strategic funnels that will convert",
-    href: "#",
-    icon: ArrowPathIcon,
-  },
-];
-
-const callsToAction = [
-  { name: "Watch demo", href: "#", icon: PlayCircleIcon },
-  { name: "Contact sales", href: "#", icon: PhoneIcon },
+const categories = [
+  { key: "mechanisms", icon: ChartPieIcon },
+  { key: "hooks", icon: CursorArrowRaysIcon },
+  { key: "curtains", icon: FingerPrintIcon },
+  { key: "corners", icon: SquaresPlusIcon },
 ];
 
 // Оновлений список телефонів з іконками
@@ -118,14 +81,12 @@ const phoneNumbers = [
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const t = useTranslations("Header");
+  const tCategory = useTranslations("CategoryPage");
   const localizeHref = useLocalizedHref();
 
   return (
     <>
-      <header
-        className="bg-gray-900"
-        //className="bg-gray-900 fixed top-0 left-0 w-full z-50 " /* style={{ background: "var(--foreground)", color: "var(--background)" }} */
-      >
+      <header className="bg-gray-900">
         <nav
           aria-label="Global"
           className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8"
@@ -174,9 +135,10 @@ export default function Header() {
                 className="absolute left-1/2 z-10 mt-3 w-screen max-w-md -translate-x-1/2 overflow-hidden rounded-3xl bg-gray-800 outline-1 -outline-offset-1 outline-white/10 transition data-closed:translate-y-1 data-closed:opacity-0 data-enter:duration-200 data-enter:ease-out data-leave:duration-150 data-leave:ease-in"
               >
                 <div className="p-4">
-                  {products.map((item) => (
-                    <div
-                      key={item.name}
+                  {categories.map((item) => (
+                    <Link
+                      key={item.key}
+                      href={localizeHref(`/${item.key}`)}
                       className="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm/6 hover:bg-white/5"
                     >
                       <div className="flex size-11 flex-none items-center justify-center rounded-lg bg-gray-700/50 group-hover:bg-gray-700">
@@ -186,31 +148,10 @@ export default function Header() {
                         />
                       </div>
                       <div className="flex-auto">
-                        <a
-                          href={item.href}
-                          className="block font-semibold text-white"
-                        >
-                          {item.name}
-                          <span className="absolute inset-0" />
-                        </a>
-                        <p className="mt-1 text-gray-400">{item.description}</p>
+                        <span className="block font-semibold text-white">
+                          {tCategory(`categories.${item.key}`)}
+                        </span>
                       </div>
-                    </div>
-                  ))}
-                </div>
-                <div className="grid grid-cols-2 divide-x divide-white/10 bg-gray-700/50">
-                  {callsToAction.map((item) => (
-                    <Link
-                      key={item.name}
-                      href={localizeHref(`${item.href}`)}
-                      //href={item.href}
-                      className="flex items-center justify-center gap-x-2.5 p-3 text-sm/6 font-semibold text-white hover:bg-gray-700/50"
-                    >
-                      <item.icon
-                        aria-hidden="true"
-                        className="size-5 flex-none text-gray-500"
-                      />
-                      {item.name}
                     </Link>
                   ))}
                 </div>
@@ -218,7 +159,6 @@ export default function Header() {
             </Popover>
 
             <Link
-              //href="/features"
               href={localizeHref("/features")}
               scroll={false}
               className="text-sm/6 font-semibold text-white transition-colors hover:text-gray-400"
@@ -226,7 +166,6 @@ export default function Header() {
               {t("features")}
             </Link>
             <Link
-              //href="/marketplace"
               href={localizeHref("/marketplace")}
               scroll={false}
               className="text-sm/6 font-semibold text-white transition-colors hover:text-gray-400"
@@ -234,7 +173,6 @@ export default function Header() {
               {t("marketplace")}
             </Link>
             <Link
-              //href="/company"
               href={localizeHref("/company")}
               scroll={false}
               className="text-sm/6 font-semibold text-white transition-colors hover:text-gray-400"
@@ -259,7 +197,6 @@ export default function Header() {
                   {phoneNumbers.map((phone) => (
                     <Link
                       key={phone.number}
-                      //href={`tel:${phone.number}`}
                       href={localizeHref(`tel:${phone.number}`)}
                       className="flex items-center gap-3 rounded-lg px-4 py-2 text-sm font-semibold text-white hover:bg-gray-700"
                     >
@@ -272,7 +209,6 @@ export default function Header() {
             </Popover>
           </PopoverGroup>
           <LangSwitcher />
-          {/* <ThemeSwitcher /> */}
         </nav>
 
         {/* Mobile menu */}
@@ -322,21 +258,23 @@ export default function Header() {
                       />
                     </DisclosureButton>
                     <DisclosurePanel className="mt-2 space-y-2">
-                      {/*  {phoneNumbers.map((phone) => (
+                      {categories.map((item) => (
                         <Link
-                          key={phone.number}
-                          href={`tel:${phone.number}`}
+                          key={item.key}
+                          href={localizeHref(`/${item.key}`)}
                           className="flex items-center gap-3 rounded-lg py-2 pr-3 pl-6 text-sm font-semibold text-white hover:bg-white/5"
                         >
-                          {phone.icon}
-                          <span>{phone.number}</span>
+                          <item.icon
+                            aria-hidden="true"
+                            className="size-5 flex-none text-gray-400"
+                          />
+                          <span>{tCategory(`categories.${item.key}`)}</span>
                         </Link>
-                      ))} */}
+                      ))}
                     </DisclosurePanel>
                   </Disclosure>
 
                   <Link
-                    //href="/features"
                     href={localizeHref("/features")}
                     scroll={false}
                     className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-white hover:bg-white/5"
@@ -344,7 +282,6 @@ export default function Header() {
                     {t("features")}
                   </Link>
                   <Link
-                    //href="/marketplace"
                     href={localizeHref("/marketplace")}
                     scroll={false}
                     className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-white hover:bg-white/5"
@@ -352,7 +289,6 @@ export default function Header() {
                     {t("marketplace")}
                   </Link>
                   <Link
-                    //href="/company"
                     href={localizeHref("/company")}
                     scroll={false}
                     className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-white hover:bg-white/5"
@@ -375,7 +311,6 @@ export default function Header() {
                       {phoneNumbers.map((phone) => (
                         <Link
                           key={phone.number}
-                          //href={`tel:${phone.number}`}
                           href={localizeHref(`tel:${phone.number}`)}
                           className="flex items-center gap-3 rounded-lg py-2 pr-3 pl-6 text-sm font-semibold text-white hover:bg-white/5"
                         >

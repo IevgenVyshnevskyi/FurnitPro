@@ -1,26 +1,22 @@
-// src/app/[locale]/[category]/[id]/ProductSchema.tsx
 "use client";
 
 import Script from "next/script";
+import { Product } from "@/types";
 
-type Product = {
-  name: string;
-  imageSrc: {
-    image: string;
-    drawing?: string;
-  };
-  description: string;
-  price: string | number;
-};
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+
+function resolveImageUrl(image: string) {
+  return image.startsWith("http") ? image : `${siteUrl}${image}`;
+}
 
 export default function ProductSchema({ product }: { product: Product }) {
   return (
-    <Script id="ld-product" type="application/ld+json">
+    <Script id={`ld-product-${product.id}`} type="application/ld+json">
       {JSON.stringify({
         "@context": "https://schema.org/",
         "@type": "Product",
         name: product.name,
-        image: product.imageSrc.image,
+        image: resolveImageUrl(product.imageSrc.image),
         description: product.description,
         offers: {
           "@type": "Offer",

@@ -9,7 +9,6 @@ export default function FloatingMessenger() {
   const [open, setOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
-  const [showButtons, setShowButtons] = useState(false);
 
   // Перевірка ширини екрану
   useEffect(() => {
@@ -35,16 +34,6 @@ export default function FloatingMessenger() {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [isMobile, open]);
-
-  // Керування появою/зникнення кнопок
-  useEffect(() => {
-    if (open) {
-      setShowButtons(true);
-    } else {
-      const timer = setTimeout(() => setShowButtons(false), 300);
-      return () => clearTimeout(timer);
-    }
-  }, [open]);
 
   // ⚡ Динамічні розміри
   const buttonSize = isMobile ? "48px" : "56px";
@@ -111,38 +100,36 @@ export default function FloatingMessenger() {
       </div>
 
       {/* Контейнер кнопок */}
-      {showButtons && (
-        <div className="flex items-center" style={{ gap: gapSize }}>
-          {(isMobile ? mobileButtons : buttons).map((btn, idx) => (
-            <a
-              key={idx}
-              href={btn.close ? "#" : btn.url}
-              target={btn.close ? "_self" : "_blank"}
-              rel="noopener noreferrer"
-              onClick={(e) => {
-                if (btn.close) {
-                  e.preventDefault();
-                  setOpen(false);
-                }
-              }}
-              className={`rounded-full flex items-center justify-center text-white cursor-pointer transform transition-all duration-300 ${btn.bg}`}
-              style={{
-                width: buttonSize,
-                height: buttonSize,
-                transitionDelay: open
-                  ? `${idx * 100}ms`
-                  : `${(buttons.length - idx) * 100}ms`,
-                opacity: open ? 1 : 0,
-                transform: open ? "translateX(0)" : "translateX(-2rem)",
-                pointerEvents: open ? "auto" : "none",
-                fontSize: isMobile ? "1rem" : "1.5rem",
-              }}
-            >
-              {btn.icon}
-            </a>
-          ))}
-        </div>
-      )}
+      <div className="flex items-center" style={{ gap: gapSize }}>
+        {(isMobile ? mobileButtons : buttons).map((btn, idx) => (
+          <a
+            key={idx}
+            href={btn.close ? "#" : btn.url}
+            target={btn.close ? "_self" : "_blank"}
+            rel="noopener noreferrer"
+            onClick={(e) => {
+              if (btn.close) {
+                e.preventDefault();
+                setOpen(false);
+              }
+            }}
+            className={`rounded-full flex items-center justify-center text-white cursor-pointer transform transition-all duration-300 ${btn.bg}`}
+            style={{
+              width: buttonSize,
+              height: buttonSize,
+              transitionDelay: open
+                ? `${idx * 100}ms`
+                : `${(buttons.length - idx) * 100}ms`,
+              opacity: open ? 1 : 0,
+              transform: open ? "translateX(0)" : "translateX(-2rem)",
+              pointerEvents: open ? "auto" : "none",
+              fontSize: isMobile ? "1rem" : "1.5rem",
+            }}
+          >
+            {btn.icon}
+          </a>
+        ))}
+      </div>
     </div>
   );
 }

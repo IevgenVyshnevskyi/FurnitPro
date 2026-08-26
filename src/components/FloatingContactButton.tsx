@@ -14,7 +14,6 @@ export default function FloatingContactButton() {
   const [animate, setAnimate] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
-  const [showButtons, setShowButtons] = useState(false);
 
   const t = useTranslations("FloatingContactButton");
 
@@ -57,16 +56,6 @@ export default function FloatingContactButton() {
       return () => clearTimeout(timer);
     }
   }, [showText]);
-
-  // Поява/зникнення кнопок
-  useEffect(() => {
-    if (open) {
-      setShowButtons(true);
-    } else {
-      const timer = setTimeout(() => setShowButtons(false), 300);
-      return () => clearTimeout(timer);
-    }
-  }, [open]);
 
   // Кнопки операторів
   const buttons = [
@@ -150,36 +139,34 @@ export default function FloatingContactButton() {
       </div>
 
       {/* Кнопки операторів */}
-      {showButtons && (
-        <div className="flex items-center" style={{ gap: gapSize }}>
-          {(isMobile ? mobileButtons : buttons).map((btn, idx) => (
-            <a
-              key={idx}
-              href={btn.close ? "#" : btn.href}
-              title={btn.label}
-              onClick={(e) => {
-                if (btn.close) {
-                  e.preventDefault();
-                  setOpen(false);
-                }
-              }}
-              className={`rounded-full flex items-center justify-center text-white text-2xl cursor-pointer transform transition-all duration-300 ${btn.bg}`}
-              style={{
-                width: mainButtonSize,
-                height: mainButtonSize,
-                transitionDelay: open
-                  ? `${idx * 100}ms`
-                  : `${(buttons.length - idx) * 100}ms`,
-                opacity: open ? 1 : 0,
-                transform: open ? "translateX(0)" : "translateX(-2rem)",
-                pointerEvents: open ? "auto" : "none",
-              }}
-            >
-              {btn.icon}
-            </a>
-          ))}
-        </div>
-      )}
+      <div className="flex items-center" style={{ gap: gapSize }}>
+        {(isMobile ? mobileButtons : buttons).map((btn, idx) => (
+          <a
+            key={idx}
+            href={btn.close ? "#" : btn.href}
+            title={btn.label}
+            onClick={(e) => {
+              if (btn.close) {
+                e.preventDefault();
+                setOpen(false);
+              }
+            }}
+            className={`rounded-full flex items-center justify-center text-white text-2xl cursor-pointer transform transition-all duration-300 ${btn.bg}`}
+            style={{
+              width: mainButtonSize,
+              height: mainButtonSize,
+              transitionDelay: open
+                ? `${idx * 100}ms`
+                : `${(buttons.length - idx) * 100}ms`,
+              opacity: open ? 1 : 0,
+              transform: open ? "translateX(0)" : "translateX(-2rem)",
+              pointerEvents: open ? "auto" : "none",
+            }}
+          >
+            {btn.icon}
+          </a>
+        ))}
+      </div>
 
       {/* Анімація вібрації */}
       <style jsx>{`

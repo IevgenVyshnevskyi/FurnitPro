@@ -8,6 +8,9 @@ import Image from "next/image";
 import kyivstarLogo from "./../../public/images/phones/kyivstar.jpeg";
 import { useTranslations } from "next-intl";
 
+// Тривалість одного циклу показу тексту/іконки
+const TEXT_CYCLE_MS = 5000;
+
 export default function FloatingContactButton() {
   const [open, setOpen] = useState(false);
   const [showText, setShowText] = useState(false);
@@ -44,17 +47,25 @@ export default function FloatingContactButton() {
 
   // Перемикання між текстом і іконкою
   useEffect(() => {
-    const interval = setInterval(() => setShowText((prev) => !prev), 5000);
+    const interval = setInterval(() => setShowText((prev) => !prev), TEXT_CYCLE_MS);
     return () => clearInterval(interval);
   }, []);
 
-  // Анімація вібрації
+  // Анімація вібрації — з пропорційною затримкою від появи іконки,
+  // а не одразу в момент зникнення тексту
   useEffect(() => {
-    if (!showText) {
+    if (showText) return;
+
+    let stopId: ReturnType<typeof setTimeout>;
+    const startId = setTimeout(() => {
       setAnimate(true);
-      const timer = setTimeout(() => setAnimate(false), 1000);
-      return () => clearTimeout(timer);
-    }
+      stopId = setTimeout(() => setAnimate(false), 1000);
+    }, TEXT_CYCLE_MS / 2);
+
+    return () => {
+      clearTimeout(startId);
+      clearTimeout(stopId);
+    };
   }, [showText]);
 
   // Кнопки операторів
@@ -125,17 +136,21 @@ export default function FloatingContactButton() {
             showText ? "opacity-100" : "opacity-0"
           }`}
           style={{
-            fontSize: isMobile ? "10px" : "14px",
+            fontSize: isMobile ? "8px" : "12px",
           }}
         >
           {t("contactButtonLabel")}
         </span>
 
-        {!showText && (
+        <div
+          className={`absolute inset-0 flex items-center justify-center transition-opacity duration-700 ${
+            showText ? "opacity-0" : "opacity-100"
+          }`}
+        >
           <div className={animate ? "vibrate-once" : ""}>
             <FaPhoneAlt className="text-2xl" />
           </div>
-        )}
+        </div>
       </div>
 
       {/* Кнопки операторів */}

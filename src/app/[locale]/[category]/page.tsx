@@ -8,7 +8,7 @@ type Props = {
   params: Promise<{ locale: string; category: string }>;
 };
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://furnit-pro.vercel.app";
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { category, locale } = await params;
@@ -18,6 +18,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     return {
       title: "Категорію не знайдено — Фурніт-Про",
       description: "Сторінка категорії не знайдена.",
+      robots: { index: false, follow: true },
     };
   }
 

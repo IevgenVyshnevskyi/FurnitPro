@@ -8,7 +8,7 @@ type Props = {
   params: Promise<{ locale: string; category: string; id: string }>;
 };
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://furnit-pro.vercel.app";
 
 function findProduct(category: string, id: string) {
   return allProducts.find(
@@ -25,6 +25,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     return {
       title: `${t("productNotFound")} — Фурніт-Про`,
       description: t("productNotFound"),
+      robots: { index: false, follow: true },
     };
   }
 

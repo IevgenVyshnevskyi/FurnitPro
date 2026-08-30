@@ -4,9 +4,12 @@ import { useState, useEffect, useRef } from "react";
 import { Breadcrumbs, BreadcrumbItem } from "@heroui/react";
 import { usePathname, useParams } from "next/navigation";
 import Link from "next/link";
+import Script from "next/script";
 import { useTranslations } from "next-intl";
 import { useLocalizedHref } from "@/hooks/useLocalizedHref";
 import allProducts from "@/../public/data/products";
+
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://furnit-pro.vercel.app";
 
 export default function AppBreadcrumbs() {
   const pathname = usePathname();
@@ -40,6 +43,41 @@ export default function AppBreadcrumbs() {
     }
   }, [segments, isMobile]);
 
+  // Обчислюємо крихти один раз — використовуємо і для відображення, і для JSON-LD
+  const crumbs = [
+    { label: t("home"), href: localizeHref("/") },
+    ...segments.map((seg, idx) => {
+      const rawHref = "/" + segments.slice(0, idx + 1).join("/");
+      const href = localizeHref(rawHref);
+      let label: string = seg;
+
+      const isProductId = idx === segments.length - 1 && /^\d+$/.test(seg);
+      if (isProductId) {
+        const product = allProducts.find((p) => p.id.toString() === seg);
+        label = product
+          ? tProduct.has(`products.${product.name}`)
+            ? tProduct(`products.${product.name}`)
+            : product.name
+          : seg;
+      } else {
+        label = t(seg, { default: seg });
+      }
+
+      return { label, href };
+    }),
+  ];
+
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: crumbs.map((crumb, idx) => ({
+      "@type": "ListItem",
+      position: idx + 1,
+      name: crumb.label,
+      item: `${siteUrl}${crumb.href}`,
+    })),
+  };
+
   return (
     <div
       ref={containerRef}
@@ -50,41 +88,19 @@ export default function AppBreadcrumbs() {
       }
       style={isMobile ? { whiteSpace: "nowrap" } : undefined}
     >
+      <Script id="ld-breadcrumb" type="application/ld+json">
+        {JSON.stringify(breadcrumbJsonLd)}
+      </Script>
+
       <Breadcrumbs
         className="flex flex-nowrap"
         style={isMobile ? { minWidth: "max-content" } : undefined}
       >
-        {/* Головна */}
-        <BreadcrumbItem>
-          <Link href={localizeHref("/")}>{t("home")}</Link>
-        </BreadcrumbItem>
-
-        {/* Інші сегменти */}
-        {segments.map((seg, idx) => {
-          const rawHref = "/" + segments.slice(0, idx + 1).join("/");
-          const href = localizeHref(rawHref); // ✅ локалізація один раз
-          let label: string = seg;
-
-          // Якщо це productId → шукаємо серед локальних товарів
-          const isProductId = idx === segments.length - 1 && /^\d+$/.test(seg);
-          if (isProductId) {
-            const product = allProducts.find((p) => p.id.toString() === seg);
-            label = product
-              ? tProduct.has(`products.${product.name}`)
-                ? tProduct(`products.${product.name}`)
-                : product.name
-              : seg;
-          } else {
-            // Інакше переклад сегмента
-            label = t(seg, { default: seg });
-          }
-
-          const refProp =
-            idx === segments.length - 1 ? { ref: lastItemRef } : {};
-
+        {crumbs.map((crumb, idx) => {
+          const refProp = idx === crumbs.length - 1 ? { ref: lastItemRef } : {};
           return (
-            <BreadcrumbItem key={`${idx}-${href}`} {...refProp}>
-              <Link href={href}>{label}</Link>
+            <BreadcrumbItem key={`${idx}-${crumb.href}`} {...refProp}>
+              <Link href={crumb.href}>{crumb.label}</Link>
             </BreadcrumbItem>
           );
         })}

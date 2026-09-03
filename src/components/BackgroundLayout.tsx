@@ -47,8 +47,10 @@ export default function BackgroundLayout({
         </motion.div>
       </div>
 
-      {/* Контент сайту */}
-      <main className="relative z-10">{children}</main>
+      {/* Контент сайту — flex-колонка на всю висоту екрана, щоб <main className="flex-grow">
+          у [locale]/layout.tsx міг розтягуватись і притискати футер до низу
+          незалежно від кількості контенту на конкретній сторінці */}
+      <main className="relative z-10 flex min-h-screen flex-col">{children}</main>
     </div>
   );
 }

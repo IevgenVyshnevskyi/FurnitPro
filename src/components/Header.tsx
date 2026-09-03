@@ -90,7 +90,6 @@ export default function Header() {
           <div className="flex lg:flex-1">
             <Link
               href={localizeHref("/")}
-              scroll={false}
               className="-m-1.5 p-1.5"
             >
               <span className="sr-only">Your Company</span>
@@ -156,21 +155,18 @@ export default function Header() {
 
             <Link
               href={localizeHref("/features")}
-              scroll={false}
               className="text-sm/6 font-semibold text-white transition-colors hover:text-gray-400"
             >
               {t("features")}
             </Link>
             <Link
               href={localizeHref("/marketplace")}
-              scroll={false}
               className="text-sm/6 font-semibold text-white transition-colors hover:text-gray-400"
             >
               {t("marketplace")}
             </Link>
             <Link
               href={localizeHref("/company")}
-              scroll={false}
               className="text-sm/6 font-semibold text-white transition-colors hover:text-gray-400"
             >
               {t("company")}
@@ -218,7 +214,6 @@ export default function Header() {
             <div className="flex items-center justify-between">
               <Link
                 href={localizeHref("/")}
-                scroll={false}
                 className="-m-1.5 p-1.5"
               >
                 <span className="sr-only">Your Company</span>
@@ -258,6 +253,7 @@ export default function Header() {
                         <Link
                           key={item.key}
                           href={localizeHref(`/${item.key}`)}
+                          onClick={() => setMobileMenuOpen(false)}
                           className="flex items-center gap-3 rounded-lg py-2 pr-3 pl-6 text-sm font-semibold text-white hover:bg-white/5"
                         >
                           <item.icon
@@ -272,21 +268,21 @@ export default function Header() {
 
                   <Link
                     href={localizeHref("/features")}
-                    scroll={false}
+                    onClick={() => setMobileMenuOpen(false)}
                     className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-white hover:bg-white/5"
                   >
                     {t("features")}
                   </Link>
                   <Link
                     href={localizeHref("/marketplace")}
-                    scroll={false}
+                    onClick={() => setMobileMenuOpen(false)}
                     className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-white hover:bg-white/5"
                   >
                     {t("marketplace")}
                   </Link>
                   <Link
                     href={localizeHref("/company")}
-                    scroll={false}
+                    onClick={() => setMobileMenuOpen(false)}
                     className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-white hover:bg-white/5"
                   >
                     {t("company")}
@@ -308,6 +304,7 @@ export default function Header() {
                         <Link
                           key={phone.number}
                           href={localizeHref(`tel:${phone.number}`)}
+                          onClick={() => setMobileMenuOpen(false)}
                           className="flex items-center gap-3 rounded-lg py-2 pr-3 pl-6 text-sm font-semibold text-white hover:bg-white/5"
                         >
                           {phone.icon}

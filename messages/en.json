@@ -6,6 +6,8 @@
     "company": "Company",
     "category": "Categories",
     "marketplace": "Marketplace",
+    "features": "Features",
+    "login": "Login",
     "mechanisms": "Mechanisms",
     "hooks": "Latches",
     "curtains": "Hinges",
@@ -150,5 +152,36 @@
   },
   "FloatingContactButton": {
     "contactButtonLabel": "Contact Button"
+  },
+  "FeaturesPage": {
+    "title": "Our Services",
+    "intro": "FurnitPro supplies furniture hardware to manufacturers and workshops across Ukraine — from single mechanisms to batches for serial production.",
+    "items": {
+      "range": "Wide range: lifting mechanisms, hinges, latches, and connecting corners for various furniture types.",
+      "quality": "Galvanized steel and tested materials — hardware built to withstand daily use for years.",
+      "wholesale": "Retail and wholesale supply — for a single project or ongoing production.",
+      "consulting": "Guidance on choosing the right hardware for a specific furniture design."
+    }
+  },
+  "CompanyPage": {
+    "title": "About the Company",
+    "intro": "FurnitPro is a furniture hardware supplier working directly with manufacturers, without unnecessary middlemen.",
+    "approachTitle": "Our Approach",
+    "approach": "We focus on the durability and reliability of every mechanism, hinge, and corner — because hardware quality directly affects how long furniture lasts.",
+    "values": {
+      "quality": "Quality control at every stage — from material to packaging.",
+      "reliability": "Consistent stock availability for production planning.",
+      "partnership": "Flexible cooperation terms for workshops and production lines of any scale."
+    }
+  },
+  "MarketplacePage": {
+    "title": "Marketplace",
+    "badge": "Coming soon",
+    "intro": "We're developing a dedicated platform for bulk furniture hardware orders — a more convenient option for manufacturers who work with us regularly.",
+    "items": {
+      "catalog": "Extended catalog with filters by type, size, and material.",
+      "bulk": "Bulk ordering and purchase history.",
+      "tracking": "Real-time order status tracking."
+    }
   }
 }

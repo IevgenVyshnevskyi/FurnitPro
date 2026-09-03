@@ -8,6 +8,8 @@
     "marketplace": "Marketplace",
     "features": "Features",
     "login": "Login",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Use",
     "mechanisms": "Mechanisms",
     "hooks": "Latches",
     "curtains": "Hinges",
@@ -33,6 +35,8 @@
   },
   "CategoryPage": {
     "view": "View",
+    "notFound": "Category not found",
+    "backToCatalog": "Return to catalog",
     "categories": {
       "mechanisms": "Mechanisms",
       "hooks": "Latches",
@@ -182,6 +186,37 @@
       "catalog": "Extended catalog with filters by type, size, and material.",
       "bulk": "Bulk ordering and purchase history.",
       "tracking": "Real-time order status tracking."
+    }
+  },
+  "PrivacyPage": {
+    "title": "Privacy Policy",
+    "updated": "Last updated: 2026",
+    "intro": "FurnitPro respects the privacy of website visitors. This page explains what data we collect and how we use it.",
+    "sections": {
+      "collectionTitle": "What Data We Collect",
+      "collection": "We only collect the data you provide yourself when contacting us through the contact form, messenger, email, or phone — typically your name, phone number, and email address.",
+      "useTitle": "How We Use Your Data",
+      "use": "The data we receive is used solely to process inquiries, provide guidance on our product range, and coordinate orders. We do not share your data with third parties or use it for mailings without your consent.",
+      "cookiesTitle": "Cookies",
+      "cookies": "The site uses technical cookies required for it to function correctly (for example, remembering your selected interface language).",
+      "rightsTitle": "Your Rights",
+      "rights": "You may request to view, correct, or delete the data you've provided to us at any time by writing to the email address below."
+    },
+    "contact": "For privacy questions, contact: "
+  },
+  "TermsPage": {
+    "title": "Terms of Use",
+    "updated": "Last updated: 2026",
+    "intro": "By using this website, you agree to the terms below.",
+    "sections": {
+      "contentTitle": "Informational Nature of the Catalog",
+      "content": "The catalog, images, and prices on this site are for informational purposes. Product availability and final price are confirmed when you contact us using the details provided on the site.",
+      "ipTitle": "Content Rights",
+      "ip": "The text, images, and materials on this site belong to FurnitPro. Copying or using them without written consent is not permitted.",
+      "liabilityTitle": "Liability",
+      "liability": "We make an effort to keep the information on this site accurate and up to date, but we do not guarantee it is entirely free of technical errors or inaccuracies.",
+      "lawTitle": "Governing Law",
+      "law": "These terms are governed by the laws of Ukraine."
     }
   }
 }

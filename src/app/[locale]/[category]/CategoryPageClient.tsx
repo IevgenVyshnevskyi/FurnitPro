@@ -22,7 +22,7 @@ export default function CategoryPageClient({
   if (!products?.length) {
     return (
       <div className="flex flex-col items-center justify-center min-h-screen px-4">
-        <h1 className="text-3xl font-bold mb-4">Категорія не знайдена</h1>
+        <h1 className="text-3xl font-bold mb-4">{t("notFound")}</h1>
         <Link
           href={localizeHref("/")}
           className="text-blue-600 hover:underline"

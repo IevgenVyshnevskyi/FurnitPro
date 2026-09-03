@@ -7,6 +7,7 @@ import Link from "next/link";
 import logo from "../../public/logo/logo.png";
 import logo1 from "../../public/logo/logo1.jpg";
 import { SiVodafone } from "react-icons/si";
+import { DoorOpen, CornerRightDown } from "lucide-react";
 import kyivstarLogo from "./../../public/images/phones/kyivstar.jpeg"; // ✅ JPEG іконка
 import { useLocalizedHref } from "@/hooks/useLocalizedHref"; // ✅ імпорт хуку
 
@@ -22,25 +23,20 @@ import {
   PopoverPanel,
 } from "@headlessui/react";
 
-import {
-  Bars3Icon,
-  ChartPieIcon,
-  CursorArrowRaysIcon,
-  FingerPrintIcon,
-  SquaresPlusIcon,
-  XMarkIcon,
-} from "@heroicons/react/24/outline";
+import { Bars3Icon, CogIcon, LinkIcon, XMarkIcon } from "@heroicons/react/24/outline";
 
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 
 import LangSwitcher from "./LangSwitcher";
 import AppBreadcrumbs from "./AppBreadcrumbs";
 
+// Іконки підібрані за змістом категорії: механізм (шестерня), зачіп (ланка),
+// петля (дверцята на завісах), куток (прямий кут)
 const categories = [
-  { key: "mechanisms", icon: ChartPieIcon },
-  { key: "hooks", icon: CursorArrowRaysIcon },
-  { key: "curtains", icon: FingerPrintIcon },
-  { key: "corners", icon: SquaresPlusIcon },
+  { key: "mechanisms", icon: CogIcon },
+  { key: "hooks", icon: LinkIcon },
+  { key: "curtains", icon: DoorOpen },
+  { key: "corners", icon: CornerRightDown },
 ];
 
 // Оновлений список телефонів з іконками

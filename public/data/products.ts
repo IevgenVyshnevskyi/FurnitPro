@@ -298,7 +298,7 @@ const products: Product[] = [
     id: 10,
     name: "Механізм Блюз",
     href: "#",
-    price: "??? грн./шт.",
+    price: "65.00 грн./шт.",
     imageSrc: {
       image: "/images/products/10.mechanism-blues/item1.jpg",
       /* drawing: "/images/products/10.mechanism-blues/item2.jpg", */
@@ -329,7 +329,7 @@ const products: Product[] = [
     id: 11,
     name: "Механізм ліжковий гідравлічний",
     href: "#",
-    price: "??? грн./шт.",
+    price: "78.00 грн./шт.",
     imageSrc: {
       image: "/images/products/12.mechanism-bed/item1.jpg",
       /* drawing: "/images/products/12.mechanism-bed/item2.jpg", */
@@ -360,7 +360,7 @@ const products: Product[] = [
     id: 12,
     name: "Механізм Алігатор",
     href: "#",
-    price: "??? грн./шт.",
+    price: "59.00 грн./шт.",
     imageSrc: {
       image: "/images/products/11.mechanism-alligator/item1.jpg",
       /* drawing: "/images/products/11.mechanism-alligator/item2.jpg", */
@@ -391,7 +391,7 @@ const products: Product[] = [
     id: 13,
     name: "Механізм Євро-Книжка",
     href: "#",
-    price: "??? грн./шт.",
+    price: "72.00 грн./шт.",
     imageSrc: {
       image: "/images/products/13.mechanism-eurobook/item1.jpg",
       /* drawing: "/images/products/13.mechanism-eurobook/item2.jpg", */

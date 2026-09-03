@@ -28,7 +28,7 @@ export default async function CompanyPage({ params }: Props) {
   const values = ["quality", "reliability", "partnership"] as const;
 
   return (
-    <main className="container mx-auto px-4 py-8 max-w-4xl">
+    <main className="container mx-auto px-4 pt-16 pb-8 sm:pt-24 max-w-4xl">
       <h1 className="text-3xl font-bold mb-4 text-gray-900">{t("title")}</h1>
       <p className="text-gray-600 mb-8">{t("intro")}</p>
 

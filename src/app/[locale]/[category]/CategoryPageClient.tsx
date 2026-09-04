@@ -40,9 +40,15 @@ export default function CategoryPageClient({
           {t(`categories.${category}`)}
         </h1>
 
-        <div className="grid grid-cols-2 gap-2 sm:grid-cols-2 lg:grid-cols-3 gap-4 xl:grid-cols-4">
+        {/* flex-wrap + justify-center замість grid: коли карток менше, ніж
+            вміщує рядок, вони центруються, а не лишають порожній простір
+            праворуч (grid-cols-N з 1fr завжди розтягує колонки на всю ширину) */}
+        <div className="flex flex-wrap justify-center gap-4">
           {products.map((product) => (
-            <div key={product.id} className="relative">
+            <div
+              key={product.id}
+              className="relative w-[calc(50%-0.5rem)] lg:w-[calc(33.333%-0.667rem)] xl:w-[calc(25%-0.75rem)]"
+            >
               <ProductSchema product={product} />
 
               <Link

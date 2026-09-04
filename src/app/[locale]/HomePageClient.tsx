@@ -45,14 +45,16 @@ export default function HomePageClient() {
       <div className="mx-auto max-w-7xl px-4 pt-12 pb-2 sm:px-6 sm:py-24">
         <h1 className="text-3xl font-bold mb-8 text-gray-900 dark:text-white">{t("title")}</h1>
 
-        <div className="grid grid-cols-2 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        {/* flex-wrap + justify-center замість grid: 4 категорії в 3-колонковій
+            сітці (lg) інакше лишали б одну картку самотньою зліва в новому рядку */}
+        <div className="flex flex-wrap justify-center gap-6">
           {categories.map((cat) => (
             <Link
               key={cat.id}
               href={localizeHref(`${cat.category}`)}
               className="group relative rounded-2xl bg-white dark:bg-gray-800 p-4 shadow-md hover:shadow-xl transition-shadow duration-300
                          sm:hover:scale-105 sm:hover:opacity-90 sm:duration-300 transition-transform
-                         block"
+                         block w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)] xl:w-[calc(25%-1.125rem)]"
             >
               {/* Блок з картинкою */}
               <div className="relative overflow-hidden rounded-xl">

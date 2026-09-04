@@ -47,6 +47,16 @@ export default async function MarketplacePage({ params }: Props) {
           </li>
         ))}
       </ul>
+
+      <h2 className="text-xl font-semibold mt-10 mb-2 text-gray-900">
+        {t("whyTitle")}
+      </h2>
+      <p className="text-gray-600 mb-8">{t("why")}</p>
+
+      <h2 className="text-xl font-semibold mb-2 text-gray-900">
+        {t("notifyTitle")}
+      </h2>
+      <p className="text-gray-600">{t("notify")}</p>
     </main>
   );
 }

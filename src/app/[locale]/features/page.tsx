@@ -26,6 +26,8 @@ export default async function FeaturesPage({ params }: Props) {
   const t = await getTranslations({ locale, namespace: "FeaturesPage" });
 
   const items = ["range", "quality", "wholesale", "consulting"] as const;
+  const categories = ["mechanisms", "hooks", "curtains", "corners"] as const;
+  const orderSteps = ["step1", "step2", "step3"] as const;
 
   return (
     <main className="container mx-auto px-4 pt-16 pb-8 sm:pt-24 max-w-4xl">
@@ -42,6 +44,34 @@ export default async function FeaturesPage({ params }: Props) {
           </li>
         ))}
       </ul>
+
+      <h2 className="text-xl font-semibold mt-10 mb-4 text-gray-900">
+        {t("categoriesTitle")}
+      </h2>
+      <ul className="grid gap-4 sm:grid-cols-2">
+        {categories.map((key) => (
+          <li
+            key={key}
+            className="rounded-xl bg-white p-5 shadow-md text-gray-700"
+          >
+            {t(`categories.${key}`)}
+          </li>
+        ))}
+      </ul>
+
+      <h2 className="text-xl font-semibold mt-10 mb-4 text-gray-900">
+        {t("orderTitle")}
+      </h2>
+      <ol className="space-y-3">
+        {orderSteps.map((key, idx) => (
+          <li key={key} className="flex gap-3 text-gray-700">
+            <span className="flex h-6 w-6 flex-none items-center justify-center rounded-full bg-blue-600 text-sm font-semibold text-white">
+              {idx + 1}
+            </span>
+            <span>{t(`orderSteps.${key}`)}</span>
+          </li>
+        ))}
+      </ol>
     </main>
   );
 }

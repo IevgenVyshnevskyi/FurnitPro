@@ -26,6 +26,7 @@ export default async function CompanyPage({ params }: Props) {
   const t = await getTranslations({ locale, namespace: "CompanyPage" });
 
   const values = ["quality", "reliability", "partnership"] as const;
+  const processSteps = ["step1", "step2", "step3", "step4"] as const;
 
   return (
     <main className="container mx-auto px-4 pt-16 pb-8 sm:pt-24 max-w-4xl">
@@ -47,6 +48,31 @@ export default async function CompanyPage({ params }: Props) {
           </li>
         ))}
       </ul>
+
+      <h2 className="text-xl font-semibold mt-10 mb-4 text-gray-900">
+        {t("processTitle")}
+      </h2>
+      <ol className="grid gap-4 sm:grid-cols-2">
+        {processSteps.map((key, idx) => (
+          <li
+            key={key}
+            className="rounded-xl bg-white p-5 shadow-md text-gray-700"
+          >
+            <div className="flex items-center gap-2 mb-1 font-semibold text-gray-900">
+              <span className="flex h-6 w-6 flex-none items-center justify-center rounded-full bg-blue-600 text-sm font-semibold text-white">
+                {idx + 1}
+              </span>
+              {t(`process.${key}Title`)}
+            </div>
+            {t(`process.${key}`)}
+          </li>
+        ))}
+      </ol>
+
+      <h2 className="text-xl font-semibold mt-10 mb-2 text-gray-900">
+        {t("audienceTitle")}
+      </h2>
+      <p className="text-gray-600">{t("audience")}</p>
     </main>
   );
 }

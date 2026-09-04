@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -18,11 +19,32 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default function LoginPage() {
+export default async function LoginPage({ params }: Props) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "LoginPage" });
+
+  const benefits = ["history", "pricing", "reorder"] as const;
+
   return (
-    <main className="container mx-auto px-4 pt-16 pb-8 sm:pt-24">
-      <h1 className="text-3xl font-bold mb-4">Вхід</h1>
-      <p className="text-gray-600">Сторінка входу буде додана найближчим часом.</p>
+    <main className="container mx-auto px-4 pt-16 pb-8 sm:pt-24 max-w-3xl">
+      <h1 className="text-3xl font-bold mb-4 text-gray-900">{t("title")}</h1>
+      <p className="text-gray-600 mb-8">{t("intro")}</p>
+
+      <h2 className="text-xl font-semibold mb-4 text-gray-900">
+        {t("benefitsTitle")}
+      </h2>
+      <ul className="grid gap-4 sm:grid-cols-3">
+        {benefits.map((key) => (
+          <li
+            key={key}
+            className="rounded-xl bg-white p-5 shadow-md text-gray-700"
+          >
+            {t(`benefits.${key}`)}
+          </li>
+        ))}
+      </ul>
+
+      <p className="mt-8 text-gray-600">{t("contact")}</p>
     </main>
   );
 }

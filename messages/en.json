@@ -165,6 +165,19 @@
       "quality": "Galvanized steel and tested materials — hardware built to withstand daily use for years.",
       "wholesale": "Retail and wholesale supply — for a single project or ongoing production.",
       "consulting": "Guidance on choosing the right hardware for a specific furniture design."
+    },
+    "categoriesTitle": "Hardware Categories",
+    "categories": {
+      "mechanisms": "Lifting mechanisms for daybeds and sofa-beds — from compact models like Junior to reinforced versions for heavier structures.",
+      "hooks": "Latches for fixing furniture frame elements — galvanized steel in various thicknesses for different loads.",
+      "curtains": "Hinges for precise, long-lasting opening of furniture doors and lids.",
+      "corners": "Connecting corners for frame assembly — fast, reliable installation."
+    },
+    "orderTitle": "How to Order",
+    "orderSteps": {
+      "step1": "Pick a category in the catalog and browse the available options.",
+      "step2": "Contact us by phone, email, or messenger — details are on the site.",
+      "step3": "Get confirmation of price, quantity, and delivery timeline."
     }
   },
   "CompanyPage": {
@@ -176,7 +189,20 @@
       "quality": "Quality control at every stage — from material to packaging.",
       "reliability": "Consistent stock availability for production planning.",
       "partnership": "Flexible cooperation terms for workshops and production lines of any scale."
-    }
+    },
+    "processTitle": "How We Work",
+    "process": {
+      "step1Title": "Consultation",
+      "step1": "Tell us what furniture you need hardware for — we help you pick the right mechanisms, hinges, or corners.",
+      "step2Title": "Confirmation",
+      "step2": "We agree on quantity, price, and delivery timeline using the contact details on the site.",
+      "step3Title": "Delivery",
+      "step3": "We hand off the order retail or as a wholesale batch — whichever fits your needs.",
+      "step4Title": "Support",
+      "step4": "We stay in touch for repeat orders and follow-up consultations."
+    },
+    "audienceTitle": "Who We Work With",
+    "audience": "Our clients are furniture manufacturers, joinery workshops, and independent craftsmen who need reliable hardware for serial or one-off furniture production."
   },
   "MarketplacePage": {
     "title": "Marketplace",
@@ -186,7 +212,22 @@
       "catalog": "Extended catalog with filters by type, size, and material.",
       "bulk": "Bulk ordering and purchase history.",
       "tracking": "Real-time order status tracking."
-    }
+    },
+    "whyTitle": "Why a Dedicated Platform",
+    "why": "Right now, orders are arranged directly through the contacts on the site. The marketplace will let wholesale clients place orders themselves, see purchase history, and track delivery status without manually coordinating every item.",
+    "notifyTitle": "Want to Be the First to Know",
+    "notify": "Reach out using the contacts on the site, and we'll let you know when the platform launches."
+  },
+  "LoginPage": {
+    "title": "Login",
+    "intro": "A personal account for FurnitPro regular clients is currently in development.",
+    "benefitsTitle": "What Will Be Available",
+    "benefits": {
+      "history": "Order history for quick reordering.",
+      "pricing": "Personalized terms for wholesale clients.",
+      "reorder": "Placing a new order without re-entering your contact details."
+    },
+    "contact": "The account is still in development — reach out to us directly using the contacts on the site."
   },
   "PrivacyPage": {
     "title": "Privacy Policy",

@@ -7,14 +7,22 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://furnit-pro.vercel.a
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
-  const isUa = locale === "ua";
 
-  const title = isUa
-    ? "Фурніт-Про — Меблева фурнітура: механізми, петлі, зачепи, кутки"
-    : "FurnitPro — Furniture Hardware: Mechanisms, Hinges, Latches, Corners";
-  const description = isUa
-    ? "Купуйте якісну меблеву фурнітуру онлайн: підйомні механізми, петлі, зачепи та кутки з доставкою по Україні."
-    : "Buy quality furniture hardware online: lifting mechanisms, hinges, latches and corners, delivered across Ukraine.";
+  const titles = {
+    ua: "Фурніт-Про — Меблева фурнітура: механізми, петлі, зачепи, кутки",
+    ru: "Фурнит-Про — Мебельная фурнитура: механизмы, петли, крючки, уголки",
+    en: "FurnitPro — Furniture Hardware: Mechanisms, Hinges, Latches, Corners",
+  };
+  const descriptions = {
+    ua: "Купуйте якісну меблеву фурнітуру онлайн: підйомні механізми, петлі, зачепи та кутки з доставкою по Україні.",
+    ru: "Покупайте качественную мебельную фурнитуру онлайн: подъёмные механизмы, петли, крючки и уголки с доставкой по Украине.",
+    en: "Buy quality furniture hardware online: lifting mechanisms, hinges, latches and corners, delivered across Ukraine.",
+  };
+  const ogLocales = { ua: "uk_UA", ru: "ru_RU", en: "en_US" };
+
+  const key = locale as keyof typeof titles;
+  const title = titles[key] ?? titles.ua;
+  const description = descriptions[key] ?? descriptions.ua;
 
   return {
     title,
@@ -23,6 +31,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       canonical: `${siteUrl}/${locale}`,
       languages: {
         uk: `${siteUrl}/ua`,
+        ru: `${siteUrl}/ru`,
         en: `${siteUrl}/en`,
       },
     },
@@ -31,7 +40,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description,
       url: `${siteUrl}/${locale}`,
       siteName: "Фурніт-Про",
-      locale: isUa ? "uk_UA" : "en_US",
+      locale: ogLocales[key] ?? ogLocales.ua,
       type: "website",
     },
   };

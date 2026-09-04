@@ -7,16 +7,21 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://furnit-pro.vercel.a
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
-  const isUa = locale === "ua";
+  const titles = {
+    ua: "Політика конфіденційності",
+    ru: "Политика конфиденциальности",
+    en: "Privacy Policy",
+  };
 
   return {
-    title: isUa ? "Політика конфіденційності" : "Privacy Policy",
+    title: titles[locale as keyof typeof titles] ?? titles.ua,
     // Юридична сторінка без унікального маркетингового контенту — не варто конкурувати за видачу
     robots: { index: false, follow: true },
     alternates: {
       canonical: `${siteUrl}/${locale}/privacy`,
       languages: {
         uk: `${siteUrl}/ua/privacy`,
+        ru: `${siteUrl}/ru/privacy`,
         en: `${siteUrl}/en/privacy`,
       },
     },

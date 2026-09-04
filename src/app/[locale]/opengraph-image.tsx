@@ -7,10 +7,12 @@ type Props = { params: Promise<{ locale: string }> };
 
 export default async function OGImage({ params }: Props) {
   const { locale } = await params;
-  const tagline =
-    locale === "ua"
-      ? "Меблева фурнітура: механізми, петлі, зачепи, кутки"
-      : "Furniture hardware: mechanisms, hinges, latches, corners";
+  const taglines = {
+    ua: "Меблева фурнітура: механізми, петлі, зачепи, кутки",
+    ru: "Мебельная фурнитура: механизмы, петли, крючки, уголки",
+    en: "Furniture hardware: mechanisms, hinges, latches, corners",
+  };
+  const tagline = taglines[locale as keyof typeof taglines] ?? taglines.ua;
 
   return new ImageResponse(
     (

@@ -7,10 +7,10 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://furnit-pro.vercel.a
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
-  const isUa = locale === "ua";
+  const titles = { ua: "Вхід", ru: "Вход", en: "Login" };
 
   return {
-    title: isUa ? "Вхід" : "Login",
+    title: titles[locale as keyof typeof titles] ?? titles.ua,
     // Утилітарна сторінка без унікального контенту — не повинна індексуватись
     robots: { index: false, follow: true },
     alternates: {

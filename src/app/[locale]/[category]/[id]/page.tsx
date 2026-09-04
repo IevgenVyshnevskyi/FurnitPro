@@ -36,6 +36,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     ? t(`descriptions.${product.name}`)
     : product.description;
 
+  const ogLocales = { ua: "uk_UA", ru: "ru_RU", en: "en_US" };
+
   return {
     metadataBase: new URL(siteUrl),
     title: `${name} — Фурніт-Про`,
@@ -45,13 +47,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description,
       images: [`${siteUrl}${product.imageSrc.image}`],
       url: `${siteUrl}/${locale}/${category}/${id}`,
-      locale: locale === "ua" ? "uk_UA" : "en_US",
+      locale: ogLocales[locale as keyof typeof ogLocales] ?? ogLocales.ua,
       type: "website",
     },
     alternates: {
       canonical: `${siteUrl}/${locale}/${category}/${id}`,
       languages: {
         uk: `${siteUrl}/ua/${category}/${id}`,
+        ru: `${siteUrl}/ru/${category}/${id}`,
         en: `${siteUrl}/en/${category}/${id}`,
       },
     },

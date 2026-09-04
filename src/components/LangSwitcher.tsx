@@ -7,12 +7,25 @@ type LangSwitcherProps = {
   mobile?: boolean;
 };
 
+const LOCALES = ["ua", "ru", "en"] as const;
+type Locale = (typeof LOCALES)[number];
+
+const FLAGS: Record<Locale, { src: string; alt: string }> = {
+  ua: { src: "/flags/ua-flag.svg", alt: "UA" },
+  ru: { src: "/flags/ru-flag.svg", alt: "RU" },
+  en: { src: "/flags/uk-flag.svg", alt: "GB" },
+};
+
 export default function LangSwitcher({ mobile = false }: LangSwitcherProps) {
   const pathname = usePathname(); // поточний шлях
   const router = useRouter();
 
   const segments = pathname.split("/").filter(Boolean);
-  const currentLang = segments[0] === "ua" ? "ua" : "en";
+  const currentLang: Locale = (
+    LOCALES as readonly string[]
+  ).includes(segments[0])
+    ? (segments[0] as Locale)
+    : "ua";
   const restSegments = segments.slice(1).join("/"); // всі сегменти крім локалі
 
   // клас для контейнера
@@ -22,50 +35,42 @@ export default function LangSwitcher({ mobile = false }: LangSwitcherProps) {
 
   const flagSizeClass = mobile ? "h-4 w-6" : "h-5 w-8";
 
-  const getFlagClass = (lang: string) =>
+  const getFlagClass = (lang: Locale) =>
     currentLang === lang
       ? "opacity-100 border-2 border-white rounded"
       : "opacity-50";
 
   // формуємо чисті URL без повторної локалі
-  const getHref = (lang: "ua" | "en") => {
+  const getHref = (lang: Locale) => {
     // прибираємо зайву локаль, якщо вона є
-    const cleanRest = restSegments.replace(/^(ua|en)\//, "");
+    const cleanRest = restSegments.replace(/^(ua|ru|en)\//, "");
     return `/${lang}${cleanRest ? "/" + cleanRest : ""}`;
   };
 
-  const handleClick = (lang: "ua" | "en") => {
+  const handleClick = (lang: Locale) => {
     const href = getHref(lang);
     router.push(href);
   };
 
   return (
     <div className={containerClass}>
-      <button
-        onClick={() => handleClick("ua")}
-        className={`${flagSizeClass} ${getFlagClass("ua")}`}
-      >
-        <Image
-          src="/flags/ua-flag.svg"
-          alt="UA"
-          width={500}
-          height={500}
-          className="h-full w-full"
-        />
-      </button>
-      <span className="text-white">|</span>
-      <button
-        onClick={() => handleClick("en")}
-        className={`${flagSizeClass} ${getFlagClass("en")}`}
-      >
-        <Image
-          src="/flags/uk-flag.svg"
-          alt="GB"
-          width={500}
-          height={500}
-          className="h-full w-full"
-        />
-      </button>
+      {LOCALES.map((lang, idx) => (
+        <div key={lang} className="flex items-center gap-2">
+          {idx > 0 && <span className="text-white">|</span>}
+          <button
+            onClick={() => handleClick(lang)}
+            className={`${flagSizeClass} ${getFlagClass(lang)}`}
+          >
+            <Image
+              src={FLAGS[lang].src}
+              alt={FLAGS[lang].alt}
+              width={500}
+              height={500}
+              className="h-full w-full"
+            />
+          </button>
+        </div>
+      ))}
     </div>
   );
 }

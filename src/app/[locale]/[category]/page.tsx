@@ -24,7 +24,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   const categoryName = tCategory(`categories.${category}`);
   const title = `${categoryName} — Фурніт-Про`;
-  const description = `Купити меблеву фурнітуру у категорії ${categoryName}`;
+  const descriptionTemplates = {
+    ua: `Купити меблеву фурнітуру у категорії ${categoryName}`,
+    ru: `Купить мебельную фурнитуру в категории ${categoryName}`,
+    en: `Buy furniture hardware in the ${categoryName} category`,
+  };
+  const ogLocales = { ua: "uk_UA", ru: "ru_RU", en: "en_US" };
+  const key = locale as keyof typeof descriptionTemplates;
+  const description = descriptionTemplates[key] ?? descriptionTemplates.ua;
 
   return {
     metadataBase: new URL(siteUrl),
@@ -35,13 +42,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description,
       url: `${siteUrl}/${locale}/${category}`,
       siteName: "Фурніт-Про",
-      locale: locale === "ua" ? "uk_UA" : "en_US",
+      locale: ogLocales[key] ?? ogLocales.ua,
       type: "website",
     },
     alternates: {
       canonical: `${siteUrl}/${locale}/${category}`,
       languages: {
         uk: `${siteUrl}/ua/${category}`,
+        ru: `${siteUrl}/ru/${category}`,
         en: `${siteUrl}/en/${category}`,
       },
     },

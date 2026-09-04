@@ -13,7 +13,7 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://furnit-pro.vercel.a
 
 export default function AppBreadcrumbs() {
   const pathname = usePathname();
-  const { locale } = useParams(); // "ua" або "en"
+  const { locale } = useParams(); // "ua", "ru" або "en"
   const t = useTranslations("Breadcrumbs");
   const tProduct = useTranslations("ProductPage");
   const localizeHref = useLocalizedHref();

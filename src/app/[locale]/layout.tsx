@@ -18,14 +18,22 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  const isUa = locale === "ua";
 
-  const title = isUa
-    ? "Фурніт-Про — Меблева фурнітура"
-    : "FurnitPro — Furniture Hardware";
-  const description = isUa
-    ? "Магазин меблевої фурнітури: механізми, петлі, зачепи та кутки з доставкою по Україні."
-    : "Furniture hardware store: mechanisms, hinges, latches and corners, delivered across Ukraine.";
+  const titles = {
+    ua: "Фурніт-Про — Меблева фурнітура",
+    ru: "Фурнит-Про — Мебельная фурнитура",
+    en: "FurnitPro — Furniture Hardware",
+  };
+  const descriptions = {
+    ua: "Магазин меблевої фурнітури: механізми, петлі, зачепи та кутки з доставкою по Україні.",
+    ru: "Магазин мебельной фурнитуры: механизмы, петли, крючки и уголки с доставкой по Украине.",
+    en: "Furniture hardware store: mechanisms, hinges, latches and corners, delivered across Ukraine.",
+  };
+  const ogLocales = { ua: "uk_UA", ru: "ru_RU", en: "en_US" };
+
+  const key = locale as keyof typeof titles;
+  const title = titles[key] ?? titles.ua;
+  const description = descriptions[key] ?? descriptions.ua;
 
   return {
     title,
@@ -34,6 +42,7 @@ export async function generateMetadata({
       canonical: `${siteUrl}/${locale}`,
       languages: {
         uk: `${siteUrl}/ua`,
+        ru: `${siteUrl}/ru`,
         en: `${siteUrl}/en`,
       },
     },
@@ -41,7 +50,7 @@ export async function generateMetadata({
       title,
       description,
       siteName: "Фурніт-Про",
-      locale: isUa ? "uk_UA" : "en_US",
+      locale: ogLocales[key] ?? ogLocales.ua,
       type: "website",
     },
   };

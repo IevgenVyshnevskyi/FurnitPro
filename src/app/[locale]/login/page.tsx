@@ -27,24 +27,24 @@ export default async function LoginPage({ params }: Props) {
 
   return (
     <main className="container mx-auto px-4 pt-16 pb-8 sm:pt-24 max-w-3xl">
-      <h1 className="text-3xl font-bold mb-4 text-gray-900">{t("title")}</h1>
-      <p className="text-gray-600 mb-8">{t("intro")}</p>
+      <h1 className="text-3xl font-bold mb-4 text-gray-900 dark:text-white">{t("title")}</h1>
+      <p className="text-gray-600 dark:text-gray-400 mb-8">{t("intro")}</p>
 
-      <h2 className="text-xl font-semibold mb-4 text-gray-900">
+      <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-white">
         {t("benefitsTitle")}
       </h2>
       <ul className="grid gap-4 sm:grid-cols-3">
         {benefits.map((key) => (
           <li
             key={key}
-            className="rounded-xl bg-white p-5 shadow-md text-gray-700"
+            className="rounded-xl bg-white dark:bg-gray-800 p-5 shadow-md text-gray-700 dark:text-gray-300"
           >
             {t(`benefits.${key}`)}
           </li>
         ))}
       </ul>
 
-      <p className="mt-8 text-gray-600">{t("contact")}</p>
+      <p className="mt-8 text-gray-600 dark:text-gray-400">{t("contact")}</p>
     </main>
   );
 }

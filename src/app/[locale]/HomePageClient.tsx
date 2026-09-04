@@ -43,14 +43,14 @@ export default function HomePageClient() {
   return (
     <div className="bg-gray-0 min-h-screen mb-[-30] sm:mb-[-10] md:mb-[-30]">
       <div className="mx-auto max-w-7xl px-4 pt-12 pb-2 sm:px-6 sm:py-24">
-        <h1 className="text-3xl font-bold mb-8 text-gray-900">{t("title")}</h1>
+        <h1 className="text-3xl font-bold mb-8 text-gray-900 dark:text-white">{t("title")}</h1>
 
         <div className="grid grid-cols-2 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {categories.map((cat) => (
             <Link
               key={cat.id}
               href={localizeHref(`${cat.category}`)}
-              className="group relative rounded-2xl bg-white p-4 shadow-md hover:shadow-xl transition-shadow duration-300
+              className="group relative rounded-2xl bg-white dark:bg-gray-800 p-4 shadow-md hover:shadow-xl transition-shadow duration-300
                          sm:hover:scale-105 sm:hover:opacity-90 sm:duration-300 transition-transform
                          block"
             >
@@ -78,7 +78,7 @@ export default function HomePageClient() {
               </div>
 
               {/* Текст */}
-              <h3 className="mt-4 text-lg font-semibold text-gray-800 capitalize">
+              <h3 className="mt-4 text-lg font-semibold text-gray-800 dark:text-gray-100 capitalize">
                 {t(`categories.${cat.category}`)}
               </h3>
             </Link>

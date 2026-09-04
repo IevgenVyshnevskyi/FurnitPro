@@ -28,6 +28,7 @@ import { Bars3Icon, CogIcon, LinkIcon, XMarkIcon } from "@heroicons/react/24/out
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 
 import LangSwitcher from "./LangSwitcher";
+import ThemeSwitcher from "./ThemeSwitcher";
 import AppBreadcrumbs from "./AppBreadcrumbs";
 
 // Іконки підібрані за змістом категорії: механізм (шестерня), зачіп (ланка),
@@ -81,8 +82,11 @@ export default function Header() {
   const localizeHref = useLocalizedHref();
 
   return (
-    <>
-      <header className="sticky top-0 z-40 bg-gray-900">
+    // Хедер і хлібні крихти обгорнуті ОДНИМ sticky-контейнером, щоб вони
+    // прилипали до верху разом — якби sticky був лише на <header>, крихти
+    // (звичайний потік документа) заїжджали б під непрозорий хедер при скролі
+    <div className="sticky top-0 z-40">
+      <header className="bg-gray-900">
         <nav
           aria-label="Global"
           className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8"
@@ -200,6 +204,7 @@ export default function Header() {
               </PopoverPanel>
             </Popover>
           </PopoverGroup>
+          <ThemeSwitcher />
           <LangSwitcher />
         </nav>
 
@@ -226,6 +231,7 @@ export default function Header() {
                   className="transition hover:opacity-60 rounded-sm ml-[-6] lg:ml-[0]"
                 />
               </Link>
+              <ThemeSwitcher mobile />
               <LangSwitcher mobile />
               <button
                 type="button"
@@ -320,6 +326,6 @@ export default function Header() {
         </Dialog>
       </header>
       <AppBreadcrumbs />
-    </>
+    </div>
   );
 }

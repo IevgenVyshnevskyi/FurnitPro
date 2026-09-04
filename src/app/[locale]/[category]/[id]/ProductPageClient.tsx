@@ -35,7 +35,7 @@ export default function ProductPageClient({ product }: Props) {
   if (!product) {
     return (
       <div className="flex flex-col items-center justify-center min-h-screen px-4">
-        <h1 className="text-3xl font-bold mb-4">{t("productNotFound")}</h1>
+        <h1 className="text-3xl font-bold mb-4 text-gray-900 dark:text-white">{t("productNotFound")}</h1>
         <Link
           href={localizeHref("/")}
           className="text-blue-600 hover:underline"
@@ -57,8 +57,8 @@ export default function ProductPageClient({ product }: Props) {
       <ProductSchema product={product} />
 
       <div className="flex flex-col items-center justify-center min-h-screen px-4 pt-10 pb-0">
-        <div className="max-w-4xl w-full text-center sm:text-left bg-white p-6 rounded-xl shadow-lg">
-          <h1 className="text-3xl font-bold mb-6 text-gray-900">
+        <div className="max-w-4xl w-full text-center sm:text-left bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg">
+          <h1 className="text-3xl font-bold mb-6 text-gray-900 dark:text-white">
             {product.name}
           </h1>
 
@@ -131,15 +131,15 @@ export default function ProductPageClient({ product }: Props) {
             </div>
 
             {/* Інформація */}
-            <div className="w-full md:w-1/2 text-center md:text-left mt-[-16] md:mt-0 p-2 md:p-4 border rounded-xl shadow-sm bg-gray-50">
-              <div className="pb-2 mb-2 md:pb-4 md:mb-4 border-b border-gray-200">
-                <p className="text-2xl md:text-3xl font-extrabold text-blue-600">
+            <div className="w-full md:w-1/2 text-center md:text-left mt-[-16] md:mt-0 p-2 md:p-4 border dark:border-gray-700 rounded-xl shadow-sm bg-gray-50 dark:bg-gray-900">
+              <div className="pb-2 mb-2 md:pb-4 md:mb-4 border-b border-gray-200 dark:border-gray-700">
+                <p className="text-2xl md:text-3xl font-extrabold text-blue-600 dark:text-blue-400">
                   {product.price}
                 </p>
               </div>
 
               {details.length > 0 && (
-                <dl className="space-y-1 text-sm text-gray-700 mb-4">
+                <dl className="space-y-1 text-sm text-gray-700 dark:text-gray-300 mb-4">
                   {details.map((d) => (
                     <div
                       key={d.label}
@@ -154,10 +154,10 @@ export default function ProductPageClient({ product }: Props) {
 
               {product.description && (
                 <div>
-                  <p className="font-semibold text-sm text-gray-800 mb-1">
+                  <p className="font-semibold text-sm text-gray-800 dark:text-gray-200 mb-1">
                     {t("description")}
                   </p>
-                  <p className="text-sm text-gray-600">
+                  <p className="text-sm text-gray-600 dark:text-gray-400">
                     {product.description}
                   </p>
                 </div>

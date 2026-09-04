@@ -36,26 +36,26 @@ export default async function PrivacyPage({ params }: Props) {
 
   return (
     <main className="container mx-auto px-4 pt-16 pb-8 sm:pt-24 max-w-3xl">
-      <h1 className="text-3xl font-bold mb-2 text-gray-900">{t("title")}</h1>
-      <p className="text-sm text-gray-400 mb-6">{t("updated")}</p>
-      <p className="text-gray-600 mb-8">{t("intro")}</p>
+      <h1 className="text-3xl font-bold mb-2 text-gray-900 dark:text-white">{t("title")}</h1>
+      <p className="text-sm text-gray-400 dark:text-gray-500 mb-6">{t("updated")}</p>
+      <p className="text-gray-600 dark:text-gray-400 mb-8">{t("intro")}</p>
 
       <div className="space-y-6">
         {sections.map((key) => (
           <section key={key}>
-            <h2 className="text-xl font-semibold mb-2 text-gray-900">
+            <h2 className="text-xl font-semibold mb-2 text-gray-900 dark:text-white">
               {t(`sections.${key}Title`)}
             </h2>
-            <p className="text-gray-600">{t(`sections.${key}`)}</p>
+            <p className="text-gray-600 dark:text-gray-400">{t(`sections.${key}`)}</p>
           </section>
         ))}
       </div>
 
-      <p className="mt-8 text-gray-600">
+      <p className="mt-8 text-gray-600 dark:text-gray-400">
         {t("contact")}
         <a
           href="mailto:furnitpro7@gmail.com"
-          className="text-blue-600 hover:underline"
+          className="text-blue-600 dark:text-blue-400 hover:underline"
         >
           furnitpro7@gmail.com
         </a>

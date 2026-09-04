@@ -1,58 +1,53 @@
-/* "use client";
+"use client";
 
-import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
-import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
+import { useTheme } from "next-themes";
 import { Sun, Moon, Laptop } from "lucide-react";
 
-export default function ThemeSwitcher() {
-  const { theme, setTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
+type ThemeSwitcherProps = {
+  mobile?: boolean;
+};
 
+const OPTIONS = [
+  { value: "light", icon: Sun, label: "Світла" },
+  { value: "dark", icon: Moon, label: "Темна" },
+  { value: "system", icon: Laptop, label: "Системна" },
+] as const;
+
+export default function ThemeSwitcher({ mobile = false }: ThemeSwitcherProps) {
+  const { theme, setTheme } = useTheme();
+  // next-themes не знає поточну тему до монтування на клієнті (щоб уникнути
+  // розбіжності SSR/CSR) — до монтування нічого не рендеримо
+  const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
-  if (!mounted) return null;
+
+  const containerClass = mobile
+    ? "flex gap-3 justify-center items-center"
+    : "hidden lg:flex items-center gap-1 rounded-full bg-white/10 p-1";
+
+  if (!mounted) {
+    // Плейсхолдер того самого розміру, щоб уникнути стрибка макета після монтування
+    return <div className={containerClass} style={{ visibility: "hidden" }} aria-hidden="true" />;
+  }
 
   return (
-    <DropdownMenu.Root>
-      <DropdownMenu.Trigger asChild>
-        <button className="flex items-center gap-2 px-3 py-2 rounded-xl border bg-white dark:bg-gray-800 shadow hover:bg-gray-100 dark:hover:bg-gray-700 transition">
-          {theme === "dark" ? (
-            <Moon className="w-5 h-5 text-gray-300" />
-          ) : theme === "light" ? (
-            <Sun className="w-5 h-5 text-yellow-500" />
-          ) : (
-            <Laptop className="w-5 h-5 text-blue-500" />
-          )}
-          <span className="text-sm capitalize">{theme}</span>
+    <div className={containerClass}>
+      {OPTIONS.map(({ value, icon: Icon, label }) => (
+        <button
+          key={value}
+          type="button"
+          onClick={() => setTheme(value)}
+          aria-label={label}
+          aria-pressed={theme === value}
+          className={`flex items-center justify-center rounded-full p-1.5 transition-colors ${
+            theme === value
+              ? "bg-white text-gray-900"
+              : "text-gray-400 hover:text-white"
+          }`}
+        >
+          <Icon className="size-4" aria-hidden="true" />
         </button>
-      </DropdownMenu.Trigger>
-
-      <DropdownMenu.Content
-        className="min-w-[160px] bg-white dark:bg-gray-800 rounded-xl shadow-lg p-1"
-        sideOffset={8}
-      >
-        <DropdownMenu.Item
-          className="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer"
-          onClick={() => setTheme("light")}
-        >
-          <Sun className="w-4 h-4 text-yellow-500" /> Light
-        </DropdownMenu.Item>
-
-        <DropdownMenu.Item
-          className="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer"
-          onClick={() => setTheme("dark")}
-        >
-          <Moon className="w-4 h-4 text-gray-300" /> Dark
-        </DropdownMenu.Item>
-
-        <DropdownMenu.Item
-          className="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer"
-          onClick={() => setTheme("system")}
-        >
-          <Laptop className="w-4 h-4 text-blue-500" /> System
-        </DropdownMenu.Item>
-      </DropdownMenu.Content>
-    </DropdownMenu.Root>
+      ))}
+    </div>
   );
 }
- */

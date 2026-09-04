@@ -6,6 +6,7 @@ import "./globals.css";
 import BackgroundLayout from "@/components/BackgroundLayout";
 import OrganizationSchema from "@/components/OrganizationSchema";
 import { NextIntlClientProvider } from "next-intl";
+import { ThemeProvider } from "next-themes";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -75,12 +76,17 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html className="light">
+    // suppressHydrationWarning: next-themes виставляє клас .light/.dark на <html>
+    // інлайн-скриптом до гідратації — без цього React зайве попереджав би про
+    // розбіжність між серверним і клієнтським рендером
+    <html suppressHydrationWarning>
       <body className={`${geistSans.variable} ${geistMono.variable} h-full`}>
         <OrganizationSchema />
-        <NextIntlClientProvider>
-          <BackgroundLayout>{children}</BackgroundLayout>
-        </NextIntlClientProvider>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <NextIntlClientProvider>
+            <BackgroundLayout>{children}</BackgroundLayout>
+          </NextIntlClientProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

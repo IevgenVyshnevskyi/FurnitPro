@@ -22,7 +22,7 @@ export default function CategoryPageClient({
   if (!products?.length) {
     return (
       <div className="flex flex-col items-center justify-center min-h-screen px-4">
-        <h1 className="text-3xl font-bold mb-4">{t("notFound")}</h1>
+        <h1 className="text-3xl font-bold mb-4 text-gray-900 dark:text-white">{t("notFound")}</h1>
         <Link
           href={localizeHref("/")}
           className="text-blue-600 hover:underline"
@@ -36,7 +36,7 @@ export default function CategoryPageClient({
   return (
     <div className="bg-gray-0 min-h-screen">
       <div className="px-4 pt-12 pb-2 mx-auto max-w-7xl sm:px-6 sm:py-24">
-        <h1 className="text-3xl font-bold mb-8 text-gray-900 capitalize">
+        <h1 className="text-3xl font-bold mb-8 text-gray-900 dark:text-white capitalize">
           {t(`categories.${category}`)}
         </h1>
 
@@ -47,7 +47,7 @@ export default function CategoryPageClient({
 
               <Link
                 href={localizeHref(`${product.category}/${product.id}`)}
-                className="group relative rounded-2xl bg-white p-4 shadow-md transition-shadow duration-300
+                className="group relative rounded-2xl bg-white dark:bg-gray-800 p-4 shadow-md transition-shadow duration-300
                    sm:hover:scale-105 sm:hover:opacity-90
                    block flex flex-col"
               >
@@ -71,11 +71,11 @@ export default function CategoryPageClient({
                   </div>
                 </div>
 
-                <h3 className="mt-4 text-lg font-semibold text-gray-800">
+                <h3 className="mt-4 text-lg font-semibold text-gray-800 dark:text-gray-100">
                   {product.name}
                 </h3>
 
-                <p className="mt-auto text-lg font-medium text-gray-900">
+                <p className="mt-auto text-lg font-medium text-gray-900 dark:text-white">
                   {product.price}
                 </p>
               </Link>

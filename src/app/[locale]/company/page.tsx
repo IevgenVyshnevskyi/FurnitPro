@@ -31,35 +31,35 @@ export default async function CompanyPage({ params }: Props) {
 
   return (
     <main className="container mx-auto px-4 pt-16 pb-8 sm:pt-24 max-w-4xl">
-      <h1 className="text-3xl font-bold mb-4 text-gray-900">{t("title")}</h1>
-      <p className="text-gray-600 mb-8">{t("intro")}</p>
+      <h1 className="text-3xl font-bold mb-4 text-gray-900 dark:text-white">{t("title")}</h1>
+      <p className="text-gray-600 dark:text-gray-400 mb-8">{t("intro")}</p>
 
-      <h2 className="text-xl font-semibold mb-2 text-gray-900">
+      <h2 className="text-xl font-semibold mb-2 text-gray-900 dark:text-white">
         {t("approachTitle")}
       </h2>
-      <p className="text-gray-600 mb-8">{t("approach")}</p>
+      <p className="text-gray-600 dark:text-gray-400 mb-8">{t("approach")}</p>
 
       <ul className="grid gap-4 sm:grid-cols-3">
         {values.map((key) => (
           <li
             key={key}
-            className="rounded-xl bg-white p-5 shadow-md text-gray-700"
+            className="rounded-xl bg-white dark:bg-gray-800 p-5 shadow-md text-gray-700 dark:text-gray-300"
           >
             {t(`values.${key}`)}
           </li>
         ))}
       </ul>
 
-      <h2 className="text-xl font-semibold mt-10 mb-4 text-gray-900">
+      <h2 className="text-xl font-semibold mt-10 mb-4 text-gray-900 dark:text-white">
         {t("processTitle")}
       </h2>
       <ol className="grid gap-4 sm:grid-cols-2">
         {processSteps.map((key, idx) => (
           <li
             key={key}
-            className="rounded-xl bg-white p-5 shadow-md text-gray-700"
+            className="rounded-xl bg-white dark:bg-gray-800 p-5 shadow-md text-gray-700 dark:text-gray-300"
           >
-            <div className="flex items-center gap-2 mb-1 font-semibold text-gray-900">
+            <div className="flex items-center gap-2 mb-1 font-semibold text-gray-900 dark:text-white">
               <span className="flex h-6 w-6 flex-none items-center justify-center rounded-full bg-blue-600 text-sm font-semibold text-white">
                 {idx + 1}
               </span>
@@ -70,10 +70,10 @@ export default async function CompanyPage({ params }: Props) {
         ))}
       </ol>
 
-      <h2 className="text-xl font-semibold mt-10 mb-2 text-gray-900">
+      <h2 className="text-xl font-semibold mt-10 mb-2 text-gray-900 dark:text-white">
         {t("audienceTitle")}
       </h2>
-      <p className="text-gray-600">{t("audience")}</p>
+      <p className="text-gray-600 dark:text-gray-400">{t("audience")}</p>
     </main>
   );
 }

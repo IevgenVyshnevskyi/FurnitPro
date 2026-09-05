@@ -231,17 +231,17 @@
   },
   "PrivacyPage": {
     "title": "Privacy Policy",
-    "updated": "Last updated: 2026",
-    "intro": "FurnitPro respects the privacy of website visitors. This page explains what data we collect and how we use it.",
+    "updated": "Last updated: September 2026",
+    "intro": "FurnitPro respects the privacy of website visitors. This page explains how we handle data while you use the site.",
     "sections": {
       "collectionTitle": "What Data We Collect",
-      "collection": "We only collect the data you provide yourself when contacting us through the contact form, messenger, email, or phone — typically your name, phone number, and email address.",
+      "collection": "Our site has no contact form or account system — it does not collect, receive, or store any personal data (name, phone number, email) on the server. The contact buttons (call, messenger, email) open your own phone or app — your message is sent directly from your device, without passing through our server.",
       "useTitle": "How We Use Your Data",
-      "use": "The data we receive is used solely to process inquiries, provide guidance on our product range, and coordinate orders. We do not share your data with third parties or use it for mailings without your consent.",
+      "use": "Since the site doesn't store any personal data, there is nothing for us to process on our end. A call, a messenger conversation, or an email happens directly between you and us through your own app — its content stays there, not on our server.",
       "cookiesTitle": "Cookies",
-      "cookies": "The site uses technical cookies required for it to function correctly (for example, remembering your selected interface language).",
+      "cookies": "The site does not use cookies to collect personal data or for analytics. Browser local storage (localStorage) is used only to remember your chosen theme (light/dark) — this data never leaves your device.",
       "rightsTitle": "Your Rights",
-      "rights": "You may request to view, correct, or delete the data you've provided to us at any time by writing to the email address below."
+      "rights": "Since we don't store your personal data on our server, requests to view, correct, or delete such data don't apply. If you have any privacy questions, please email us at the address below."
     },
     "contact": "For privacy questions, contact: "
   },

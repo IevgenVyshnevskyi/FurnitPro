@@ -50,3 +50,30 @@ body {
 .animate-shake {
   animation: shake 0.6s ease-in-out;
 }
+
+/* Custom scrollbar matching the site's purple accent, instead of the OS's
+   native light/dark scrollbar that color-scheme would otherwise draw */
+html {
+  scrollbar-color: #7e22ce transparent;
+  scrollbar-width: thin;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #7e22ce;
+  border-radius: 9999px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #6b21a8;
+}

@@ -6,16 +6,16 @@ import ScrollToTop from "./ScrollToTop";
 import FloatingContactButton from "./FloatingContactButton";
 import FloatingSocials from "./FloatingSocials";
 import { useTranslations } from "next-intl";
-import { useLocalizedHref } from "@/hooks/useLocalizedHref"; // ✅ імпорт хуку
+import { useLocalizedHref } from "@/hooks/useLocalizedHref";
 
 export default function Footer() {
-  const t = useTranslations("Footer"); // Ініціалізуємо хук для доступу до перекладів у просторі імен "Footer"
+  const t = useTranslations("Footer"); // Initializes the hook for translations in the "Footer" namespace
   const localizeHref = useLocalizedHref();
 
   return (
     <footer className="w-full bg-gray-900 text-gray-300 mt-10">
       <div className="container mx-auto px-4 py-6 grid grid-cols-1 md:grid-cols-3 gap-6">
-        {/* Про компанію */}
+        {/* About us */}
         <div>
           <h2 className="text-lg font-semibold text-white">
             {t("aboutUsTitle")}
@@ -23,7 +23,7 @@ export default function Footer() {
           <p className="mt-2 text-sm">{t("aboutUsText")}</p>
         </div>
 
-        {/* Швидкі посилання */}
+        {/* Quick links */}
         <div>
           <h2 className="text-lg font-semibold text-white">
             {t("quickLinksTitle")}
@@ -47,7 +47,7 @@ export default function Footer() {
           </ul>
         </div>
 
-        {/* Контакти */}
+        {/* Contacts */}
         <div>
           <h2 className="text-lg font-semibold text-white">
             {t("contactTitle")}
@@ -87,7 +87,7 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Нижня лінія */}
+      {/* Bottom line */}
       <div className="border-t border-gray-700 text-center py-4 text-sm">
         © {new Date().getFullYear()} FurnitPro. {t("copyright")}
       </div>

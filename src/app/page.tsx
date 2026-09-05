@@ -1,4 +1,6 @@
 // src/app/page.tsx
+// Fallback root page — the real homepage lives at src/app/[locale]/page.tsx;
+// this only serves visitors on a locale-less "/" that middleware missed.
 import Script from "next/script";
 
 export const metadata = {
@@ -19,8 +21,8 @@ export default function HomePage() {
       </Script>
 
       <main>
-        <h1>{/* Ласкаво просимо на Фурніт-Про! */}</h1>
-        {/* Тут можеш додати головний контент */}
+        <h1>{/* Welcome to FurnitPro! */}</h1>
+        {/* Main content can be added here */}
       </main>
     </>
   );

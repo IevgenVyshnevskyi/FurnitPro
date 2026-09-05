@@ -16,8 +16,8 @@ const OPTIONS = [
 
 export default function ThemeSwitcher({ mobile = false }: ThemeSwitcherProps) {
   const { theme, setTheme } = useTheme();
-  // next-themes не знає поточну тему до монтування на клієнті (щоб уникнути
-  // розбіжності SSR/CSR) — до монтування нічого не рендеримо
+  // next-themes doesn't know the current theme until mounted on the client
+  // (to avoid an SSR/CSR mismatch) — render nothing before mount
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
 
@@ -26,7 +26,7 @@ export default function ThemeSwitcher({ mobile = false }: ThemeSwitcherProps) {
     : "hidden lg:flex items-center gap-1 rounded-full bg-white/10 p-1";
 
   if (!mounted) {
-    // Плейсхолдер того самого розміру, щоб уникнути стрибка макета після монтування
+    // Same-sized placeholder to avoid a layout shift after mounting
     return <div className={containerClass} style={{ visibility: "hidden" }} aria-hidden="true" />;
   }
 

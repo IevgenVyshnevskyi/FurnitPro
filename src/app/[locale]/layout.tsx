@@ -58,7 +58,7 @@ export async function generateMetadata({
 
 export default async function RootLayout({ children, params }: Props) {
   const { locale } = await params;
-  // Якщо URL не містить мови, перенаправляємо на українську
+  // If the URL doesn't include a locale, redirect to Ukrainian
   if (!locale) {
     redirect("/ua");
   }

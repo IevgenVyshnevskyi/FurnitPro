@@ -8,7 +8,7 @@ import Image from "next/image";
 import kyivstarLogo from "./../../public/images/phones/kyivstar.jpeg";
 import { useTranslations } from "next-intl";
 
-// Тривалість одного циклу показу тексту/іконки
+// Duration of one text/icon display cycle
 const TEXT_CYCLE_MS = 5000;
 
 export default function FloatingContactButton() {
@@ -20,7 +20,7 @@ export default function FloatingContactButton() {
 
   const t = useTranslations("FloatingContactButton");
 
-  // Визначення мобільного режиму
+  // Detect mobile mode
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth <= 768);
     checkMobile();
@@ -28,7 +28,7 @@ export default function FloatingContactButton() {
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
-  // Закриття при кліку поза блоком (тільки для мобільного)
+  // Close on click outside the block (mobile only)
   useEffect(() => {
     if (!isMobile || !open) return;
 
@@ -45,14 +45,14 @@ export default function FloatingContactButton() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [isMobile, open]);
 
-  // Перемикання між текстом і іконкою
+  // Toggle between text and icon
   useEffect(() => {
     const interval = setInterval(() => setShowText((prev) => !prev), TEXT_CYCLE_MS);
     return () => clearInterval(interval);
   }, []);
 
-  // Анімація вібрації — з пропорційною затримкою від появи іконки,
-  // а не одразу в момент зникнення тексту
+  // Vibration animation — with a delay proportional to the icon's appearance,
+  // rather than firing right when the text disappears
   useEffect(() => {
     if (showText) return;
 
@@ -68,7 +68,7 @@ export default function FloatingContactButton() {
     };
   }, [showText]);
 
-  // Кнопки операторів
+  // Operator buttons
   const buttons = [
     {
       icon: <SiVodafone className={isMobile ? "w-5 h-5" : "w-7 h-7"} />,
@@ -119,7 +119,7 @@ export default function FloatingContactButton() {
       }}
       onMouseLeave={() => !isMobile && setOpen(false)}
     >
-      {/* Головна кнопка */}
+      {/* Main button */}
       <div
         className={`rounded-full bg-purple-900 flex items-center justify-center text-white text-lg cursor-pointer transition-all duration-500 relative overflow-hidden ${
           open ? "opacity-100" : "opacity-60"
@@ -153,7 +153,7 @@ export default function FloatingContactButton() {
         </div>
       </div>
 
-      {/* Кнопки операторів */}
+      {/* Operator buttons */}
       <div className="flex items-center" style={{ gap: gapSize }}>
         {(isMobile ? mobileButtons : buttons).map((btn, idx) => (
           <a
@@ -183,7 +183,7 @@ export default function FloatingContactButton() {
         ))}
       </div>
 
-      {/* Анімація вібрації */}
+      {/* Vibration animation */}
       <style jsx>{`
         @keyframes vibrateOnce {
           0% {

@@ -63,7 +63,7 @@ export default function ProductPageClient({ product }: Props) {
           </h1>
 
           <div className="flex flex-col md:flex-row items-center md:items-start gap-8">
-            {/* Галерея */}
+            {/* Gallery */}
             <div className="w-full md:w-1/2">
               {images.length > 1 ? (
                 <div className="relative">
@@ -82,7 +82,7 @@ export default function ProductPageClient({ product }: Props) {
                     ))}
                   </div>
 
-                  {/* Кнопки навігації */}
+                  {/* Navigation buttons */}
                   <button
                     onClick={() => {
                       instanceRef.current?.prev();
@@ -103,7 +103,7 @@ export default function ProductPageClient({ product }: Props) {
                     <FaChevronRight />
                   </button>
 
-                  {/* Індикатори */}
+                  {/* Indicators */}
                   <div className="absolute bottom-3 w-full flex justify-center gap-2">
                     {images.map((_, idx) => (
                       <button
@@ -130,7 +130,7 @@ export default function ProductPageClient({ product }: Props) {
               )}
             </div>
 
-            {/* Інформація */}
+            {/* Info */}
             <div className="w-full md:w-1/2 text-center md:text-left mt-[-16] md:mt-0 p-2 md:p-4 border dark:border-gray-700 rounded-xl shadow-sm bg-gray-50 dark:bg-gray-900">
               <div className="pb-2 mb-2 md:pb-4 md:mb-4 border-b border-gray-200 dark:border-gray-700">
                 <p className="text-2xl md:text-3xl font-extrabold text-blue-600 dark:text-blue-400">

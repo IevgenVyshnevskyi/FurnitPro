@@ -13,7 +13,7 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://furnit-pro.vercel.a
 
 export default function AppBreadcrumbs() {
   const pathname = usePathname();
-  const { locale } = useParams(); // "ua", "ru" або "en"
+  const { locale } = useParams(); // "ua", "ru" or "en"
   const t = useTranslations("Breadcrumbs");
   const tProduct = useTranslations("ProductPage");
   const localizeHref = useLocalizedHref();
@@ -22,7 +22,7 @@ export default function AppBreadcrumbs() {
   const containerRef = useRef<HTMLDivElement>(null);
   const lastItemRef = useRef<HTMLLIElement>(null);
 
-  // Перевірка мобільного режиму
+  // Check for mobile mode
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth <= 768);
     checkMobile();
@@ -30,20 +30,20 @@ export default function AppBreadcrumbs() {
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
-  // Розбиваємо шлях і прибираємо перший сегмент (locale)
+  // Split the path and drop the first segment (locale)
   let segments = pathname.split("/").filter(Boolean);
   if (segments[0] === locale) {
     segments = segments.slice(1);
   }
 
-  // Автоматичне прокручування до останньої крихти (тільки на мобільному)
+  // Auto-scroll to the last crumb (mobile only)
   useEffect(() => {
     if (isMobile && lastItemRef.current && containerRef.current) {
       lastItemRef.current.scrollIntoView({ behavior: "smooth", inline: "end" });
     }
   }, [segments, isMobile]);
 
-  // Обчислюємо крихти один раз — використовуємо і для відображення, і для JSON-LD
+  // Compute the crumbs once — used both for rendering and for JSON-LD
   const crumbs = [
     { label: t("home"), href: localizeHref("/") },
     ...segments.map((seg, idx) => {

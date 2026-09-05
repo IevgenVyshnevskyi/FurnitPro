@@ -40,9 +40,9 @@ export default function CategoryPageClient({
           {t(`categories.${category}`)}
         </h1>
 
-        {/* flex-wrap + justify-center замість grid: коли карток менше, ніж
-            вміщує рядок, вони центруються, а не лишають порожній простір
-            праворуч (grid-cols-N з 1fr завжди розтягує колонки на всю ширину) */}
+        {/* flex-wrap + justify-center instead of grid: when there are fewer cards
+            than a row can hold, they center instead of leaving empty space on
+            the right (grid-cols-N with 1fr always stretches columns to full width) */}
         <div className="flex flex-wrap justify-center gap-4">
           {products.map((product) => (
             <div

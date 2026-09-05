@@ -10,7 +10,7 @@ import { X } from "lucide-react";
 interface ProductImageZoomProps {
   src: string;
   alt?: string;
-  resetSignal?: number; // сигнал для скидання zoom при зміні слайда
+  resetSignal?: number; // signal to reset zoom when the slide changes
 }
 
 export default function ProductImageZoom({
@@ -23,18 +23,18 @@ export default function ProductImageZoom({
   const [imageLoaded, setImageLoaded] = useState(false);
   const [mounted, setMounted] = useState(false);
 
-  // Portal-контейнер (document.body) доступний лише на клієнті після монтування
+  // The portal container (document.body) is only available client-side, after mount
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  // --- Скидання стану при зміні resetSignal ---
+  // --- Reset state when resetSignal changes ---
   useEffect(() => {
     setIsFullscreen(false);
     setImageLoaded(false);
   }, [resetSignal]);
 
-  // --- Закриття по Escape та блокування скролу сторінки, поки відкрито ---
+  // --- Close on Escape and lock page scroll while open ---
   useEffect(() => {
     if (!isFullscreen) return;
 
@@ -79,8 +79,8 @@ export default function ProductImageZoom({
         />
       </div>
 
-      {/* Fullscreen — рендеримо через portal у document.body, щоб position:fixed
-          не ламався через transform на батьківському слайдері keen-slider */}
+      {/* Fullscreen — rendered through a portal into document.body so position:fixed
+          isn't broken by a transform on the parent keen-slider */}
       {mounted &&
         createPortal(
           <AnimatePresence>
@@ -96,7 +96,7 @@ export default function ProductImageZoom({
                 <button
                   onClick={handleClose}
                   className="absolute top-4 right-4 z-50 text-white bg-black/40 hover:bg-black/60 p-2 rounded-full transition-all"
-                  aria-label="Закрити"
+                  aria-label="Close"
                 >
                   <X size={24} />
                 </button>

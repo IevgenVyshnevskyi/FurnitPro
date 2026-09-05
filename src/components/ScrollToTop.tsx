@@ -17,7 +17,7 @@ export default function ScrollToTop() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Визначаємо мобільний режим
+  // Detect mobile mode
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth <= 768);
     checkMobile();
@@ -41,7 +41,7 @@ export default function ScrollToTop() {
         hover:opacity-100 bg-purple-900
       `}
       style={{
-        left: isMobile ? "16px" : "48px", // ✅ адаптивний лівий відступ
+        left: isMobile ? "16px" : "48px", // responsive left offset
       }}
       aria-label="Scroll to top"
     >

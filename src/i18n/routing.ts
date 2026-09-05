@@ -7,6 +7,6 @@ export const routing = defineRouting({
   // Used when no locale matches
   defaultLocale: "ua",
 
-  // Завжди відкривати українську за замовчуванням, а не мову браузера відвідувача
+  // Always default to Ukrainian instead of the visitor's browser language
   localeDetection: false,
 });

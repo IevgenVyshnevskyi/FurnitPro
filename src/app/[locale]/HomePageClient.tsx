@@ -45,8 +45,8 @@ export default function HomePageClient() {
       <div className="mx-auto max-w-7xl px-4 pt-12 pb-2 sm:px-6 sm:py-24">
         <h1 className="text-3xl font-bold mb-8 text-gray-900 dark:text-white">{t("title")}</h1>
 
-        {/* flex-wrap + justify-center замість grid: 4 категорії в 3-колонковій
-            сітці (lg) інакше лишали б одну картку самотньою зліва в новому рядку */}
+        {/* flex-wrap + justify-center instead of grid: 4 categories in a 3-column
+            grid (lg) would otherwise leave one card alone on the left in a new row */}
         <div className="flex flex-wrap justify-center gap-6">
           {categories.map((cat) => (
             <Link
@@ -56,7 +56,7 @@ export default function HomePageClient() {
                          sm:hover:scale-105 sm:hover:opacity-90 sm:duration-300 transition-transform
                          block w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)] xl:w-[calc(25%-1.125rem)]"
             >
-              {/* Блок з картинкою */}
+              {/* Image block */}
               <div className="relative overflow-hidden rounded-xl">
                 <Image
                   alt={cat.imageAlt}
@@ -69,7 +69,7 @@ export default function HomePageClient() {
                 {/* Overlay */}
                 <div className="absolute inset-0 rounded-xl bg-black bg-opacity-50 opacity-0 lg:group-hover:opacity-50 transition-opacity duration-300" />
 
-                {/* Кнопка */}
+                {/* Button */}
                 <div className="absolute inset-0 flex items-center justify-center">
                   <span className="hidden lg:inline-block">
                     <div className="px-4 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 transition transform scale-90 opacity-0 group-hover:opacity-100 group-hover:scale-100 duration-300">
@@ -79,7 +79,7 @@ export default function HomePageClient() {
                 </div>
               </div>
 
-              {/* Текст */}
+              {/* Text */}
               <h3 className="mt-4 text-lg font-semibold text-gray-800 dark:text-gray-100 capitalize">
                 {t(`categories.${cat.category}`)}
               </h3>

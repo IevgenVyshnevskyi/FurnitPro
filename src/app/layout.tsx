@@ -22,8 +22,8 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://furnit-pro.vercel.a
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  // Кожна сторінка сама додає суфікс бренду до свого title (напр. "... — Фурніт-Про"),
-  // тож тут навмисно НЕ використовуємо template, щоб уникнути подвійного суфікса.
+  // Each page appends the brand suffix to its own title (e.g. "... — FurnitPro"),
+  // so we deliberately do NOT use a template here to avoid a duplicate suffix.
   title: "Фурніт-Про",
   description:
     "Магазин меблевої фурнітури із локалізацією українською, російською та англійською.",
@@ -76,9 +76,9 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    // suppressHydrationWarning: next-themes виставляє клас .light/.dark на <html>
-    // інлайн-скриптом до гідратації — без цього React зайве попереджав би про
-    // розбіжність між серверним і клієнтським рендером
+    // suppressHydrationWarning: next-themes sets the .light/.dark class on <html>
+    // via an inline script before hydration — without this, React would needlessly
+    // warn about a mismatch between the server and client render
     <html suppressHydrationWarning>
       <body className={`${geistSans.variable} ${geistMono.variable} h-full`}>
         <OrganizationSchema />

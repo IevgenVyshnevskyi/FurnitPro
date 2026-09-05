@@ -9,7 +9,7 @@ export default function FloatingSocials() {
   const [isMobile, setIsMobile] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // 📏 Перевірка ширини екрану
+  // Check screen width
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth <= 768);
     checkMobile();
@@ -17,7 +17,7 @@ export default function FloatingSocials() {
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
-  // ❌ Закриття при кліку поза блоком (на мобільному)
+  // Close on click outside the block (mobile only)
   useEffect(() => {
     if (!isMobile || !open) return;
 
@@ -34,7 +34,7 @@ export default function FloatingSocials() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [isMobile, open]);
 
-  // ⚡ Динамічні розміри
+  // Dynamic sizes
   const buttonSize = isMobile ? "48px" : "56px";
   const iconSizeClass = isMobile ? "text-xl" : "text-2xl";
   const gapSize = isMobile ? "6px" : "16px";
@@ -60,7 +60,7 @@ export default function FloatingSocials() {
     },
   ];
 
-  // 📱 Мобільний режим — додаємо кнопку ❌
+  // Add a close button in mobile mode
   const mobileSocials = [
     ...socials,
     {
@@ -82,7 +82,7 @@ export default function FloatingSocials() {
       }}
       onMouseLeave={() => !isMobile && setOpen(false)}
     >
-      {/* 🔘 Головна кнопка */}
+      {/* Main button */}
       <div
         className={`rounded-full bg-purple-900 flex items-center justify-center text-white cursor-pointer transition-opacity duration-300 ${
           open ? "opacity-100" : "opacity-60"
@@ -98,7 +98,7 @@ export default function FloatingSocials() {
         <FaShareAlt className={iconSizeClass} />
       </div>
 
-      {/* 📌 Контейнер кнопок */}
+      {/* Button container */}
       <div className="flex items-center" style={{ gap: gapSize }}>
         {(isMobile ? mobileSocials : socials).map((btn, idx) => (
           <a

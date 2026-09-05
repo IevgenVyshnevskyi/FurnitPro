@@ -11,7 +11,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   return {
     title: titles[locale as keyof typeof titles] ?? titles.ua,
-    // Утилітарна сторінка без унікального контенту — не повинна індексуватись
+    // Utility page with no unique content — should not be indexed
     robots: { index: false, follow: true },
     alternates: {
       canonical: `${siteUrl}/${locale}/login`,

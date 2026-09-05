@@ -1,8 +1,8 @@
 @import "tailwindcss";
 @import "keen-slider/keen-slider.min.css";
 
-/* Tailwind v4: вмикаємо клас-стратегію для dark:, щоб вона реагувала на
-   клас .dark на <html> (керується next-themes), а не лише на системну тему */
+/* Tailwind v4: enable the class strategy for dark: so it reacts to the
+   .dark class on <html> (controlled by next-themes) instead of only the system theme */
 @custom-variant dark (&:where(.dark, .dark *));
 
 :root {

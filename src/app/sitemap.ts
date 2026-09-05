@@ -4,7 +4,7 @@ import products from "../../public/data/products";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://furnit-pro.vercel.app";
 
-// Мапа "ua" -> "uk" для коректних hreflang-кодів (справжній ISO-код української — "uk")
+// Map "ua" -> "uk" for correct hreflang codes (the real ISO code for Ukrainian is "uk")
 const hreflangByLocale: Record<string, string> = { ua: "uk", en: "en" };
 
 const categories = Array.from(new Set(products.map((p) => p.category)));
@@ -19,7 +19,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const entries: MetadataRoute.Sitemap = [];
 
   for (const locale of routing.locales) {
-    // Головна сторінка локалі
+    // Locale homepage
     entries.push({
       url: `${siteUrl}/${locale}`,
       changeFrequency: "weekly",
@@ -27,7 +27,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       alternates: { languages: languagesFor((l) => `/${l}`) },
     });
 
-    // Сторінки категорій
+    // Category pages
     for (const category of categories) {
       entries.push({
         url: `${siteUrl}/${locale}/${category}`,
@@ -37,7 +37,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       });
     }
 
-    // Сторінки товарів
+    // Product pages
     for (const product of products) {
       entries.push({
         url: `${siteUrl}/${locale}/${product.category}/${product.id}`,

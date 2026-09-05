@@ -31,8 +31,8 @@ import LangSwitcher from "./LangSwitcher";
 import ThemeSwitcher from "./ThemeSwitcher";
 import AppBreadcrumbs from "./AppBreadcrumbs";
 
-// Іконки підібрані за змістом категорії: механізм (шестерня), зачіп (ланка),
-// петля (дверцята на завісах), куток (прямий кут)
+// Icons chosen to match each category: mechanism (gear), hook (link),
+// hinge (door on hinges), corner (right angle)
 const categories = [
   { key: "mechanisms", icon: CogIcon },
   { key: "hooks", icon: LinkIcon },
@@ -40,7 +40,7 @@ const categories = [
   { key: "corners", icon: CornerRightDown },
 ];
 
-// Оновлений список телефонів з іконками
+// Updated phone list with icons
 const phoneNumbers = [
   {
     number: "+380963760986",
@@ -82,9 +82,9 @@ export default function Header() {
   const localizeHref = useLocalizedHref();
 
   return (
-    // Хедер і хлібні крихти обгорнуті ОДНИМ sticky-контейнером, щоб вони
-    // прилипали до верху разом — якби sticky був лише на <header>, крихти
-    // (звичайний потік документа) заїжджали б під непрозорий хедер при скролі
+    // The header and breadcrumbs are wrapped in ONE sticky container so they
+    // stick to the top together — if sticky were only on <header>, the crumbs
+    // (regular document flow) would slide under the opaque header on scroll
     <div className="sticky top-0 z-40">
       <header className="bg-gray-900">
         <nav

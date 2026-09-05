@@ -17,7 +17,7 @@ const FLAGS: Record<Locale, { src: string; alt: string }> = {
 };
 
 export default function LangSwitcher({ mobile = false }: LangSwitcherProps) {
-  const pathname = usePathname(); // поточний шлях
+  const pathname = usePathname(); // current path
   const router = useRouter();
 
   const segments = pathname.split("/").filter(Boolean);
@@ -26,9 +26,9 @@ export default function LangSwitcher({ mobile = false }: LangSwitcherProps) {
   ).includes(segments[0])
     ? (segments[0] as Locale)
     : "ua";
-  const restSegments = segments.slice(1).join("/"); // всі сегменти крім локалі
+  const restSegments = segments.slice(1).join("/"); // all segments except the locale
 
-  // клас для контейнера
+  // container class
   const containerClass = mobile
     ? "flex gap-4 justify-center items-center"
     : "hidden lg:flex lg:flex-1 lg:justify-end gap-2 items-center";
@@ -40,9 +40,9 @@ export default function LangSwitcher({ mobile = false }: LangSwitcherProps) {
       ? "opacity-100 border-2 border-white rounded"
       : "opacity-50";
 
-  // формуємо чисті URL без повторної локалі
+  // build clean URLs without a duplicate locale
   const getHref = (lang: Locale) => {
-    // прибираємо зайву локаль, якщо вона є
+    // strip the existing locale, if any
     const cleanRest = restSegments.replace(/^(ua|ru|en)\//, "");
     return `/${lang}${cleanRest ? "/" + cleanRest : ""}`;
   };

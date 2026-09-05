@@ -2,7 +2,7 @@ import { Product } from "@/types";
 
 const API_KEY = process.env.GOOGLE_API_KEY;
 const SHEET_ID = process.env.GOOGLE_SPREADSHEET_ID;
-// Беремо дані з аркуша Products, стовпці від A до Z
+// Read data from the Products sheet, columns A to Z
 const RANGE = "Products!A2:Z100";
 
 export async function getProducts(locale: string): Promise<Product[]> {
@@ -11,11 +11,11 @@ export async function getProducts(locale: string): Promise<Product[]> {
   const url = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${RANGE}?key=${API_KEY}`;
 
   try {
-    // Кешуємо запит на 1 годину (3600 секунд)
+    // Cache the request for 1 hour (3600 seconds)
     const res = await fetch(url, { next: { revalidate: 3600 } });
 
     if (!res.ok) {
-      console.error(`Помилка Google Sheets API: ${res.status} ${res.statusText}`);
+      console.error(`Google Sheets API error: ${res.status} ${res.statusText}`);
       return [];
     }
 
@@ -35,7 +35,7 @@ export async function getProducts(locale: string): Promise<Product[]> {
         price: (isUa ? row[5] || row[6] : row[6] || row[5]) || "",
         imageSrc: {
           image: row[7] || "/placeholder.jpg",
-          drawing: row[8] || undefined, // якщо є креслення
+          drawing: row[8] || undefined, // if a drawing is provided
         },
         imageAlt: (isUa ? row[9] || row[10] : row[10] || row[9]) || "",
         thickness: row[11] || "",
@@ -45,7 +45,7 @@ export async function getProducts(locale: string): Promise<Product[]> {
       }))
       .filter((product) => !Number.isNaN(product.id));
   } catch (error) {
-    console.error("Помилка завантаження товарів:", error);
+    console.error("Error loading products:", error);
     return [];
   }
 }

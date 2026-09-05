@@ -9,9 +9,9 @@ function resolveImageUrl(image: string) {
   return image.startsWith("http") ? image : `${siteUrl}${image}`;
 }
 
-// Schema.org вимагає числове значення price (напр. "40.00"), а не рядок
-// на кшталт "40.00 грн./шт." — витягуємо саме число, або пропускаємо offers,
-// якщо ціна ще не заповнена (наприклад, плейсхолдер "??? грн./шт.")
+// Schema.org requires a numeric price value (e.g. "40.00"), not a string
+// like "40.00 грн./шт." — extract just the number, or omit offers entirely
+// if the price isn't filled in yet (e.g. a "??? грн./шт." placeholder)
 function parsePrice(price: string): number | null {
   const match = price.match(/\d+(?:[.,]\d+)?/);
   if (!match) return null;

@@ -55,7 +55,7 @@ export default function CategoryPageClient({
                 href={localizeHref(`${product.category}/${product.id}`)}
                 className="group relative rounded-2xl bg-white dark:bg-gray-800 p-4 shadow-md transition-shadow duration-300
                    sm:hover:scale-105 sm:hover:opacity-90
-                   block flex flex-col"
+                   block flex h-full flex-col"
               >
                 <div className="relative overflow-hidden rounded-xl">
                   <Image

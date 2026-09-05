@@ -44,3 +44,27 @@
  GET /ua 200 in 215ms
  GET /ua 200 in 208ms
  GET /ua/mechanisms 200 in 202ms
+ GET /ua/mechanisms 200 in 579ms
+ GET /icon?d8fe5ed9a6aef367 200 in 434ms
+ ✓ Compiled in 181ms
+ GET /ua/mechanisms 200 in 1795ms
+ GET /favicon.ico 404 in 464ms
+ GET /ua/mechanisms 200 in 582ms
+ GET /icon?d8fe5ed9a6aef367 200 in 450ms
+ GET /ua 200 in 249ms
+ GET /ua/hooks 200 in 213ms
+ GET /ua/hooks/4 200 in 267ms
+ GET /ua/hooks 200 in 233ms
+ GET /ua/hooks/4 200 in 234ms
+ ○ Compiling /[locale]/marketplace ...
+ ✓ Compiled /[locale]/marketplace in 1868ms
+ GET /ua/marketplace 200 in 2400ms
+ GET /ua 200 in 335ms
+ GET /ua/mechanisms 200 in 232ms
+ GET /ua/mechanisms/2 200 in 209ms
+ GET /ua/mechanisms 200 in 224ms
+ GET /ua 200 in 212ms
+ GET /ua/marketplace 200 in 232ms
+ GET /ua 200 in 205ms
+ GET /ua/mechanisms 200 in 600ms
+ GET /favicon.ico 404 in 417ms

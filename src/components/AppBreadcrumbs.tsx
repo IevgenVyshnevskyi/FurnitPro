@@ -97,10 +97,11 @@ export default function AppBreadcrumbs() {
         style={isMobile ? { minWidth: "max-content" } : undefined}
       >
         {crumbs.map((crumb, idx) => {
-          const refProp = idx === crumbs.length - 1 ? { ref: lastItemRef } : {};
+          const isCurrent = idx === crumbs.length - 1;
+          const refProp = isCurrent ? { ref: lastItemRef } : {};
           return (
             <BreadcrumbItem key={`${idx}-${crumb.href}`} {...refProp}>
-              <Link href={crumb.href}>{crumb.label}</Link>
+              {isCurrent ? crumb.label : <Link href={crumb.href}>{crumb.label}</Link>}
             </BreadcrumbItem>
           );
         })}

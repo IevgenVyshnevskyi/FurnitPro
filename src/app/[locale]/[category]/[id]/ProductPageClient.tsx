@@ -34,7 +34,7 @@ export default function ProductPageClient({ product }: Props) {
 
   if (!product) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-screen px-4">
+      <div className="flex flex-col items-center justify-center h-full px-4">
         <h1 className="text-3xl font-bold mb-4 text-gray-900 dark:text-white text-legible">{t("productNotFound")}</h1>
         <Link
           href={localizeHref("/")}
@@ -56,7 +56,7 @@ export default function ProductPageClient({ product }: Props) {
     <>
       <ProductSchema product={product} />
 
-      <div className="flex flex-col items-center justify-center min-h-screen px-4 pt-10 pb-0">
+      <div className="flex flex-col items-center justify-center h-full px-4 pt-10 pb-0">
         <div className="max-w-4xl w-full text-center sm:text-left bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg">
           <h1 className="text-3xl font-bold mb-6 text-gray-900 dark:text-white">
             {product.name}

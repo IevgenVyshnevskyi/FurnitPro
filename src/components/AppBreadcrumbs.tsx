@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
 import { Breadcrumbs, BreadcrumbItem } from "@heroui/react";
 import { usePathname, useParams } from "next/navigation";
 import Link from "next/link";
@@ -30,16 +30,19 @@ export default function AppBreadcrumbs() {
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
-  // Split the path and drop the first segment (locale)
-  let segments = pathname.split("/").filter(Boolean);
-  if (segments[0] === locale) {
-    segments = segments.slice(1);
-  }
+  // Split the path and drop the first segment (locale) — memoized so this
+  // array only changes when the route actually changes, not on every render
+  // (an effect depending on a freshly-recreated array fires every render,
+  // since React compares array dependencies by reference)
+  const segments = useMemo(() => {
+    const parts = pathname.split("/").filter(Boolean);
+    return parts[0] === locale ? parts.slice(1) : parts;
+  }, [pathname, locale]);
 
   // Auto-scroll to the last crumb (mobile only)
   useEffect(() => {
     if (isMobile && lastItemRef.current && containerRef.current) {
-      lastItemRef.current.scrollIntoView({ behavior: "smooth", inline: "end" });
+      lastItemRef.current.scrollIntoView({ behavior: "smooth", inline: "end", block: "nearest" });
     }
   }, [segments, isMobile]);
 

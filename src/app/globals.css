@@ -1,6 +1,12 @@
 @import "tailwindcss";
 @import "keen-slider/keen-slider.min.css";
 
+/* Tailwind v4 only scans ./src by default (see content in tailwind.config.js,
+   which isn't even loaded without @config) — HeroUI generates its utility
+   classes (e.g. text-foreground/50) at runtime from its own package, so
+   without this they're never compiled and silently do nothing */
+@source "../../node_modules/@heroui/theme/dist/**/*.js";
+
 /* Tailwind v4: enable the class strategy for dark: so it reacts to the
    .dark class on <html> (controlled by next-themes) instead of only the system theme */
 @custom-variant dark (&:where(.dark, .dark *));

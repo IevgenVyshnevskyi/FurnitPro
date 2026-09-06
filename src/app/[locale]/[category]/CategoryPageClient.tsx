@@ -34,8 +34,8 @@ export default function CategoryPageClient({
   }
 
   return (
-    <div className="bg-gray-0 min-h-screen">
-      <div className="px-4 pt-12 pb-2 mx-auto max-w-7xl sm:px-6 sm:py-24">
+    <div className="bg-gray-0">
+      <div className="px-4 pt-6 pb-2 mx-auto max-w-7xl sm:px-6 sm:py-24">
         <h1 className="text-3xl font-bold mb-8 text-gray-900 dark:text-white capitalize">
           {t(`categories.${category}`)}
         </h1>

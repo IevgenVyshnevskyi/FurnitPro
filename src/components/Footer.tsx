@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import FloatingMessenger from "./FloatingMessenger";
 import ScrollToTop from "./ScrollToTop";
@@ -8,12 +9,33 @@ import FloatingSocials from "./FloatingSocials";
 import { useTranslations } from "next-intl";
 import { useLocalizedHref } from "@/hooks/useLocalizedHref";
 
+// Tallest reach of the floating button stack (FloatingContactButton's
+// bottom offset + its own height) — the band the footer must stay clear of.
+const FLOATING_STACK_PX = 290;
+
 export default function Footer() {
   const t = useTranslations("Footer"); // Initializes the hook for translations in the "Footer" namespace
   const localizeHref = useLocalizedHref();
+  const footerRef = useRef<HTMLElement>(null);
+  const [nearFooter, setNearFooter] = useState(false);
+
+  // Fade out the floating buttons once the footer scrolls within their reach —
+  // padding alone can't prevent the overlap on short pages, since the buttons
+  // are fixed to the viewport, not the document (same pattern chat widgets
+  // like Intercom/Crisp use: duck out of the way near the page footer).
+  useEffect(() => {
+    const el = footerRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setNearFooter(entry.isIntersecting),
+      { rootMargin: `0px 0px -${FLOATING_STACK_PX}px 0px` }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   return (
-    <footer className="w-full bg-gray-900 text-gray-300 mt-10">
+    <footer ref={footerRef} className="w-full bg-gray-900 text-gray-300 mt-10">
       <div className="container mx-auto px-4 py-6 grid grid-cols-1 md:grid-cols-3 gap-6">
         {/* About us */}
         <div>
@@ -91,10 +113,16 @@ export default function Footer() {
       <div className="border-t border-gray-700 text-center py-4 text-sm">
         © {new Date().getFullYear()} FurnitPro. {t("copyright")}
       </div>
-      <FloatingContactButton />
-      <FloatingSocials />
-      <FloatingMessenger />
-      <ScrollToTop />
+      <div
+        className={`transition-opacity duration-300 ${
+          nearFooter ? "opacity-0 pointer-events-none" : "opacity-100"
+        }`}
+      >
+        <FloatingContactButton />
+        <FloatingSocials />
+        <FloatingMessenger />
+        <ScrollToTop />
+      </div>
     </footer>
   );
 }

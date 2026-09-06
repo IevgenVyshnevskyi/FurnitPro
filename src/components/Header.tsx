@@ -133,27 +133,30 @@ export default function Header() {
                 transition
                 className="absolute left-1/2 z-10 mt-3 w-screen max-w-md -translate-x-1/2 overflow-hidden rounded-3xl bg-gray-800 outline-1 -outline-offset-1 outline-white/10 transition data-closed:translate-y-1 data-closed:opacity-0 data-enter:duration-200 data-enter:ease-out data-leave:duration-150 data-leave:ease-in"
               >
-                <div className="p-4">
-                  {categories.map((item) => (
-                    <Link
-                      key={item.key}
-                      href={localizeHref(`/${item.key}`)}
-                      className="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm/6 hover:bg-white/5"
-                    >
-                      <div className="flex size-11 flex-none items-center justify-center rounded-lg bg-gray-700/50 group-hover:bg-gray-700">
-                        <item.icon
-                          aria-hidden="true"
-                          className="size-6 text-gray-400 group-hover:text-white"
-                        />
-                      </div>
-                      <div className="flex-auto">
-                        <span className="block font-semibold text-white">
-                          {tCategory(`categories.${item.key}`)}
-                        </span>
-                      </div>
-                    </Link>
-                  ))}
-                </div>
+                {({ close }) => (
+                  <div className="p-4">
+                    {categories.map((item) => (
+                      <Link
+                        key={item.key}
+                        href={localizeHref(`/${item.key}`)}
+                        onClick={() => close()}
+                        className="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm/6 hover:bg-white/5"
+                      >
+                        <div className="flex size-11 flex-none items-center justify-center rounded-lg bg-gray-700/50 group-hover:bg-gray-700">
+                          <item.icon
+                            aria-hidden="true"
+                            className="size-6 text-gray-400 group-hover:text-white"
+                          />
+                        </div>
+                        <div className="flex-auto">
+                          <span className="block font-semibold text-white">
+                            {tCategory(`categories.${item.key}`)}
+                          </span>
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
+                )}
               </PopoverPanel>
             </Popover>
 
@@ -189,18 +192,21 @@ export default function Header() {
                 transition
                 className="absolute left-1/2 z-10 mt-3 w-64 -translate-x-1/2 overflow-hidden rounded-2xl bg-gray-800 shadow-lg ring-1 ring-gray-700 transition data-closed:translate-y-1 data-closed:opacity-0 data-enter:duration-200 data-enter:ease-out data-leave:duration-150 data-leave:ease-in"
               >
-                <div className="p-2">
-                  {phoneNumbers.map((phone) => (
-                    <Link
-                      key={phone.number}
-                      href={localizeHref(`tel:${phone.number}`)}
-                      className="flex items-center gap-3 rounded-lg px-4 py-2 text-sm font-semibold text-white hover:bg-gray-700"
-                    >
-                      {phone.icon}
-                      <span>{phone.number}</span>
-                    </Link>
-                  ))}
-                </div>
+                {({ close }) => (
+                  <div className="p-2">
+                    {phoneNumbers.map((phone) => (
+                      <Link
+                        key={phone.number}
+                        href={localizeHref(`tel:${phone.number}`)}
+                        onClick={() => close()}
+                        className="flex items-center gap-3 rounded-lg px-4 py-2 text-sm font-semibold text-white hover:bg-gray-700"
+                      >
+                        {phone.icon}
+                        <span>{phone.number}</span>
+                      </Link>
+                    ))}
+                  </div>
+                )}
               </PopoverPanel>
             </Popover>
           </PopoverGroup>

@@ -31,8 +31,8 @@ export default async function FeaturesPage({ params }: Props) {
   const orderSteps = ["step1", "step2", "step3"] as const;
 
   return (
-    <main className="container mx-auto px-4 pt-8 pb-8 sm:pt-24 max-w-4xl text-legible">
-      <h1 className="text-3xl font-bold mb-4 text-gray-900 dark:text-white">{t("title")}</h1>
+    <main className="container mx-auto px-4 pt-8 pb-8 sm:pt-24 max-w-4xl">
+      <h1 className="text-3xl font-bold mb-4 text-gray-900 dark:text-white text-legible">{t("title")}</h1>
       <p className="text-gray-600 dark:text-gray-400 mb-8">{t("intro")}</p>
 
       <ul className="grid gap-4 sm:grid-cols-2">
@@ -46,7 +46,7 @@ export default async function FeaturesPage({ params }: Props) {
         ))}
       </ul>
 
-      <h2 className="text-xl font-semibold mt-10 mb-4 text-gray-900 dark:text-white">
+      <h2 className="text-xl font-semibold mt-10 mb-4 text-gray-900 dark:text-white text-legible">
         {t("categoriesTitle")}
       </h2>
       <ul className="grid gap-4 sm:grid-cols-2">
@@ -60,7 +60,7 @@ export default async function FeaturesPage({ params }: Props) {
         ))}
       </ul>
 
-      <h2 className="text-xl font-semibold mt-10 mb-4 text-gray-900 dark:text-white">
+      <h2 className="text-xl font-semibold mt-10 mb-4 text-gray-900 dark:text-white text-legible">
         {t("orderTitle")}
       </h2>
       <ol className="space-y-3">

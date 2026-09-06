@@ -34,8 +34,8 @@ export default function ProductPageClient({ product }: Props) {
 
   if (!product) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-screen px-4 text-legible">
-        <h1 className="text-3xl font-bold mb-4 text-gray-900 dark:text-white">{t("productNotFound")}</h1>
+      <div className="flex flex-col items-center justify-center min-h-screen px-4">
+        <h1 className="text-3xl font-bold mb-4 text-gray-900 dark:text-white text-legible">{t("productNotFound")}</h1>
         <Link
           href={localizeHref("/")}
           className="text-blue-600 hover:underline"

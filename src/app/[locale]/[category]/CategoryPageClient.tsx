@@ -21,7 +21,7 @@ export default function CategoryPageClient({
 
   if (!products?.length) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-screen px-4">
+      <div className="flex flex-col items-center justify-center min-h-screen px-4 text-legible">
         <h1 className="text-3xl font-bold mb-4 text-gray-900 dark:text-white">{t("notFound")}</h1>
         <Link
           href={localizeHref("/")}
@@ -34,7 +34,7 @@ export default function CategoryPageClient({
   }
 
   return (
-    <div className="bg-gray-0">
+    <div className="bg-gray-0 text-legible">
       <div className="px-4 pt-6 pb-2 mx-auto max-w-7xl sm:px-6 sm:py-24">
         <h1 className="text-3xl font-bold mb-8 text-gray-900 dark:text-white capitalize">
           {t(`categories.${category}`)}

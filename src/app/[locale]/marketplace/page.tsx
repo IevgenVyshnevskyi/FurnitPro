@@ -29,7 +29,7 @@ export default async function MarketplacePage({ params }: Props) {
   const items = ["catalog", "bulk", "tracking"] as const;
 
   return (
-    <main className="container mx-auto px-4 pt-8 pb-8 sm:pt-24 max-w-4xl">
+    <main className="container mx-auto px-4 pt-8 pb-8 sm:pt-24 max-w-4xl text-legible">
       <div className="flex items-center gap-3 mb-4">
         <h1 className="text-3xl font-bold text-gray-900 dark:text-white">{t("title")}</h1>
         <span className="rounded-full bg-blue-100 dark:bg-blue-900 px-3 py-1 text-xs font-semibold text-blue-700 dark:text-blue-300">

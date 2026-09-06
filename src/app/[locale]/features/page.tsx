@@ -31,7 +31,7 @@ export default async function FeaturesPage({ params }: Props) {
   const orderSteps = ["step1", "step2", "step3"] as const;
 
   return (
-    <main className="container mx-auto px-4 pt-8 pb-8 sm:pt-24 max-w-4xl">
+    <main className="container mx-auto px-4 pt-8 pb-8 sm:pt-24 max-w-4xl text-legible">
       <h1 className="text-3xl font-bold mb-4 text-gray-900 dark:text-white">{t("title")}</h1>
       <p className="text-gray-600 dark:text-gray-400 mb-8">{t("intro")}</p>
 

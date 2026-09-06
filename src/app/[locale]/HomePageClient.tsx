@@ -41,7 +41,7 @@ export default function HomePageClient() {
   const localizeHref = useLocalizedHref();
 
   return (
-    <div className="bg-gray-0">
+    <div className="bg-gray-0 text-legible">
       <div className="mx-auto max-w-7xl px-4 pt-6 pb-2 sm:px-6 sm:py-24">
         <h1 className="text-3xl font-bold mb-8 text-gray-900 dark:text-white">{t("title")}</h1>
 
